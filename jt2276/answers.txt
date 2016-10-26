@@ -1,0 +1,49 @@
+1.
+ 
+In line 37 of adventure.py, raw_input(‘> ‘) was changed to input(‘> ‘), which was    fixed in python 3.
+
+In lines 1-5 of test_commands.py, a section of code taken from http://stackoverflow.com/questions/714063/importing-modules-from-parent-folder was added to allow play.py to be added to the python path and allow the modules from play to be imported for the test.
+
+Lines 9-10 from test_walks.py were uncommented to allow additional testing to be run.
+
+2.
+
+To structure the program, first the author has used modules to divide up concerns such as saving/loading the game state, keep track of turns, etc. Second, the author has made use of classes to organize actions around commonly used game concepts like moves, rooms, hints and dwarves. Lastly the author has added unitest modules for testing various aspects of the program and streamline debugging.
+
+3.
+
+Names such as ‘Hint’ and ‘Room’ are meaningful in the sense that they correspond to commonly used adventure-type game terminology, while function names like section1(), section2(), … , section12() from data.py are not very meaningful.
+
+4.
+
+Functions such as is_finished(self), random(self), and choice(self, seq) from the class Game in game.py do exactly one thing since they either return the output of another function or the intersection of multiple boolean statements supplied by other functions. By contrast, a function like section11() from data.py creates a hint object, then modifies 2 different attributes of the object, then creates 2 new objects, resulting in a total of 5 actions for the function.
+
+5.
+
+In lines 188-207 of game.py, the function move_dwarves(self) also affects several other objects such as the ‘axe’ object that it does not necessarily disclose from its function name, and so can be considered a side effect.
+
+6.
+
+In lines 37-40 of adventure.py, the actions inside the while loop are repeated often and could be combined into a function parse_input().
+
+7. 
+
+The program does have error handling in adventure.py. In lines 42-46 of the file it will try to rerun loop() and ask for new user input if it encounters an error other than End of File error. If the user runs the command ‘python adventure.py <file>’ where <file> does not match any file in the directory, the error will not be caught and the program will end abnormally.
+
+8.
+
+The class Game has responsibility over interpreting user command, initializing the game, scoring, and keeping  track of the majority of other class objects like Dwarves and Pirates among other responsibilities.
+
+9.
+
+The class Room is particularly not cohesive, since it initially creates 13 attributes, but only has one function that uses any of the attributes, and that function, is_dark() only uses one attribute, is_light().
+
+10.
+
+The author comments appear to be mostly a mixture of the legacy fortran comments and explanations of nearly all of the variable names in game.py. While comments such as line 117-118 in game.py explaining the for loop that allows the choice to run the program using traditional truncated commands are helpful, comments such as line 34 that explain that is_dead stores whether the player is dead or not is quite useless.
+
+11.
+
+In lines 40-55 of game.py, the author uses vertical formatting to break up the __init__ function into the parts concerning questioning the player, the parts concerning time & the clock, and the parts concerning generating the random seed.
+
+12. While the tests all run, I would argue that they do not conform to F.I.R.S.T., since they would fail the ‘Independent’ principle due to the success of using walkthrough1.txt and walkthrough2.txt in test_walks.py being dependent on test_commands.py running successfully. 
