@@ -1,0 +1,167 @@
+1.
+
+We only need to change the `raw_input` function call to `input` (at
+`adventure/adventure.py:37`.
+
+`git diff` gives the following result:
+
+diff --git a/adventure/adventure.py b/adventure/adventure.py
+index f359300..e8abcaa 100644
+--- a/adventure/adventure.py
++++ b/adventure/adventure.py
+@@ -34,7 +34,7 @@ def loop():
+         baudout('GAME RESTORED\n')
+ 
+     while not game.is_finished:
+-        line = raw_input('> ')
++        line = input('> ')
+         words = re.findall(r'\w+', line)
+         if words:
+             baudout(game.do_command(words))
+
+2.
+
+The author mainly uses the following techniques:
+
+* (Global) Functions:
+  To describe a general program action.
+  (Example: `baudout() in adventure/adventure.py`)
+* Classes:
+  To describe a kind of in-game object.
+  (Example: `Dwarf` in `adventure/model.py`)
+* Modules:
+  Putting a set of related code together.
+
+3.
+Meaningful names include:
+* `Room.is_aboveground`
+  Tell whether a room is above ground or underground.
+* `baudout`
+  Output a message character by character, simulating a low-baud serial
+  (or more precisely a teletype).
+
+Seemingly meaningless names include:
+* `Game.i_fee`
+  Actually it is checking the "fee, fie, foe, foo" magic sequence for the
+  golden eggs.  The magic words themselves are meaningless.
+
+Meaningless names:
+* `section1()`, `section2()`, etc. in `data.py`
+  These functions are actually parsing the records in Section 1, Section 2,
+  etc., in `advent.dat`, which is shipped with the FORTRAN PDP implementation.
+  Each section contains different kind of game data.
+
+4.
+"Small and easy" functions often does one thing, examples include:
+`Game.is_here`, which queries if an object is in the same room with the
+player.
+
+Big routines like `Game.move_to()` does a lot of things, including
+checking if the move is allowed and actually assigning new location.
+
+5.
+All the `sectionX()` functions in `data.py` has side effects of changing
+the global object `data`.
+
+6.
+It is hard to find obvious repeating code in this project.  However, we
+can try to compress some of the specific criteria checks to get cleaner
+code.
+
+For example, in method `Game.t_unlock()`, there are lots of criteria checks
+followed by message outputs, such as in line 986-998:
+
+```
+            if verb == 'lock':
+                self.write_message(61)
+            elif not self.trident.is_toting:
+                self.write_message(122 + oy)
+            elif obj.is_toting:
+                self.write_message(120 + oy)
+            elif obj is self.oyster:
+                self.write_message(125)
+            else:
+                self.write_message(124)
+                self.clam.destroy()
+                self.oyster.drop(self.loc)
+                self.pearl.drop(self.rooms[105])
+```
+
+This piece of code can probably be rewritten as something like
+
+```
+check_sequentially_and_write(
+    verb == 'lock', 61,
+    not self.trident.is_toting, 122 + oy,
+    obj.is_toting, 120 + oy,
+    obj is self.oyster, 125,
+    destroy_clam()
+    )
+```
+
+But I think the former if-block version is much more readable.
+
+7.
+The game does not use exception handling except when deleting the random
+generator (which itself is not a part of the game mechanism).
+
+But as far as I tried the program handles abnormal text input pretty well.
+Entering Ctrl+C does throw an exception `KeyboardInterrupt`, but I think this
+is expected since Ctrl+C is *intended* to interrupt the program abnormally.
+
+8.
+`Dwarf` class in `model.py` actually keeps information of dwarves and
+pirates.  Moreover, pirates are subclass of dwarves, which is
+counter-intuitive.  This design essentially makes `Dwarf` responsible for
+keeping track of both dwarves and pirates, while making the `Pirate` class
+useless.
+
+The author should have made `Dwarf` and `Pirate` inherited from a common
+class, such as `Hostile`.
+
+9.
+`Dwarf` class is an example of being not cohesive, as described above.
+
+`Game` class is also incohesive because it does too many things unrelated to
+each other.  For instance, it takes care of dwarves' and pirate's movements by
+itself, and parses commands by itself, etc.
+
+10.
+It seems that the author assumes that the reader of the code is familiar with
+the original PDP-10 Fortran implementation, as he puts a lot of Fortran code
+references.  Examples include the line numbers prefixed by hash tag (e.g.
+`game.py:278,286`.
+
+Other comments act as summaries of certain code blocks.  Examples include
+`game.py:290`.
+
+11.
+In method `Game.describe_location()`, different cases (player followed by a
+bear, room is dark, etc.) are separated by a blank line, to make it clear
+that we are handling different criteria.
+
+12.
+The code passed all the default enabled tests, that is, excluding DocTests
+`walkthrough1.txt` and `walkthrough2.txt`.  The walkthroughs have a mistake
+that it tried to reference the object `adventure` while only importing
+`play` module by `import play` statement.  Both tests pass if the names are
+fixed.
+
+* Fast
+  The test duration is (and should be) pretty fast on modern laptops.
+* Independent
+  DocTests `vignettes.txt`, `walkthrough1.txt` and `walkthrough2.txt` are
+  unlikely to be independent because they all rely on Python's random number
+  generating algorithm (by specifying a seed).  There is no guarantee that
+  Python would not change the underlying algorithm (though unlikely), and if
+  it does change, these tests are likely to fail.
+* Repeatable
+  All the tests are repeatable.  The randomness is repeatable because the
+  random seeds are fixed.
+* Self-Validating
+  All the tests does not involve manual inspection; `unittest` directly gives
+  the result `pass` or `fail` for all tests.
+* Timely
+  It is hard to prove that the tests were timely written.  Most likely it is
+  not so because the `adventure` program is written in Python 2 at first, but
+  the tests are given in Python 3 right at the beginning.
