@@ -1,0 +1,4 @@
+1. Describe the changes you made to make the game work with Python 3
+I changed line 37 of "adventure.py", from `line = raw_input('> ')` to `line = input('> ')`, because `raw_input` in Python 2 was replaced by `input`.
+The source for this: http://stackoverflow.com/questions/954834/how-do-i-use-raw-input-in-python-3
+
