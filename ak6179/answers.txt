@@ -1,0 +1,58 @@
+1. To make the code work for Python3 I changed the code in line-37 "line = raw_input('> ')" to
+"line = line = input('> ')" in "adventure/adventure.py" file. I made this change because "raw_input" method from
+Python2 has been changed into "input" method in Python3.
+
+I also added the "walkthrough1.txt" and "walkthrough2.txt" test to test the code more thoroughly. These tests are
+present at line-9 and line-10 in "adventure/tests/test_walks.py" file. To make the "walkthrough1.txt" and
+"walkthrough2.txt" tests run correctly I had to replace "adventure.resume(savefile)"
+(file "adventure/tests/walkthrough1.txt", line-863) with "play.resume(savefile)". I also had to replace
+"adventure._game.clock1" (file "adventure/tests/walkthrough2.txt", line-1172) with "play._game.clock1".
+I had to make these changes because the "resume" and the "_game.clock1" are members of "play" and not "adventure".
+
+I am not sure if we were required to pass "walkthrough1.txt" and "walkthrough2.txt" tests but I ran those tests
+just for completion.
+
+2. a) The author has used modular programming for organizing the different parts. Eg: For abstracting the user
+interacting with the game the author has created a "play" file which contains methods through which the player
+interacts with the game. For defining the game the author has used a "game" class which contains the structure
+(model class), feature and characteristics of the game.
+For starting a game the author has used methods in the "adventure.py" file.
+
+b)The author has also created classes to define the different objects.
+Using these files he also better able to model an interaction in between the objects.
+Eg: The author has created a separate "data" class which deals with the "advent.dat" file. The data is used
+to define the moves and different positions in the game. The author has also created a "Move" class (in model.py)
+which is used to model an entry in the travel table.
+
+c) The author has also abstracted out the interactions between the different components of the game. For doing this
+he/she has used functions like "resume" (in play.py) which is used to load an existing game from a file
+and start from the saved position. There are methods to check characteristics of different parts of the game
+like "is_dark()" is used to check if a room is dark. The author has also added unit-tests for the game to check
+for correctness.
+
+3. Examples of meaningful names:
+    - "is_dark" (in model.py line-79) function which is used to check if a room is dark.
+    - The class "Room" (in model.py line-38) which is used to model room in the game.
+    - The "resume" function (in play.py line-29) which is used to load a previously saved game.
+
+   Examples where author has not used meaningful names:
+   - "start2" (in game.py line-130)
+   - "i_carry" (in game.py line-834)
+   - "dictionary" (in data.py line-44): it would have been helpful if the author indicated the type of
+   elements present in the dictionary.
+
+4. Examples of functions doing only one thing:
+    - "write_message" (in game.py line-69): this function just writes messages to the screen.
+    - "random" (in game.py line-57): return a random number between 0 and 1.
+    - "die_here" (in game.py line-767)
+
+   Examples of functions doing multiple things:
+   - "do_command" (in game.py line-429): it parses the command and also acts upon the command
+   - "move_dwarves" (in game.py line-188): it loopes through the dwarves and also moves each individual dwarf.
+   Moving of each single dwarf should have been done by a different function.
+   - "finish_turn" (in game.py line-384): it does multiple tasks like checking if hint should be given, randomly
+   setting the state of the game etc.
+
+5.
+
+6.
