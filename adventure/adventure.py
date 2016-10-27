@@ -10,13 +10,11 @@ from game import Game
 
 BAUD = 1200
 
-
 def baudout(s):
     for c in s:
         sleep(9. / BAUD)  # 8 bits + 1 stop bit @ the given baud rate
         stdout.write(c)
         stdout.flush()
-
 
 def loop():
     parser = argparse.ArgumentParser(
@@ -40,7 +38,6 @@ def loop():
         words = re.findall(r'\w+', line)
         if words:
             baudout(game.do_command(words))
-
 
 if __name__ == "__main__":
     try:
