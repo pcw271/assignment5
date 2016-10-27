@@ -1,0 +1,84 @@
+Eduardo Fierro Farah
+eff254
+Answers for Homework 5.
+Programming for Data Science. 
+
+--> Question 1: 
+Change no. 1: 
+Change raw_input() to input() in line 37 of adventure.py
+According to https://docs.python.org/3/whatsnew/3.0.html, raw_input() was renamed input()
+** Note **
+To run "test_commands.py", when I tried to run it directly from the test directory, it didn't imported all the modules. 
+Easiest way wat to copy the script to the main directory and run it from there. 
+(Used: http://stackoverflow.com/questions/2325923/how-to-fix-importerror-no-module-named-error-in-python)
+All test run with no exceptions from here. 
+ 
+--> Question 2: 
+One of the techniques is de definition of classes. Particularly, in the file model.py the author defines a class for every posible thing in the game, from objects, to dwarfs and words. 
+Other techique is the use of functions. A particularly intresting one (altough badly name) is the function "loop" on line 19 of adventure.py. This function is what actually keeps the game running, 
+The author also uses many if - else/elif statements throughout the code. 
+
+--> Question 3 (among others): 
+Examples of clear names: 
+ - Class "Hint": it's clearly the hints the program gives the user. (model.py line 152).
+ - Functions defined in model like "trying_to_deal_with_snake", "trying_to_catch_bird" in model.py, lines 42 to 56. It clearly means what the input of the user is, a Bolean that indicates if it is or not. 
+ - Function "accumulate_message" in data.py line 54. Function to concatenate the output message.
+ 
+Examples of not clear names: 
+ - Function "make_object" on line 40 of data.py. 
+ - Function "loop" on line 19 of adventure.py. 
+ - class "Object" on line 103 on model.py 
+ - In data.py, I do find that naming the functions "sectionXX" is useful, although they could have some more information, like "section1_DESCRPITION". 
+
+ --> Question 4:
+Most of the functions on the program do not do one thing and one thing only. 
+
+Examples of functions that perform only one task:
+ - Function "is_dark" in line 79 of model.py --> returns only the class "is_light" of self. 
+ - Function "accumulate_message" in line 54 of data.py
+ 
+Examples of functions that perform more than one task: 
+ - Function "move_to" in line 153 of play.py --> Evaluates many thing, including if dwarf can move, if you can move, if things are locked, among others. 
+ - Function "section3" on data.py line 67 --> Evaluates many things to perform a function, like value of "m". 
+ - Function "section9" --> Evaluates also value of "bit" to perform a function.    
+
+ --> Question 5:
+Yes. For example, the function "describe_location" on line 323 of game.py. 
+We would expect only to describe the location of the place. But if it's dark and could fall and a random variable is less than .35, you die! 
+
+--> Question 6: 
+I couldn't find any function that repeats itself. 
+
+--> Question 7: 
+Yes, it does exception handling. If "loop" doesn't work, then it runs a "pass". 
+
+--> Question 8: 
+The class Game, although is not very clear to me what it does, contains the full game. 
+This class performs all sorts of responsibilities, and the it's called in the loop function when you run adventure.py. 
+If classes should contain only one responsibility, this may not be the cleanest way to structure a program. 
+
+--> Question 9: Are all the classes cohesive? List any that aren’t.
+Again, the class "Game" is the very example of a class with low cohesion: It performs many tasks, that can easily be split into many small tasks. 
+On the other hand, model.py defines a lot of classes for rooms, dwarfs, moves, words and objects (guessing they are like cages, bottle of water and stuff). 
+It's hard to asses the level of cohesion of these. Although they do describe an object and one object only, they methods and attributes don't interact as much. 
+Also, they all have a large amount of attributes, probably because of the complexity of the game. 
+
+--> Question 10: 
+According to what we saw in class, most of the comments can be omitted by functions or renaming objects. Examples may be the lines 21 - 37 of game.py
+Many of the numeric comments scattered through the code are simply for the reader to recognise and compare to the original name, so maybe that falls in the "Copyright" category of "good-coments", and are acceptable. 
+The perfect example of a bad comment is when define the class object, on line 103 on model.py. It has to describe that it means an object of the game, not "object" as in python objects. This could be fix by changing the name of the class to "GameObjectsAndStuff" or something similar. 
+If he truly means it, as seen in class, a good comment is the TODO list in line 1640 of game.py, although I couldn't truly now what the author meant. 
+
+--> Question 11: 
+According to notes, a kind of vertical formatting is when instance variables of a class are declared together. We can see this at the beginning of the class Game, where all the instances al declared together. 
+Other example of vertical formatting in the code is in line 210 of game.py. Three variables are defined " dwarf_count = dwarf_attacks = knife_wounds = 0" exactly before the loop that uses them. 
+Related functions are also declared close. See, as an example, the "data.py" script, which declares "sectionX" functions one after the other. 
+
+--> Question 12: 
+All the test ran perfectly after the change described in Question 1. 
+All the test ran fast. 
+All the test can run interchangeably, which means they don't depend on each other. 
+All the test can be repeatable. 
+All the test are self-dalidating: Thei either raise an exception or they don't. 
+I do not now it the test were written timely (written during the code development), but by the complexity of them, I guess they were. 
+** Comment: The test don't go through the "walkthrough" files, they came commented out.
