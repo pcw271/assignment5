@@ -2,3 +2,24 @@
 I changed line 37 of "adventure.py", from `line = raw_input('> ')` to `line = input('> ')`, because `raw_input` in Python 2 was replaced by `input`.
 The source for this: http://stackoverflow.com/questions/954834/how-do-i-use-raw-input-in-python-3
 
+2. Describe three main techniques that the author used to structure the program.
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+
+5. Do any of the functions cause side effects? If so, which ones?
+
+6. Can you find any repeated code that could be made into a function?
+
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+9. Are all the classes cohesive? List any that aren’t.
+
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+11. Provide an example of where vertical formatting has been used to make the code clearer. 
+
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
