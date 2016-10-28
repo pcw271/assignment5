@@ -1,0 +1,39 @@
+1.Describe the changes you made to make the game work with Python 3
+	In “adventure.py” line 37, raw_input('> ‘) is changed to input(‘> ‘)
+
+2.Describe three main techniques that the author used to structure the program.
+	1.The author used built-in modules such as os and also its internal modules such as data, model.
+	Examples: In “game.py”, import os; from data import Data, etc.
+	2.The author used packages since there is an __init__.py file under directory adventure.
+	3.The author used classes which contain a set of functions that define behavior in the program. For example, in “game.py”, he used class Game(Data). In class Game, there are functions such as random, choice, write, etc.
+
+3.Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names.
+Yes, the author has used meaning names most of times. For example, in “game.py” line 19, the author used “class Game(Data)”, which combines a group of functions that define the rules of the game. Another example is “return self.objects_at(self.loc)” in line 96. Although the name is pretty long but it is descriptive. It tells us that the object is at current location. However, in certain lines, the names are not very meaningful. For example, in “game.py” line 57, the author used random for the function; also in line 60, the author used function name choice. It would be better to use verbs or verb phrases for method/function names. Additionally, the author used attribute prefixes such as “def __init__(self, seed=None)” in “game.py” line 39.
+ 
+4.Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+In “game.py”, the function “objects_here” only does one thing. It tells the player that certain object is at current location. Also, the function “is_finished” only does one thing. It tells the player that he/she is dead. However, the function “is_dark” does not only do one thing. It checks whether the lamp is here, the lamp’s property, and also whether the location is dark. The function “move_to” does not only do one thing neither. It checks the new location, checks whether the cave is closing and whether the new location is aboveground, etc. 
+
+5.Do any of the functions cause side effects? If so, which ones?
+In the function “i_attack” in “game.py”, it appends self.bird and self.clam to the list called targets. Targets will not be changed as a side effect when we use attribute such as append. Also, in the function play in “play.py”, it uses global variable _game inside the function and prints out _game.output[:-1], which does not change _game but does have a potential lasting effect outside the function execution.
+
+6.Can you find any repeated code that could be made into a function?
+In “test_commands.py”, the for loop in line 14 is used twice so that it could be made into a function.
+
+7.Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+Yes, in “adventure.py”, the program uses exception handling. control c will terminate the game.
+
+8.Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+In “game.py”, the function finish_turn does responsibilities over more than one piece of functionalities. It checks whether to offer a hint and whether the knife is at current location.
+
+9.Are all the classes cohesive? List any that aren’t.
+Class Game, Class Room, Class Move
+
+10.Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+The author explains about the initialization of variables and the purpose of the functions. One of the good comments is in “game.py” line 3-7, it explains the purpose of the numeric comments scattered through the file. Another good comment is “# TODO: 12000 # TODO: 12200 # TODO: 12400
+# TODO: 12600” because they are TODO comments. One bad comment is “# Reinstate the random number generator” since it is redundant. The code below this comment is descriptive enough so that people understand that it is reinstating the random number generator. Another bad comment is in “data.py” line 106. It comments out the code “data.room_list = sorted(set(data.rooms.values()), key=attrgetter(’n’))”
+
+11.Provide an example of where vertical formatting has been used to make the code clearer.
+In function start2, function move_to, function move_dwarves, they all call the function describe_location. They describe_location function is just below all these three functions, so it meets the vertical formatting.
+ 
+12.Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+All the tests are passed. I think the tests meet the F.I.R.S.T criteria。 The tests are fast. I run these tests in just several seconds, and in any order they can be run successfully. They are also repeatable and self-validating, but I am not sure whether they are written during code development not after the program is completed.

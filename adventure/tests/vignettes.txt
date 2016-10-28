@@ -58,7 +58,7 @@ move the caller into that room, and the second when it calls look().
 ...
 ...     global game
 ...     savefile.seek(0)
-...     play.resume(savefile, quiet=True)
+...	play.resume(savefile, quiet=True)
 ...     game = play._game
 ...     if room is not None:
 ...         _go_to(room)
