@@ -1,4 +1,5 @@
 >>> import play
+>>> import adventure
 >>> play.play(seed=1)
 WELCOME TO ADVENTURE!!  WOULD YOU LIKE INSTRUCTIONS?
 <BLANKLINE>
@@ -860,7 +861,7 @@ YOU HAVE GOTTEN YOURSELF KILLED.
 
 >>> savefile.seek(0)
 0
->>> adventure.resume(savefile)
+>>> play.resume(savefile)
 GAME RESTORED
 <BLANKLINE>
 
