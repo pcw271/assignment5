@@ -1,0 +1,86 @@
+1. Describe the changes you made to make the game work with Python 3.
+
+I changed the code in line 37 of "adventure.py" file: "line = raw_input('> ')" to "line = line = input('> ')" . 
+
+I uncommented lines 9-10 from test_walks.py so walkthrough1 and walkthrough2 testss can be run.
+
+
+2. Describe three main techniques that the author used to structure the program.
+
+a) Using modules: The author used several modules: play.py, game.py, data.py and model.py. These modules 
+   are built to make the program more clear and understandable. Besides, these modules can also be reused in other programs.
+
+b) Using classess: The author used classes with different sets of functions to define and organize certain obejects. 
+  
+
+c) Using functions: The author used functions, which can be reused as many times as needed,to do one certain thing.
+
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names.
+
+The author certainly used meaningful names. 
+
+Examples of meaningful names: describe_location in line 323 of game.py shows the description of location chosen.
+                              is_dark in line 79 of model.py is used to check if a room is dark.
+                              dwarf class in line 165 of model.py defines the behavior of dwarf
+                              say_okay_and_finish in line 376 of game.py is to write “Okay” and finish the turn;
+Examples of not meaningful names: those functions named sectionX() of data.py are not meaniful since they do not describe any obeject.
+                                  start2 in line 130 of game.py is not meaningful.
+
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+
+Example of program doing one thing: function random in line 57 of game.py does one thing to get a random number.
+				    function write_message in line 69 of game.py does one thing to write message.
+
+Example of program doing more than one thing: function resume in line 29 of play.py does more than one thing.
+                                              function finish_turn in line 384 of game.py does many things as well. 
+
+
+5. Do any of the functions cause side effects? If so, which ones?
+
+function resume() of play.py changes the global variable _game which causes side effect.
+
+6. Can you find any repeated code that could be made into a function?
+
+The code “self.write(verb.default_message)” has repeated many times in game.py.
+
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? H? int: run the program from the terminal prompt. The invalid input may not be normal text.
+
+The program used exception handling in “adventure.py” line 42 - 46. In windows, input Control + c will terminate the game abnormally.
+
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+class Gmae() of game.py has more responsibility more over more than one piece of functionality.
+
+
+9. Are all the classes cohesive? List any that a?ren’t?. 
+
+class Gmae() of game.py is not cohesive.
+class Room() is not cohesive
+
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+Examples of good comments: """How we keep track of the state of the game.""" in line 1 of game.py. Author comments this module using
+                           description at the very beginning to explain the purpose.
+
+                           """An object in the game, like a grate, or a rod with a rusty star.""" in line 103 of model.py. This comment in 
+                           gives user a clear idea about the object.
+
+Examples of bad comments:  # DKILL and # KNFLOC in line25-26 of game.py. These comments are useless 
+                           """Start the game.""" in line 114 of game.py is also unnecessary.
+
+11. Provide an example of where vertical formatting has been used to make the code clearer.
+
+In line 153 of game.py, function move_to used vertical formatting to make the code clearer:
+must_allow_move = ((newloc is loc) or (loc.is_forced)
+                           or (loc.is_forbidden_to_pirate))
+          
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+
+The tests all passed.
+I think the tests run fast so they can be run frequently.
+I think the tests can be run in any order so they are independent.
+I think the tests are reputable and self-validating.
+I don't think the tests are timely.
