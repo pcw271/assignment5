@@ -1,0 +1,114 @@
+1. Describe the changes you made to make the game work with Python 3
+Answer:
+(1) file name: adventure.py line number: 37 change: raw_input -> input
+(2) file name: walkthrough1 line number: 863 change adventure.resume(savefile) -> play.resume(savefile) 
+(3) file name: walkthrough2 line number: 1172 change: adventure._game.clock1 -> play._game.clock1
+ 
+2. Describe three main techniques that the author used to structure the program.
+Answer:
+(1) Functions: the author assembled each action in small functions which could be used for times. 
+(2) Classes: It is easy to find that the author combined series of actions or components in
+different classes. Such as Room, Messsage, Hint, Dwarf, in model.py.
+(3) Modules: Those .py files in the documents.
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names.
+Answer:
+The author has used several meaningful names.
+(1) Meaningful Names:
+(a) file name: game.py; line number: 29; name: treasures_not_found; meaning: how many treasures have
+not yet been seen or found by the player
+(b) file name: game.py; line number 168; name: dwarf_blocking_the_way; meaning: is there any dwarf
+is blocking the way
+(c) file name: game.py; line number: 1649; name: compute_score; meaning: describe the purpose of the
+function, compute the score that player has achieved.  
+(2) Meaningless Names:
+(a) file name: game.py; line number: 1326; name: first; it is difficult to understand what this
+first represent for.
+(b) file name: game.py; line number: 303; name: k; k has been give different numerical value in each
+situation but the name is so vague.
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+Answer:
+Not all functions in the code just do one thing.
+(1) Functions do one thing:
+(a) filename: game.py line number: 57-58 
+    function:
+    def random(self):
+        return self.random_generator.random()
+    This function, random, only do one thing, return the results of self.random_generator.random()
+
+(b) filename: game.py line number: 1563-1564
+    function:
+    def i_hours(self, verb):
+        self.write('Open all day')
+    Function i_hours just call the command,self.write(‘Open all day’)
+
+(2) Functions do more than one thing: 
+    Most of functions all of more than one thing, such as should_offer_hint(take different actions
+in case of different situations), score_and_exit(two things: print the score and exit the game)
+5. Do any of the functions cause side effects? If so, which ones?
+Answer:
+Lots of functions in data.py cause side effects. They take ‘data’ as a argument and do some action
+and change the value of ‘data’.
+6. Can you find any repeated code that could be made into a function?
+Answer:
+It is difficult to find exact repeated code in all the script. However, I found there are lots of
+criteria checks followed by message outputs and the actions under different criteria are similar, 
+pass relevant value to the same variables. For example, several functions in game.py contain those
+lines, such as t_feed, t_fill and compute_score.
+Therefore, there may be some possibility to rewrite the action into functions and replace those commands.
+  
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? H  int: run the program from the terminal prompt. The invalid input may not 
+be normal text.
+Answer:
+The program has one exception in adventure.py, 42-46
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+Enter control+c, it gives you exception.
+However, it is difficult to find a input that will terminate the program abnormally.
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+Answer:
+The class Game is pretty big and covers a lots of functionalities in the program. It will start 
+the game, clean the roads, catch dwarves as well as calculate the scores and end the game.
+
+9. Are all the classes cohesive? List any that aren’t .
+Answer:
+Not all classes are cohesive.
+For example, class Game in game.py is really a big class. It contains so many functions and actions. 
+But lots of functions do not manipulate any attribute to make it cohesive.   
+
+10. Describe the author’s approach to commenting the code. Provide examples of good andbad comments that have been used in the code.
+Answer:
+The authors users comments for public APIs, legal comments, explanation of intend, warning of consequences and real todo. However, comments are not as frequent as I think it should be in the
+program.
+In the start of each script, we could find comments explaining the purpose of the following and 
+there are several describes of the situation in the middle of each functions. Those comments make 
+it more clear for the reader.
+Lots of variables are following by some comments in the naming part. I think it will be better to
+give those information in the name of the variable.     
+
+11. Provide an example of where vertical formatting has been used to make the code clearer.
+Answer:
+in the file, data.py, each function is separated by a blank line. Further more, inside the structure
+of functions, for example, section3, 74-75, variables are declared together and 77-95, the
+conditional statement is close inside and separated with blank lines with other parts of actions. 
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria.
+Answer:
+All the tests provided with the program has passed. (After correction in the 1 question)
+
+…………….
+----------------------------------------------------------------------
+Ran 16 tests in 5.648s
+
+OK
+
+All those test have been done in 5.648s. I think it is pretty fast and they all satisfy the ‘Fast’
+criteria. And it is easy to confirm the last three criteria. Each test file are independent with
+each other, but the commands inside they may not independent. 
+ 
+
+
