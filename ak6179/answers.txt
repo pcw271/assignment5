@@ -1,6 +1,6 @@
-1. To make the code work for Python3 I changed the code in line-37 "line = raw_input('> ')" to
+1. To make the code work for Python3 I changed the code in line-37: "line = raw_input('> ')" to
 "line = line = input('> ')" in "adventure/adventure.py" file. I made this change because "raw_input" method from
-Python2 has been changed into "input" method in Python3.
+Python2 has been changed to "input" method in Python3.
 
 I also added the "walkthrough1.txt" and "walkthrough2.txt" test to test the code more thoroughly. These tests are
 present at line-9 and line-10 in "adventure/tests/test_walks.py" file. To make the "walkthrough1.txt" and
@@ -12,14 +12,15 @@ I had to make these changes because the "resume" and the "_game.clock1" are memb
 I am not sure if we were required to pass "walkthrough1.txt" and "walkthrough2.txt" tests but I ran those tests
 just for completion.
 
-2. a) The author has used modular programming for organizing the different parts. Eg: For abstracting the user
+2.
+a) The author has used modular programming for organizing the different parts. Eg: For abstracting the user
 interacting with the game the author has created a "play" file which contains methods through which the player
 interacts with the game. For defining the game the author has used a "game" class which contains the structure
 (model class), feature and characteristics of the game.
 For starting a game the author has used methods in the "adventure.py" file.
 
 b)The author has also created classes to define the different objects.
-Using these files he also better able to model an interaction in between the objects.
+Using these files he is able to better model an interaction in between the objects.
 Eg: The author has created a separate "data" class which deals with the "advent.dat" file. The data is used
 to define the moves and different positions in the game. The author has also created a "Move" class (in model.py)
 which is used to model an entry in the travel table.
@@ -54,7 +55,7 @@ for correctness.
    setting the state of the game etc.
 
 5. I think the function "finish_turn" (in game.py line-384) has a side-effect because it performs more than 1 task and
-the name of function "finish_turn" does not imply that it should be performing this tasks. The function offers
+the name of function "finish_turn" does not imply that it should be performing these tasks. The function offers
 hints and it also advances the random number generator. These tasks are not supposed to be performed by the
 "finish_turn" function.
 
@@ -106,7 +107,7 @@ In this case also the intent of the comment is already communicated by the name 
                            or (loc.is_forbidden_to_pirate))
 
 12. All the tests pass. There were a few commented out tests also. I had to make some modifications to pass them.
-I have described the modification in answer to part 1. I will analyze the F.I.R.S.T principle conformity below:
+I have described the modifications in answer to part 1. I will analyze the F.I.R.S.T principle conformity below:
 
 Fast: The tests run fast enough so that they can be tested frequently.
 
