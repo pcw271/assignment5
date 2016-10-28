@@ -1,12 +1,12 @@
 """The Adventure game."""
 
-def load_advent_dat(data):
+def load_advent_dat(gameData):
     import os
     from data import parse
 
     datapath = os.path.join(os.path.dirname(__file__), 'advent.dat')
     with open(datapath, 'r') as datafile:
-        parse(data, datafile)
+        parse(gameData, datafile)
 
 def play(seed=None):
     """Turn the Python prompt into an Adventure game.
