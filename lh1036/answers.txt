@@ -9,7 +9,7 @@ adventure.py, line 37: changed raw_input() to input() to resolve NameError. This
 2.	Describe three main techniques that the author used to structure the program.
 
 - Modular programming: creating separate programs for different concerns
-- Using classes to encapsulate state information and behavior (although in some cases the classea have too many responsibilities, e.g. game.py, "Game" class)
+- Using classes to encapsulate state information and behavior (although in some cases the classes have more than one responsibility, e.g. game.py, "Game" class)
 - Limiting functions to one "thing"/level of abstraction (although the author does not always accomplish this)
 
 3.	Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
@@ -42,7 +42,7 @@ game.py, line 323: "describe_location"
 
 5.	Do any of the functions cause side effects? If so, which ones?
 
-YES.
+YES. In many cases, the methods cause side effects such as (a) doing something other than what its name says it does, (b) changing variables or stores values, (c) calling additional functions only if certain conditions are met
 
 adventure.py, loop() function: side effects include game.start() and reading input, printing output
 
@@ -109,7 +109,7 @@ model.py, line 165: "Dwarf"
 
 9.	Are all the classes cohesive? List any that aren’t.
 
-There are non cohesive classes. In some of these classes, methods use only one or a small subset of the many attributes defined for the class. In other classes, the methods do not use any of the instance variables for the class (or there are no methods).
+There are non cohesive classes. In some of these classes, methods use only one or a small subset of the many attributes defined for the class. In other classes, the methods do not use any of the instance variables for the class (or the class has no methods defined).
 
 Non cohesive classes:
 game.py, line 19: "Game" class
@@ -141,5 +141,4 @@ game.py, "Game" class: blank line spaces between each of the many methods to vis
 The provided tests all pass. 
 
 However, I would argue that the tests do not meet the F.I.R.S.T. criteria. In particular, they do not meet the Independent criteria because tests should have only one reason to fail but some of the tests can fail for multiple reasons. For example, a test with multiple Assert statements can fail for multiple reasons. 
-
 Examples: test_data.py, line 30: "test_hint", line 54, "test_move_repr_look_good"
