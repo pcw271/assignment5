@@ -33,7 +33,7 @@ In data.py line 70, the author comments on that line of code. It seems that the 
 11.In data.py line 68 and 74, the last_travel and n,m,mh,mm are all declared just before they are used.
 12.It passes all the test cases.
 Fast: It is really fast.
-Independent: 
+Independent: It is independent because it starts from the beginning.
 Repeatable: It starts from the beginning of the game, so it is repeatable.
 Self-validating: It uses asserts to validate the results.
 Timely: I don't know whether the author wrote the test cases during developing.
