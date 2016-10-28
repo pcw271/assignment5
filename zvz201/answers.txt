@@ -1,9 +1,9 @@
-Question 1.	Describe the changes you made to make the game work with Python 3
+Question 1. 	Describe the changes you made to make the game work with Python 3
 
 In adventure.py, line 37: changed raw_input('> ') to input('> ')
 Note: raw_input() was renamed to input() in python 3. Source: https://docs.python.org/3/whatsnew/3.0.html
 
-
+****************
 Question 2.	Describe three main techniques that the author used to structure the program.
 
 The author uses:
@@ -13,7 +13,7 @@ The author uses:
         load_advent_dat(data) in play.py 
 		o Functions are used both inside and outside classes
 
-
+****************
 Question 3.	Has the author used meaningful names? Give some examples of meaningful names used and what 
 you think they mean. Give some examples of where the author has not used meaningful names. 
 
@@ -49,6 +49,7 @@ Examples of NOT very meaningful names:
 -	In adventure.py, line 19, the name of the function "loop" could be more informative. It is not 		
 	clear what the function loops over/does. 
 
+****************
 Question 4. Do the functions used in the code do one thing? Give some examples of functions that only
 do one thing. Give some examples of functions that do more than one thing.
 
@@ -75,14 +76,14 @@ Functions that do more than one thing:
 -	In game.py, lines 153-186, function "move_to" does more than one thing: it checks several 			
 	conditions (i.e., goes through several "if"-related blocks of code)
 
-
+****************
 Question 5.	Do any of the functions cause side effects? If so, which ones?
 
 Reference: Clean Code book, p. 44.  "Side effects are lies. Your function promises to do one thing, but it 
 also does other hidden things."
 
 In game.py, lines 130-146, function start2 is intended to "display instructions" as specified in comments. 
-However, it seems to be doing something else with “treasures” and “describe_location”.
+However, it seems to be doing something else with “treasures" and “describe_location”.
 
     def start2(self, yes):
         """Display instructions if the user wants them."""
@@ -102,8 +103,7 @@ However, it seems to be doing something else with “treasures” and “describe_loca
 
         self.describe_location()
 
-
-
+****************
 Question 6.	Can you find any repeated code that could be made into a function
 
 In model.py, lines 130-140 (see below), self.rooms and self.is_toting are repeated in 3 functions and could be 
@@ -126,7 +126,7 @@ Also, a fair amount of functions in the program have if-elif-else statements tha
 compactly re-written as functions. For example, function defined in model.py, lines 11-36 (def __repr__(self)), 
 has 2 blocks of if-elif-(else) code. The first block could be more compactly re-written as a function.
 
-
+****************
 Question 7.	Does the program use exception handling? Can you find any input that causes the program
 to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input
 may not be normal text.
@@ -142,6 +142,8 @@ if __name__ == "__main__":
 The program does not terminate abnormally because whenever an exception is encountered, the "pass" sends the 
 program back to run the loop.
 
+
+****************
 Question 8. Do any of the classes have responsibility over more than one piece of functionality. If so,
 which ones?
 
@@ -150,8 +152,8 @@ responsibility(ies) (e.g., write, write_message, is_dark, is_here, start, star2,
 
 Another example is class "Move" (model.py, lines 3-36, in) that has two if-elif-else blocks (i.e., checks two conditions).
 
-
-Question 8.	Are all the classes cohesive? List any that aren't .
+****************
+Question 9.	Are all the classes cohesive? List any that aren't .
 
 Reference: Clean code book, p. 140.  "Classes should have a small number of instance variables. Each of the methods
 of a class should manipulate one or more of those variables. In general the more variables a method manipulates 
@@ -191,7 +193,7 @@ class Pirate(Dwarf):
     is_dwarf = False
     is_pirate = True
 
-
+****************
 Question 10. Describe the author's approach to commenting the code. Provide examples of good and bad
 comments that have been used in the code.
 
@@ -241,7 +243,7 @@ In game.py, line 112: "# Game startup" is redundant because this is clear from n
 
 In prompt.py, line 29: "# stack()[0] is this; stack()[1] is adventure.play(); so, stack()[2]" is not informative.
 
-
+****************
 Question 11. Provide an example of where vertical formatting has been used to make the code clearer.
 
 Prompt.py model is a good example of nice vertical formatting. Specifically:
@@ -254,7 +256,7 @@ a class with a bunch of functions within).
 Following the class end, we see two blank lines followed by another function. The two blank lines are a nice way 
 to separate the class from function "install_words" 
 
-
+****************
 Question 12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests
 meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria.
 
