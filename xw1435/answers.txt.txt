@@ -1,0 +1,36 @@
+Q1.
+The raw_input() function has been renamed in python3. Therefore I changed this function to input().  
+
+Q2.
+To structure the program,  the author used modules. He also defined classes that combine both structural and behavioral components. He also defined a set of functions that define behaviors that contained in each class.
+
+Q3.
+Yes, the author use some meaningful names, some variable names like dwarf_count, dwarf_attack, trying_to_get_into_cave are descriptive, straightforward and easy to understand. They each means: the count of the dwarves, the attacks of dwarves, and whether or not the player is trying to get into the cave. There are also some not meaningful names like full_wests and foobar, which would be hard to understand without further comments.
+
+Q4.
+Some functions that only do one thing are: choice(self,seq), it generate a random choice from a sequence;  load_advent_dat(data), it load data of the game. Examples that function not only do one thing are say_okay_and_finish(self, *ignored): this function does two things: it write a message and run a finish_turn() function. Another example is __init__(self, room), it initiate self.start_at(room), and set self.has_seen_adventurer to False.
+
+Q5.
+For function die_here(self), it first runs function die() and write a message, but it also has a side effect of setting self.oldloc2 to self.loc. 
+
+Q6.
+Most of the repetitive works have been codeded into functions already.
+
+Q7.
+The program uses exception handling in the loop() function. It will output prompts for the player to enter a valid input. I did not find any input that would cause the program to terminate abnormally.
+
+Q8.
+The Class Words has more than one piece of functionality. It defines properties of the words that can be used as part of a command but also the add_synonym function that allows to extend the list of words. 
+
+Q9.
+Class Game is not cohesive. We can spot some of the variables that are only used by a subset of methods, this means it is likely that we should break the class into two or more smaller classes. 
+
+Q10.
+Some good conments include: explanation of intent at beginning of each module and explaination of the variables and class definitions. The author explained code that does not explain itself and have some TODO comments in game.py. Some bad coments includes redundant comments that can be done with repharasing the code. There is also one commented-out code in data.py 
+#data.room_list = sorted(set(data.rooms.values()), key=attrgetter('n'))
+
+Q11.
+In class Game, instance variables are declared together. Also, dependent function is put below functions that call them, for example move_dwarves(self) and move_to(self, newloc=None). Vertical formatting has been used to make the code clearer.
+
+Q12.
+The tests provided are run and passed. (But for a windows environment, in order to run test_commands.py, need to make sure that play.py is in the same directory to be imported. Not sure if this is a problem.) Generally speaking, the tests meet the F.I.R.S.T. criteria. Tests are fast and can be run frequently. They are also independent from each other and can be run in any order. Tests are repeatable and self-validating as they either pass or fail. The author write the tests during code development, not after the program is completed therefore meet "Timely" criteria.
