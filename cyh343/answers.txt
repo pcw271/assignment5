@@ -1,0 +1,80 @@
+# Q1
+
+Change 
+File "adventure.py", line 37, in loop
+    line = raw_input('> ')
+into 
+    line = input('> ')
+
+# Q2
+
+(1) Functions: for example, file "adventure.py", line 13-17, function baudout(s).
+(2) Modules: using for separate the whole program, for example, in file "adventure.py", "data.py", and "play.py".
+(3) Classs: for example, file "data.py", line 24-36, class Data(object) contains functions __init__(self) and referent(self, word).
+
+# Q3
+
+The auther has used some meaningful names. For example, file "game.py", line 34, variable "is_dead"is easy to make user understand that it shows whether player has died or not. File "game.py", line 92-93, the function "treasures(self)" could mean that the function returns the treasures that the player got. 
+
+However, there still exists some meaningless names, for example, file "adventure.py", line 14-26, the variables name "c" and "s", which are unsearchable. Also, in file "data.py", line 24, the name class "Data(object)" is abstract.
+
+# Q4
+
+Some functions in this program only do one thing, for example, in file "game.py", line 102, function "is_here(self,obj)" only return whether the player is in the room. File "model.py", line 67, function "is_aboveground(self)" only makes sure if the player is aboveground.
+
+Nevertheless, some functions do more than on thing, such as file "game.py", line 114, function "start(self)", and file "prompt.py", line 28, function "install_words(game)".
+
+# Q5
+
+Yes, there are functions that cause side effects. For example, file "play.py", line 11-38, functions "play(seed=None)" and "resume(savefile, quiet=False)" modify the global variable "_game". Also, in file "model.py", line 11, function "__repr__(self)" manipulates the external states "condition" and "action".
+
+# Q6
+
+Yes, for example, file "game.py", line 88-100, functions "inventory(self)", "treasures(self)", and "objects_at(self, room)" can be written into a function.
+
+# Q7
+
+Yes, it does. One of them is in file "adventure.py", line 43-46. If we input "~ quit" rather than "quit", the program will terminate abnormally.
+
+# Q8
+
+(1) File "game.py", class "Game"
+(2) File "data.py", line 24, class "Data" 
+
+# Q9
+
+(1) File "game.py", class "Game"
+(2) File "data.py", class "Data"
+
+# Q10
+
+The author uses comments frequently, and most comments are easy to understand and provide enough explanations. 
+
+Some examples of good comments:  
+(1) File "game.py", line 117-118, "For old-fashioned players, accept five-letter truncations like "inven" instead of insisting on full words like "inventory"." explains the goal below.
+(2) File "play.py", line 12-17, 
+    """Turn the Python prompt into an Adventure game.
+
+    With optional the `seed` argument the caller can supply an integer
+    to start the Python random number generator at a known state.
+
+    """
+ explains the function.
+
+Examples of bad comments:
+(1) File "game.py", line 131, """Display instructions if the user wants them.""" does not properly comment since the function "start2(self, yes)" below not only displays the instrctions but also does other things.
+(2) File "game.py", line 115, """Start the game.""" is a little redundant since the function "start(self)" has already shown the meaning.
+
+# Q11
+
+File "adventure.py", line 19-40, function "loop()" uses vertical formatting for the author leaves a line between each segment of codes.
+
+# Q12
+
+Yes, they do pass. And they meet some of the F.I.R.S.T. criteria.
+(1) They are fast.
+(2) They are independent, which means they can be run in any order.
+(3) The test "test_commands" is not repeatable.
+(4) They are self-validating, fail or pass unambiguously.
+(5) Whether they are timely or not is uncertain because we do not know when the author wrote these tests.  
+
