@@ -1,0 +1,41 @@
+1. Describe the changes you made to make the game work with Python 3
+	I changed line 37 in adventure.py, which originally was "line = raw_input('> ')"
+	to "line = input('> ')" since 'raw_input('> ')'' is no longer supported in python 3. 
+
+2. Describe three main techniques that the author used to structure the program.
+	The author uses module, classes, single responsibility principle to struture the program. 
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+	The author uses meaningful names almost throughout the program. For example, in game.py, the dwarves_killed variable in Game class may be the number of dwarves you killed in the game; the knife_location variable contains the location of the knife in the game. However in data.py, the author defines a list of functions namely: section1, section2, etc. which does not use meaningful names. 
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+	Some functions in the code do one thing, for instance, in game.py, the function start just initialize the game without instructions, and the function start2 just start the game with instruction. However, the function move_dwarves not only decide whether you will meet the dwarves or pirate, but will also decide whether you will meet pirate and how many draves will attack and how many will walk. 
+
+5. Do any of the functions cause side effects? If so, which ones?
+	Some functions has side effects, including function resume, move_dwarves, die_here, t_carry, t_drop, t_unlock, t_light, t_extinguish, t_wave, t_attack, t_pour, t_eat, t_drink, t_throw, t_fill, t_blast, t_read, start_closing_cave, close_cave in game.py and all the functions in data.py. 
+
+6. Can you find any repeated code that could be made into a function?
+	No.  
+
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+	Yes, the program use exception handling. When input symbols to the commend line, the program is not responding. 
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+	No, none of the classes have responsibility over more than one piece of functionality.
+
+9. Are all the classes cohesive? List any that aren’t.
+	Yes, all the classes cohesive. 
+
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code. 
+	The author comments the code based on what the function or the variable does. An good example is that 'max_deaths = 3  # how many times the player can die'. An example of bad comment is that '# IF LOC.EQ.0 ?', we don't know what does this comment mean. 
+
+11. Provide an example of where vertical formatting has been used to make the code clearer. 
+	In game.py, the author declears the instance variables together at the vary begining of the file, and keeps the wraper functions (i_XXX) and the dependent functions(t_xxx) together in the later part of the file. 
+
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+	All the tests pass. The test meet the F.I.R.S.T. criteria. First, the test only ran 3.6s on my machine, it's reasonable fast. The test case are all independently defined so that they all independent. And obviously the test is repeatable and self-validating. As for timely, I am not sure when are these test case written. 
+
+
+
+
+
