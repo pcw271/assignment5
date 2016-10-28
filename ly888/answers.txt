@@ -1,0 +1,85 @@
+1. Question 1
+
+First, I change the function "raw_input" (file adventure.py, line 37) to "input" because the "raw_input" function has been renamed to "input" in Python 3.0.
+Second, when I save the game, I use "save advent" to replace "save advent.save", where "advent" is the name of saved game.
+Third, in order to run the test program "walkthrough1.txt" and "walkthrough2.txt", I erase "#" in line 9-10 in "test_walks.py".
+Fourth, in line 863 in file "walkthrough1.txt", we use "play.resume(savefile)" to replace "adventure.resume(savefile)" because function resume is in "play.py". Similarly, in line 1172 in file  "walkthrough2.txt", we use "play._game.clock1" to replace "adventure._game.clock1".
+
+2. Question 2
+
+First, the author define different modules, such as "data.py", "game.py" and many others in folder "adventure". When run the main function, these modules can be reused by other programs.
+Second, the author define different classes in modules, such as "Move" (line 3), "Room" (line 38) and "Word" (line 82) in "model.py".  These classes combine both structural and behavioral components and have responsibility over one piece of functionality.
+Third, the author introduce test driven development technique. In this program, test and production code are written together and users can run and test the program simultaneously.
+
+3. Question 3
+
+Some meaningful names: game.is_finished (check if the game is finished) and Game.resume (load the existing game and continue playing) in "adventure.ty".
+Some not meaningful names: baudout in "adventure.ty", section 1 and section 2 in "data.py".
+
+4. Question 4
+
+The functions only do one thing: "random(self)" (line 57) and "choice(self, seq)" (line 60) in class "Game" in "game.py".
+The functions do more than one thing: "__repr__(self)" (line 11) in class "Move" in "model.py", "section3(data, x, y, *verbs)" (line 67) in "data.py"
+
+5. Question 5
+
+I think some functions in this program have the side effects. For example, some functions' return value will change the global value of some variables. For example, in function "parse" in "data.py", the global input is "data". However, this function will do some revision for "data" and return it. Then the global value of "data" has been changed and the side effects appear. 
+
+6. Question 6
+ 
+The repeated code appears in "play.py". For the function play, it starts the game and play. For the function resume, it continues the existing game and play. And we can find some repeated lines in these two functions (line 18-21, line 25, line 30-33, line 36), which is showed below.
+
+  global _game
+
+  from game import Game
+  from prompt import 
+  install_words(_game)
+
+Therefore, we can use "if-else" to combine these two functions to avoid repetition.
+
+7. Question 7
+
+The exception handling means that the program will use exceptions rather than return codes. In this program, some places seems have exception handling. For example, I run the game in windows powershell. When the game aks me which direction I will go, I type "sssss" and "11111" in. The program will answer me "I DON'T KNOW THAT WORD" and "I DON'T UNDERSTAND THAT!" rather than quit the game. Then it will continue the game and let me input again. Similarly, when I run "save advent.save" (line 41) in "README", the program will tell me "I DON'T KNOW THAT WORD" and let me input again.
+
+8. Question 8
+
+The class "Game" has responsibility over more than one piece of functionality. It will start the game, justify if the input is valid, describe the location and movement of the players, define death and reincarnation of the players and many others.
+
+9. Question 9
+
+Not all the classes are cohensive. For example, class "Game" is not cohensive because it define many variables and some functions use more than one.
+
+10. Question 10
+
+Generally speaking, the author has two approaches to comment the code. First, he explain the meaning of each variable in "game.py" (line 21-37). Second, he breifly describe the intention of some functions, such as the comments in function "yesno" (line 73) and the comments in function "start2" (line 131) from "game.py".
+Good comments: The comments """Display instructions if the user wants them""" in function "start2" (line 131) from "game.py" and the comments """Read the Adventure data file and return a ``Data`` object.""" in function "parse" (line 199) from "data.py". These comments will let us know what this function will do.
+Bad comments: The name of some variables and functions will explain their role, so related comments will be useless. For example, the comments "# how many times the player has died" for variable "deaths" and comments "# how many times the player can die" for variable "max_deaths" (line 35-36) in class "Game" from "game.py".
+
+11. Question 11
+
+In this program, the author use vertical formatting to make the code clear. The blank space will be introduced to identify a new and separate concept and lines of code that are related should appear close. For example, in the lines 20-36 (list below) in "adventure.py", the code will first input some variables and then these variables will be used to implement the further steps. Then a line of blank space is written between these two parts.
+
+    parser = argparse.ArgumentParser(
+        description='Adventure into the Colossal Caves.',
+        prog='{} -m adventure'.format(os.path.basename(executable)))
+    parser.add_argument(
+        'savefile', nargs='?', help='The filename of game you have saved.')
+    args = parser.parse_args()
+
+    if args.savefile is None:
+        game = Game()
+        load_advent_dat(game)
+        game.start()
+        baudout(game.output)
+    else:
+        game = Game.resume(args.savefile)
+        baudout('GAME RESTORED\n')
+
+12. Question 12
+
+All the tests are passed in my experiment. I think the program here may comply the "F.I.R.S.T." criteria.
+(1) Test is fast (F): the runing time for the four test files (syntax.txt, vignettes.txt, walkthrough1.txt, walkthrough2.txt) is 4.361s, which is fast enough.
+(2) Tests do not depend on each other so they can be run in any order (I): if I change the order of the four test files (line 7-10) in "test_walks.py", the outcome is still OK, which implies that these four test files do not depent on each other.
+(3) Test is repeatable (R): test is repeatable in any environment and the outcome is always OK.
+(4) Test is self-validation (S): Test is either pass or fail.
+(5) Test is timely (T): In README, the test codes is followed production code immediately, so I think the test code is written during code development. However, it is difficult to justify, just a high probability guess.
