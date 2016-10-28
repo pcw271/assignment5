@@ -21,6 +21,7 @@ continue explore follow attack strike devour inventory detonate ignite
 blowup peruse shatter disturb suspend sesame opensesame abracadabra
 shazam excavate information""".split() }
 
+
 class Data(object):
     def __init__(self):
         self.rooms = {}
@@ -99,7 +100,7 @@ def section3(data, x, y, *verbs):
         move.is_forced = True
     else:
         move.verbs = [ make_object(data.vocabulary, Word, verb_n)
-                       for verb_n in verbs if verb_n < 100 ] # skip bad "109"
+                       for verb_n in verbs if verb_n < 100 ]  # skip bad "109"
     move.condition = condition
     move.action = action
     data.rooms[x].travel_table.append(move)
@@ -171,9 +172,9 @@ def section9(data, bit, *nlist):
         if bit == 0:
             room.is_light = True
         elif bit == 1:
-            room.liquid = make_object(data.objects, Object, 22) #oil
+            room.liquid = make_object(data.objects, Object, 22)   # oil
         elif bit == 2:
-            room.liquid = make_object(data.objects, Object, 21) #water
+            room.liquid = make_object(data.objects, Object, 21)   # water
         elif bit == 3:
             room.is_forbidden_to_pirate = True
         else:
@@ -215,7 +216,7 @@ def parse(data, datafile):
     del data._object       # state used by section 5
 
     data.object_list = sorted(set(data.objects.values()), key=attrgetter('n'))
-    #data.room_list = sorted(set(data.rooms.values()), key=attrgetter('n'))
+    # data.room_list = sorted(set(data.rooms.values()), key=attrgetter('n'))
     for obj in data.object_list:
         name = obj.names[0]
         if hasattr(data, name):
