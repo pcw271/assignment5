@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.insert(0, '/Users/sunevan/Dropbox/Fall 2016/Programming for Data Science/Homework/assignment5/adventure')
 
 class DataTest(unittest.TestCase):
 
