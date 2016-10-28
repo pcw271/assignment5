@@ -69,11 +69,11 @@ In 'game.py'(line 809-832), instead of declaring those variable in the very begi
 
 
 12.
-Testing walkthrough files failed since adventure is not defined when running. After change into 'play.resume' in walkthrough1.txt and 'play._game' in walkthrough2.txt, it worked.
+Testing walkthrough files failed since adventure is not defined when running (after remove # in 'test_walk.py'). After change into 'play.resume' in walkthrough1.txt and 'play._game' in walkthrough2.txt, it worked.
 
 It doesn't meet F.I.R.S.T critirea. 
 For example, game use part of play function. Therefore, it is not independent.
-For F, I think it is pretty fast which only takes several seconds. But I actually don't know if it should be regarded as fast or not. 
+For F, I think it is pretty fast which only takes 4.77 s to run 16 tests. But I actually don't know if it should be regarded as fast or not since there is no threshold. 
 For T, the game was written in python 2 at first but tests are actully given in python 3.
 For I, the tests files such as 'walkthrough1' and 'walkthrough2' are independent. But they are not independent from modules. 
 Other criteria are met.
