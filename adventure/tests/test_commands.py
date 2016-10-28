@@ -23,6 +23,6 @@ class CommandTest(TestCase):
             game = Game()
             load_advent_dat(game)
             game.start()
-            game.do_command(['no'])  # WOULD YOU LIKE INSTRUCTIONS?
+            game.do_command(['yes'])  # WOULD YOU LIKE INSTRUCTIONS?
             game.do_command(['enter'])  # so we are next to lamp
             game.do_command([word, 'lamp'])
