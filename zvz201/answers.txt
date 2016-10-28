@@ -83,7 +83,7 @@ Reference: Clean Code book, p. 44.  "Side effects are lies. Your function promis
 also does other hidden things."
 
 In game.py, lines 130-146, function start2 is intended to "display instructions" as specified in comments. 
-However, it seems to be doing something else with “treasures" and “describe_location”.
+However, it seems to be doing something else with "treasures" and "describe_location".
 
     def start2(self, yes):
         """Display instructions if the user wants them."""
