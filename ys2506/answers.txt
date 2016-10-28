@@ -1,0 +1,51 @@
+1. change raw_input to input in advanture.py.
+2. packages and modules,classes, function
+3. sometimes.
+   in advanture.py：
+   meaningful names:
+   do_command: a function which would do the command as asked
+   is_dead: whether the person in game is dead
+   is_here: whether the person in game is here
+   not meaningful names: game, t_fill,value
+4. sometimes.
+   in advanture.py：
+   some examples of functions that only do one thing:
+   compute_score，should_offer_hint，resume
+   some examples of functions that do more than one thing:
+   score_and_exit，move_dwarves
+5. yes
+   in advanture.py：
+   move_dwarves, score_and_exit,t_suspend
+6. yes
+   in game.py：if not obj.is_toting
+7. no, in t_suspend it only use try but not handle exception in advanture.py：
+   yes, input ^C.
+8. yes. 
+   in advanture.py：Game
+9. yes.
+10.’’’ and #. 
+   in data.py:
+   good one:
+   # Check whether we should offer a hint.
+   # Report what has happened.
+   bad one:
+   #2608
+   #6000
+11. in data.py:
+    section4(data, n, text, *etc):
+    text = text.lower()
+    text = long_words.get(text, text)
+    word = make_object(data.vocabulary, Word, n)
+    if word.text is None:  # this is the first word with index "n"
+        word.text = text
+    else:  # there is already a word sitting at "n", so create a synonym
+        original = word
+        word = Word()
+        word.n = n
+        word.text = text
+        original.add_synonym(word)
+    
+12.only test_commands.py failed.
+   I think it meet the F.I.R.S.T. criteria if the tests was written during code  development not after.
+   it is fast, independent, repeatable, self-validating.
+   if the tests was written during code development not after then it is timely.
