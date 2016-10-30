@@ -1,0 +1,84 @@
+1. In adventure.py - line 37, changed raw_input to input
+
+2.
+The author uses the followings to structure the code 
+Function - Implemented to do specific task, related to function name
+Class - Class is used to organize the code and keep things together that are related to each othe, each class has its own responsibility
+Module - Module is used so that functions and classes can be reused in other part of the program
+
+3. 
+Meaningful names:
+accumulate_message in data.py, describe_location in game.py - descriptive
+Not meaningful names: 
+Data class in data.py - not very clear and abstract, section1,2,... not very clear what each section means, Object class in model.py very abstract
+I_suspend, t_suspend in game.py -> not clear and uses attribute prefix   
+
+4.
+Mixed, some do multiple things and some do only one thing.
+In data.py, function expand_tabs(segments) doese multiple things and section5 in data.py does multiple things
+In data.py, section10 does one thing and accumulate_message in data.py does one thing
+
+5.
+Describe_location in game.py has side effect. It’s name suggests that it will describe the location but has side effect as it has some return statement not really related to the function and also called die_here() function after some checks.
+
+6.
+No, since the structure of the code is such that it uses classes and functions, it's hard to find repeated code.
+
+7.
+Yes, adventure.py except. There is no input that causes the program to terminate abnormally. Only keyboard interrupt(Ctrl + C) can force it to terminate with exception.
+
+8.
+I think class Game in game.py has responsibility over more than one piece of functionality. This class takes care of the whole flow of the game.
+
+9.
+Game class in game.py is not cohesive as it has many instances and also each method does not manipulate many instances. Also it has many responsibilities so things aren't really related to each other.
+
+10.
+The author uses comment to describe variables and functionality of functions. Inline comment is used to describe variables where variable name is not self-descriptive.
+Good comment: 
+"""Classes representing Adventure game components.""" Module description in model.py(line 1)
+comment for play function in play.py(line 12) -> describes the functionality of the play function
+Inline comment # 8 bits + 1 stop bit @ the given baud rate in adventure.py(line 15)
+
+Bad comment:
+# stack()[0] is this; stack()[1] is adventure.play(); so, stack()[2] commented out code in prompt.py(line 29)
+# if ptext(0) is zero? In game.py(line 1653)
+# IF LOC.EQ.0 ? in game.py (line 179)
+
+11.
+Adventure.py
+Loop function has clean vertical formatting by separating related variables and behaviour close to each other and blank line is used to separate them.
+
+12.
+It passes the test,
+Test output
+jinu@ubuntu:~/DS7/hw/hw5/assignment5/adventure$ python -m unittest discover -v
+test_intransitive_commands_should_not_throw_exceptions (tests.test_commands.CommandTest) ... ok
+test_transitive_commands_should_not_throw_exceptions (tests.test_commands.CommandTest) ... ok
+test_hint (tests.test_data.DataTest) ... ok
+test_long_description (tests.test_data.DataTest) ... ok
+test_long_description_expands_tabs (tests.test_data.DataTest) ... ok
+test_object_message_expands_tabs (tests.test_data.DataTest) ... ok
+test_short_description (tests.test_data.DataTest) ... ok
+test_move_repr_look_good (tests.test_data.ReprTest) ... ok
+test_move_repr_works_on_all_moves (tests.test_data.ReprTest) ... ok
+test_object_repr (tests.test_data.ReprTest) ... ok
+test_room_repr (tests.test_data.ReprTest) ... ok
+test_word_repr (tests.test_data.ReprTest) ... ok
+/home/jinu/DS7/hw/hw5/assignment5/adventure/tests/syntax.txt
+Doctest: syntax.txt ... ok
+/home/jinu/DS7/hw/hw5/assignment5/adventure/tests/vignettes.txt
+Doctest: vignettes.txt ... ok
+
+
+----------------------------------------------------------------------
+Ran 14 tests in 7.533s
+
+
+OK
+
+Fast: I think it runs fast enough to test
+Independent: Each test does not depend on each other so it can be run in any order
+Repeatable: Yes this is repeatable and run multiple times.
+Self-validating: Yes it is self-validating as it either passes or fails
+Timely: I can’t really comment on this but I believe it was written during code development and some after the development as it requires the complete codebase to test the functionality of the game.
