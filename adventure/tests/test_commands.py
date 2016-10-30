@@ -1,10 +1,11 @@
 import sys,os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.pardir)))
+from unittest import TestCase
 from play import load_advent_dat
 from game import Game
-from unittest import TestCase
 
 class CommandTest(TestCase):
+    
     def setUp(self):
         game = Game()
         load_advent_dat(game)
@@ -27,4 +28,3 @@ class CommandTest(TestCase):
             game.do_command(['no'])  # WOULD YOU LIKE INSTRUCTIONS?
             game.do_command(['enter'])  # so we are next to lamp
             game.do_command([word, 'lamp'])
-
