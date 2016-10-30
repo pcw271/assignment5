@@ -38,7 +38,7 @@ long word, so you can type the long or short version as you please.
 You can save your game at any time by calling the ``save`` command
 with a filename, and then can resume it later::
 
-    > save adventsave
+    > save advent
     GAME SAVED
     > quit
     DO YOU REALLY WANT TO QUIT NOW?

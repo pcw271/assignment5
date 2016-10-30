@@ -3,7 +3,7 @@ When I use the Shell to run the Python 3 for the adventure.py, I got an error me
 
 The other problem I met is occurred when I run the tests by using walkthrough1.txt and walkthrough2.txt. By default, the program is only tested by syntax.txt and vignettes.txt. Tests can be passed by both of them. After removing "#" from the test_walks.py, the program can also be tested by walkthrough1.txt and walkthrough2.txt. However, I got error messages for both of them when I run the tests. For walkthrough1.txt, the error occurred at line 863 (i.e. adventure.resume(savefile), NameError: name 'adventure' is not defined). For walkthrough2.txt, the error occurred at line 1172 (i.e. adventure._game.clock1, NameError: name 'adventure' is notdefined). By checking, "adventure" should be "play" since the "resume" function and "_game" are all in the play.py. After correcting the problem in both files, tests can be passed.
 
-I also changed "> save advent.save" (line 41 of readme.txt) to "> save adventsave" by removing the "." since the game cannot be saved if the name of save file contains ".".
+I also changed "> save advent.save" (line 41 of readme.txt) to "> save advent" by removing the "." since the game cannot be saved if the name of save file contains ".".
    
 
 2. 
