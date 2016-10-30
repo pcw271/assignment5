@@ -33,6 +33,8 @@ def loop():
         game = Game.resume(args.savefile)
         baudout('GAME RESTORED\n')
 
+    #change raw_input() to input()
+    #2.7 to 3.5
     while not game.is_finished:
         line = input('> ')
         words = re.findall(r'\w+', line)
