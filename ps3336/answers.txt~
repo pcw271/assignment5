@@ -1,0 +1,32 @@
+1. When I first tried to run the program, it gives me an error message 
+NameError: name 'raw_input' is not defined. I need to translate the python 2 function raw_input to its python 3 counterpart. I change the function name to input() then the game works as normal.
+
+2. In order to structure the program, the author used 
+a. Use Modular Programming to allow small modules to be written separately. If combined together it will perform the function of the whole program. THis can makes the code to be reused by other programs.
+b. Defined classes combining both structural and behavioral components and containing a set of functions that define behavior.
+c. Encapsulate state information, such as attributes in those classes.
+
+3. Some examples of meaningful names: full_description_period (variable name of how often we use a room's full description) 
+is_finished (function to determine if dead of done)
+Some examples of not meaningful names: foobar (variable names of turn number of most recent still-valid "fee")
+baudout() as a function name 
+
+4. Some examples of functions that only do one thing: 
+write(self,more):Append the Unicode representation of `s` to our output
+random(self): Random number generator
+Some examples of not only one thing: 
+yesno(self, s, yesno_callback, casual=False): Ask a question and prepare to receive a yes-or-no answer.
+
+5. Yes. Side effect of function describe_location(self): it not only check the condition of location, but also finish the current turn at the end. 
+
+6. I did not find any repeated code that could be make into a function. 
+
+7. The program uses exception handling in the main function. It will output some prompts for player to enter valid input. I did not find any input that causes the program to terminate abnormally.
+
+8. Class Game has more than one piece of functionality. It defines properties of the cave, starts up the game, manipulate motion, define death and reincarnation. 
+
+9. Class Game is not cohesive. 
+
+10. Some good conments: explanation of intent at the very beginning. explain code that does not explain itself. Some bad coments: Some redundant explanation of function and variables can be done with repharasing the code without comment
+
+11. Example of vertical formatting: Put dependent functions below functions that call them (do_command(self, words), _do_command(self, words))
