@@ -1,0 +1,111 @@
+Q1
+
+(1)	Change line 37 in adventure.py:		From :		line = raw_ input('> ')		To:		line = input('> ')——In order to run it in a Python 3 environment, it should use input() method instead of raw_input() which is working in Python 2 environment.(2)	Change line 26 of test_commands.py:		From:		game.do_command(['no'])		To:		game.do_command(['yes'])——In order to simulate and test more scenarios that may happen when people play the game.(3)	Uncomment line 9 and 10 of adventure.py:    		tests.addTests(doctest.DocFileSuite('walkthrough1.txt'))		tests.addTests(doctest.DocFileSuite('walkthrough2.txt'))——In order to test walkthrough1 and walkthough2 texts.
+
+
+Q2
+
+(1) First, author uses several modules to split the whole program into different function and variable groups in a much more organized manner.(2) Second, author uses classes as a blue print to proliferate and manipulate objects. Inside the classes, author defines class properties using variables and class behaviors using functions.(3) Finally, author uses import to connect each of the module together to build up the skeleton of this cohesive program.
+
+
+Q3
+
+Examples of using meaningful name:When naming the class, the author used very clear nouns to describe the content of the class like Game() which is the blueprint of the whole game. Dwarf() defines the traits and behaviors of the dwarf character. For method names like is_at(), it judges the location of the avatar.Examples of not using meaningful name:In the data.py, author used a lot of abstract and ambiguous names like n, x, y, etc. To iterate, n is understandable as a position indicator. But the meanings of other abstract characters may seem a little vague. And when author using sections instead of more organized position-indicative names, it doesn’t create a clear map of the game, the readers of the code have hard time to understand the internal logical structure of the code.And like line 14 in model.py, author uses “c” to describe the condition of the avatar. Instead of using a single character, the word “condition” would be better and more understandable.
+
+
+Q4
+
+There are lots of examples of one-purpose function.
+For example:
+class Dwarf(object):
+    is_dwarf = True
+    is_pirate = False
+
+    def __init__(self, room):
+        self.start_at(room)
+        self.has_seen_adventurer = False
+
+    def start_at(self, room):
+        self.room = room
+        self.old_room = room
+
+    def can_move(self, move):
+        if not isinstance(move.action, Room):
+            return False
+        room = move.action
+        return (room.is_after_hall_of_mists
+                and not room.is_forced
+                and not move.condition == ('%', 100))
+
+—— The class Dwarf() defines the character of dwarfs: status like location, see or unsee the adventurer; behavior like how to move. And each of the function inside the class covers one aspect of the things I mentioned above, no repeating no overlapping.Function example of only doing more than one thing:
+The move_to(self, newloc=None) function in game.py not only check if the avatar is at a new location and if it is under or above ground, it also check the situations like if it is allow to move forward. Besides, it also defines dwarf’s movement depending on its relation with the avatar.
+
+
+Q5
+
+In the game.py, author defines a function called score_and_exit(), it does two things --- show the score and exit the game by using “self.is_done = True”. The exist exists as a side effect. If the player just wants to check the score in the middle of the game and does not want to exist. S/he has no choice but to exist once checking the score.
+
+
+Q6
+
+When defining a character is a dwarf or a pirate, in model.py. It repeat the code “is_dward” and “is_pirate” in model.py and then in the game.py, it combines the behavior of dwarf and pirate into one method “move_dwarves()”, it would be better to just combine this two avatar into one class and not repeating the judgement twice in a separate class by define a single function to define dwarf and pirate.For code like:
+    def dont_understand(self):        #3000  (a bit earlier than in the Fortran code)        n = self.random()        if n < 0.20:    # 20% of the entire 1.0 range of random()            self.write_message(61)        elif n < 0.36:  # 20% of the remaining 0.8 left            self.write_message(13)        else:            self.write_message(60)        self.finish_turn()and 	n = word.n        if 29 <= n <= 30 or 43 <= n <= 50:            self.write_message(9)        elif n in (7, 36, 37):            self.write_message(10)        elif n in (11, 19):            self.write_message(11)        elif n in (62, 65):            self.write_message(42)        elif n == 17:            self.write_message(80)        else:            self.write_message(12)        self.move_to()        return——It would be much clear, if we make a function using dictionary like message_dict={n: message_index}, and return message_dict[n].It’s the same for following code:
+	words = [ self.vocabulary.get(word) for word in words ]        if None in words:            return self.dont_understand()        word1 = words[0]        word2 = words[1] if len(words) == 2 else None        if word1 == 'enter' and (word2 == 'stream' or word2 == 'water'):            if self.loc.liquid is self.water:                self.write_message(70)            else:                self.write_message(43)            return self.finish_turn()        if (word1 == 'enter' or word1 == 'walk') and word2:            #2800  'enter house' becomes simply 'house' and so forth            word1, word2 = word2, None        if ((word1 == 'water' or word1 == 'oil') and            (word2 == 'plant' or word2 == 'door') and            self.is_here(self.referent(word2))):            word1, word2 = self.vocabulary['pour'], word1        if word1 == 'say':            return self.t_say(word1, word2) if word2 else self.i_say(word1)
+——likewise, a word_dict would be helpful to reduce the code.
+
+
+
+Q7
+
+Author uses following code to do the main check:
+
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+Once it is executed as a script, python will execute the if block and try to run the loop() function.
+
+
+Q8
+
+Yes, class game assumes multiple tasks at the same time. It not only controls the game start, suspend, resume, has control over avatar’s behavior like move, drop, drink, eat, it also navigates the game by take command, offering hint, etc. It would be better to break it down into different classes or has it contains several sub-classes.
+
+
+Q9
+
+Most of the class is very cohesive like game class which defines lots of attributes and methods of the game. And so is the class room which depicts a wholistic situation of a room. while class like Pirate doesn’t offer a full description of a pirate and his behavior.
+
+
+Q10
+
+In the game.py, author comments on almost all variables and methods that may need more explanation and the reason and purpose he uses the structure in this specific way. For example, “Routines that handle the aftermath of "big" actions like movement. Although these are called at the end of each `do_command()` cycle,  we place here at the top of `game.py` to mirror the order in the advent.for file.” This comment well explains the reason why he place the definition of movement at the top of game.py. At the beginning of game.py, he also explains the mysterious numbers that are commented after some lines refer to Fortran lines.And since he defines bunch of new attributes that can’t be fully depicted purely by its name. The author should add more comments behind it to explain the usage or purpose of those variables.
+
+
+Q11
+
+The code can be divided into chunks based on their functionality. For example in game.py
+author put following definitions together:
+
+def do_command(self, words)
+def _do_command(self, words)
+def dispatch_command(self, words)
+
+They retrieve, handle and process player’s commands. They are closely related, thus they are put closely together.
+
+Following is the definitions like:
+
+def do_motion(self, word)
+def die(self)
+def i_carry(self, verb)
+def t_drop(self, verb, obj)
+def t_say(self, verb, word)
+etc
+
+These are actions the avatar takes following the commands of player. This structural design is very logical, cohesive and clear.
+
+
+Q12
+
+Fast: It takes 5.981s to run 14 tests, which satisfies the requirement of fast.Independent: The tests are divided into different functions --- testing commands, testing walks, testing data, and testing the walkthrough. So they can run separately without referring to each other.Repeatable: They are all functionally independent. Also, the test checks the codes by simulating some scenarios, i.e. inserting some values. Also, it doesn’t depend on the Python environment. Although it may be a problem that it didn't detect the raw_input() issue, but on the other hand, it is more environment compatible.Self-validating: it runs objectively based on the validity of the code.Timely: according to the scale and function of the tests, I don’t think they did the test while developing the program. Or the tests we see it the final complete version of the tests. They evolved along with the program. So it is hard to tell if it’s timely or not.
