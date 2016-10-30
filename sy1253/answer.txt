@@ -1,0 +1,24 @@
+QuestionsNote: Use the file name and line number when referring to locations in the code.1.	Describe the changes you made to make the game work with Python 3When I first run the program, “NameError: name 'raw_input' is not defined” occurs.I made change in line 37 of the file adventure.py. I change raw_input to input to make the game work.
+
+
+2.	Describe three main techniques that the author used to structure the program.(1)	The author uses modular programming to make the program more readable, easier to understand, to maintain and to be used by others. Examples are “advanture.py”, “play.py”(2)	Classes to encapsulate state information and provide a means to organize structural and behavioral components.(3)	Functions for player to interact with the program and keep track of players’ previous move.
+
+
+3.	Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. Meaningful names:model.py  line 3   Move: help the play to move and update its locationmodel.py line 38  Room: check the exact location and state of the playerplay.py     line 29  Resume: resume the gameMeaningless names:data.py line 59,64,67  section1, section2, section3data.py line 74 n,mdata.py line 75 mh,mm4.	Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.One thing: make_object()accumulate_message()More than one thing:game_move_to()parse()
+
+
+5.	Do any of the functions cause side effects? If so, which ones?In line 107-127 of the file data.py, the function section4() has the argument :text = text.lower()text = long_words.get(text, text)This would change text to lower case and long words.
+
+
+6.	Can you find any repeated code that could be made into a function?In line 36-40 of the file adventure.py, the while loop will be executed many times. Its execution can be made in to a function
+
+
+7.	Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.the program uses exception handing. In line 42-46 of the file adventure.py the program would handle End of File Error situations.
+8.	Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?In line 19 of the file game.py, the class Game has many pieces of functionality, including initiate a new play, describe location, and make turns.
+
+
+9.	Are all the classes cohesive? List any that aren’t.In line 19 of the file game.py the class GameIn line 38 of the file model.py the class RoomIn line 165 of the file model.py the class Dwarf10.	Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.The author would give a brief description about some classes or functions he thinks might be confusing.Good comment:In line 11-15 of the file play.py :"""Turn the Python prompt into an Adventure game.    With optional the `seed` argument the caller can supply an integer    to start the Python random number generator at a known state."""In line 64 of the file game.py:"""Append the Unicode representation of `s` to our output."""Bad comments:In line 39 of the file model.py:"""A location in the game."""In line 83 of the file model.py"""A word that can be used as part of a command."""
+11.	Provide an example of where vertical formatting has been used to make the code clearer. In the line 19-40 of the file adventure.py, the definition of the loop() has a clear vertical formatting. Each blank in the function is a visual cue that identifies a new and separate concept.
+
+
+12.	Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria.The tests pass. And I think the tests meet some of the F.I.R.S.T. criteria, but it is not independent because in the file of test_command.py the test would first go to walkthrough1.txt before it goes to walkthrough2.txt. Also we are not sure if the author write the tests during the code development.
