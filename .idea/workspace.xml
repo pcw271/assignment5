@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="569a46c6-422c-4a5f-a879-94129b4018e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ws854/answers.txt" afterPath="$PROJECT_DIR$/ws854/answers.txt" />
-    </list>
+    <list default="true" id="569a46c6-422c-4a5f-a879-94129b4018e8" name="Default" comment="" />
     <ignored path="assignment5.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
