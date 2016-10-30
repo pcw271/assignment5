@@ -1,3 +1,7 @@
+import os, sys
+parent_path = os.path.abspath(os.path.join(os.getcwd(), ".."))
+sys.path.append(parent_path)
+
 from unittest import TestCase
 from play import load_advent_dat
 from game import Game
