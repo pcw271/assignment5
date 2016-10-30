@@ -1,0 +1,81 @@
+1.In line 37 of Adventure.py, I changed "raw_input('>') to "input('>')".
+
+2.The author used different modules written separately and combined together to packages to perform the function;
+the author imported different python packages; and the author also took advantage of class, which contain a set 
+functions that define behavior.
+
+3.meaningful names: treasures_not_found: means the treasures not found, very clear and direct.
+                    is_dwarf_hear: means to check whether dwarf is here.  
+                    warned_about_dim_lamp: clear and direct to tell the readers it is about warning if the lamp is dim.
+                    
+                       
+
+not meaningful names: obj, c, data are not clear, and very abstract. self.clock1, self.clock2 are also not clear, and direct name the clock
+                   using its function, and easier to understand for readers. section1, section2, ..are not clear, and we cannot know
+                   what the function stands for.
+                   
+
+4.Actually, not all functions do one thing.
+Function does one thing: In model.py, thefunction is_forced(self) only returns 1<= self.n <= 8; 
+                         In model.py, the function __init__(self) only define rooms as a empty list.
+                         In game.py, the function random(self) only answered request, return self.random_generator.random().
+Function does one more thing: In adventure.py, function loop() first checked the args.savefile whether is saved,
+                              secondly, the function answered request while game is not finished.
+                              In model.py, the function can_move(self, move) answered the request and assigned a value to room;
+                              In model.py, the function start_at(self,room) assign a value to room, and then assigned a value to old_room.
+
+5. In data.py, the function parse(data, datafile) changed the global variable data, so it has side effects.
+
+6.In model.py, the function defined __repr__(self), there are multiple repeated codes:
+        if c is None:
+            condition = ''
+        elif c == '%':
+            condition = ' %d%% of the time' % self.condition[1]
+        elif c == 'not_dwarf':
+            condition = ' if not a dwarf'
+        elif c == 'carrying':
+            condition = ' if carrying %s' % self.condition[1]
+        elif c == 'carrying_or_in_room_with':
+            condition = ' if carrying or in room with %s' % self.condition[1]
+        elif c == 'prop!=':
+            condition = ' if prop %d != %d' % self.condition[1:]
+
+7.Yes, the program used exception handling. In adventure.py, try the statement loop() is executed first, 
+if EOFError occurs, then the program execute pass.
+
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+8.Yes, in game.py, there is only one class game(data) in the whole program, the class execute many functions,
+the class has functions to give initial definition, how to move, define how to describe locations and so on.
+
+9.In model.py, class Object(object) is not cohesive, first the class had a function to give initial value,
+then a function defined how to represent, and the class also did check equality, and whether someone is his room,
+and then defined some motions carry, drop, hide and destroy. Actually, a class told a many different things and 
+they were not related to each other closely, so the class is not cohesive.
+
+10. Good comment: In model.py, below the function of Hint(object), there is a good comment to explain the function
+                  """A hint offered if the player loiters in one area too long."""
+                  In play.py, in the function of play(seed =None), below the name of the function, there is a good 
+                  explanation about what is the function of seed and how to choose a seed, and it makes readers easier
+                  to understand the program.
+Bad comment: In adventure.py, in the function of baudout(s), there is a command sleep(9./BAUD), and after that there
+             is comment to explain this, # 8 bits + 1 stop bit @ the given baud rate. In my opinion, it's not a good 
+             comment, because the function of comment is to make other readers can understand what this command is used
+             for, but the comment could not give me a clear explanation. 
+
+11.In game.py, there is a space between every module. For example, after the name of the class Game(Data), there is a space 
+to separate the class name and the command to assign values, and after the initial values, there is also a space to separate from the
+function of __init__. When in a function, there are a small set of commands doing different things from another set of commands,
+then there is also a space to separate them to make the code clear.
+
+12. Actually, I faced a problem that I cannot successfully save the file when I input "save advent.save",instead
+I changed it to save advent, then the file can be successfully saved. 
+And when I run the test of adventure, the test successfully passed. The test ran 14 tests in 5.71s. I think the test 
+corresponds to F.I.R.S.T criterion, firstly, it only took 5.71s to run 14 tests, so it's fast. And the test was repeatable in any environment, 
+and also the test passed, so it is self-validating. However, we do not know whether the author wrote the tests during code development,
+so we are not sure about this point. 
+                  
