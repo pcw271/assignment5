@@ -1,0 +1,78 @@
+Answers
+
+1. File “adventure.py”, line 37, in loop
+line = raw_input('> ')
+was changed into 
+line = input('> ')
+
+2. Functions: blocks of code that either do something or answer something, such as file “adventure.py”, line 13-17, function baudout(s)
+
+Classes: contain a set of functions, and organize both structural and behavioral components. For example, file “data.py”, line 24-36, class Data(object) contains functions __init__(self) and referent(self, word).
+
+Modules: several modules are written separately, such as file “adventure.py”, “data.py” and  “play.py”. All the modules perform the function of the whole program when combined together. Modules perform logically discrete functions and make the program more readable.
+
+3. Yes, the author has used some meaningful names. 
+
+Examples of meaningful names: 
+(1) File “model.py”, line 46-48, the variable names “is_light” could mean if there is light in the room, “is_forbidden_to_pirate” could mean if the room is forbidden to pirate, and “liquid” could mean what kind of liquid is in the room. 
+(2) File “game.py”, line 92-93, the function name “treasures(self)” could mean that the function returns the treasures that the player has got. 
+
+Examples of meaningless names: 
+(1) File “model.py”, line 14-26, the variable name “c” is enigmatic and not searchable. 
+(2) File “data.py”, line 24, the class name “Data(object)” is abstract.
+
+4. Some functions used in the code do one thing.
+
+Examples of functions that only do one thing:
+(1) File “model.py”, line 67-68, the function “is_aboveground(self)” only judges if the player is aboveground.
+(2) File “game.py”, line 88-89, the function “inventory(self)” only returns the player’s inventory.
+
+Examples of functions that do more than one thing:
+(1) File “prompt.py”, line 28-38, the function “install_words(game)”
+(2) File “game.py”, line 114-128, the function “start(self)”
+
+5. Yes. Examples of functions that cause side effects: 
+(1) File “play.py”, line 11-38, the functions “play(seed=None)” and “resume(savefile, quiet=False)” modify the global variable “_game”.
+(2) File “model.py”, line 11-36, the function “__repr__(self)” manipulates the external states “condition” and “action”.
+
+6. Examples of repeated code that could be made into a function:
+(1) File “game.py”, line 75-76, the assignments could be made into a function.
+(2) File “game.py”, line 88-100, the functions “inventory(self)”, “treasures(self)” and “objects_at(self, room)” could be made into one function.
+
+7. Yes, one exception handling is file “adventure.py”, line 43-46. 
+If I input “~quit” instead of “quit”, the program will terminate abnormally.
+
+8. I find two classes that have responsibility over more than one piece of functionality:
+(1) The whole file “game.py” is a class “Game”
+(2) File “data.py”, line 24, class “Data”
+
+9. The classes that are not (highly) cohesive include:
+(1) File “game.py”, class “Game”
+(2) File “data.py”, class “Data”
+(3) File “model.py”, class “room”, “word”, “object”, “hint”, “dwarf”, “pirate”.
+Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+10. The author uses comments frequently, and most comments briefly explains the related code.
+
+Examples of good comments:
+(1) File “game.py”, line 117-118, the comment “For old-fashioned players, accept five-letter truncations like "inven" instead of insisting on full words like "inventory".” explains the intent of the code below.
+(2) File “play.py”, line 12-17, the comment 
+      """Turn the Python prompt into an Adventure game.
+    With optional the `seed` argument the caller can supply an integer
+    to start the Python random number generator at a known state.
+    """  
+explains the function that does not explain itself.
+
+Examples of bad comments: 
+(1) File “game.py”, line 131, the comment """Display instructions if the user wants them.""" contains a lie, since the function “start2(self, yes)” not only displays instructions, but also does other things.
+(2) File “game.py”, line 115, the comment  """Start the game.""" is redundant, since the function name “start(self)” means the same.
+
+11. An example of vertical formatting: file “game.py”, line 63-76, the related functions “write(self, more)”, “write_message(self, n)” and “yesno(self, s, yesno_callback, casual=False)” appear close.
+
+12. The tests pass, and meet some of the F.I.R.S.T. criteria:
+(1) they are fast, take only seconds to run
+(2) they are independent, could be run in any order
+(3) The test “test_commands” is not repeatable
+(4) they are self-validating, fail or pass unambiguously
+(5) they could be timely or not, because I don’t know if the author wrote the tests during code development
+
