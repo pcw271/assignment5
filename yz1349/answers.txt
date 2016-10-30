@@ -1,0 +1,98 @@
+Question 1: 
+
+Changed “raw_input()” to “input()” in adventure.py
+Uncommented the last two lines in “tests_walks.py”
+Added “import adventure” in the beginning of walkthrough1.txt and walkthrough2.txt
+Changed “adventure.resume” to “play.resume” in walkthrough1.txt
+Changed “adventure._game.clock1” to “play._game.clock1” in walkthrough2.txt
+
+Question 2:
+ 
+Using classes, modules and functions to structure the program. For example, “adventure.py” imports the module “game”. Within the game module there is a class called “Game”. Under “Game”, there is a series of small supporting functions.
+
+Question 3:
+
+The author used meaningful names for the most part:
+Examples of meaningful names: 
+In “Game”, “is_finished” returns whether the current game is finished.
+“max_deaths” means the maximum number of deaths the play can have.
+Examples of not meaningful name:
+In “Game”, “clock1” is the counts down from finding last treasure, but this is not clear just by looking at the name.
+In “Data”, section1 - section12 are not very meaningful names.
+
+Question 4:
+
+Most of the functions do only one thing. 
+Examples:
+In “Games”, the only thing “is_finished” does is to return whether the current game is finished.
+The only thing “write_message” does is to print a message.’
+Examples of function that does more than one thing:
+In “Games”, “say_okay_and_finish” prints a message and finishes the turn.
+
+Question 5:
+
+In “play.py”, the function “resume” involves the global variable “_game” which changes after the function is called. 
+
+Question 6:
+
+It’s generally pretty hard to found redundant code. However it seems like in “Game”, line 809-820, we have,
+
+    i_walk = ask_verb_what
+    i_drop = ask_verb_what
+    i_say = ask_verb_what
+    i_nothing = say_okay_and_finish
+    i_wave = ask_verb_what
+    i_calm = ask_verb_what
+    i_rub = ask_verb_what
+    i_throw = ask_verb_what
+    i_find = ask_verb_what
+    i_feed = ask_verb_what
+    i_break = ask_verb_what
+    i_wake = ask_verb_what
+
+It seems like the author can create a list containing i_walk, i_drop, etc. and write a function that passes the list directly to simplify the code. 
+
+Question 7:
+
+In “adventure.py”
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+Pressing “control+z” abruptly ends the program.
+
+Question 8:
+
+The class “Game” is a relatively large classes and certainly has more than one piece of functionality. 
+
+Question 9:
+
+As mentioned above, the class “Game” has more than one piece of functionality which also leads to lower cohesion since there is a large amount of instance variables and a large fraction of these variables were used only by some of the methods.
+
+Question 10:
+
+Examples of good comments:
+In “game.py”, “ # Death and reincarnation” serves the function of structuring the code; making it clear that the functions after this comment deals with death and reincarnation. 
+
+Examples of bad comments:
+self.clock1 = 30                # counts down from finding last treasure
+self.clock2 = 50                # counts down until cave closes
+
+Instead of using comments to illustrate the meaning of clock1 and clock2, it is better practice to directly reflect this using the names. 
+
+Question 11:
+
+In “game.py”, all instance variables were defined together at the top. 
+Also, in “model.py”, class “Pirate” is dependent on “Dwarf” and is placed directly below class “Dwarf”.
+
+Question 12:
+
+All the tests passed after the alterations made that were described in question 1. 
+16 tests were ran in 6.2 seconds, meaning the program is fairly fast. 
+The tests do appear to be independent of each other: switching the order doesn’t induce error. 
+The tests were environment-independent and therefore repeatable.
+The tests were self-validating in that it can pass or fail. (It initially failed before the changes in question 1 were made)
+According to “README.txt”, these test codes were written around the time of the development. 
+Overall, the F.I.R.S.T. criteria is met. 

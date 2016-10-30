@@ -1,4 +1,5 @@
 >>> import play
+>>> import adventure
 >>> play.play(seed=2)
 WELCOME TO ADVENTURE!!  WOULD YOU LIKE INSTRUCTIONS?
 <BLANKLINE>
@@ -1169,7 +1170,7 @@ OK
 >>> drop(vase)
 THE VASE IS NOW RESTING, DELICATELY, ON A VELVET PILLOW.
 <BLANKLINE>
->>> adventure._game.clock1
+>>> play._game.clock1
 5
 >>> plugh
 YOU'RE AT "Y2".
