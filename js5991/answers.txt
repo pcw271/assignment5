@@ -1,0 +1,103 @@
+Questions
+Note: Use the file name and line number when referring to locations in the code.
+1. Describe the changes you made to make the game work with Python 3
+Answer:
+	1.changed the raw_input() function from Python 2.7 of Adventure.py line 37 to input() from Python 3
+	# There is an issue with the instruction, save adverture.save should be changed to save adverture. 
+	
+2. Describe three main techniques that the author used to structure the program.
+Answer:
+	1. Modular programming is used to structure the program. It separates the programs to different concerns.Small modules are written separately in python files like game.py and play.py. They are then combined to perform the progam and they can be reused for other program.They makes the program readable and understandable. 
+	2. Classes, such as class game(),combine both structural and behavioral component. They encapsulate state information, such as indcators of whether we are currently dead(is_dead) and how many times the player has died (deaths) in the game. They also contain functions, such as property function of is_dark(self). 
+	3. Functions are used inside the class to do specific things, such as moving around. 
+
+3. Has the author used meaningful names? Give some examples of meaningful names used
+and what you think they mean. Give some examples of where the author has not used
+meaningful names.
+Answer:
+	Yes, the author used some meaningful names. 
+	Examples of meaningful name:
+	1. is_dark(self): check property of the cave
+	2. is_finished(self): check whether the gam is finished
+	3. move_dwares(self): it moves dwares
+	4. resume(): resume a saved game
+	
+	Examples of not-meaningful name:
+	1. start2(self,yes): without the comment, one may not know what this function mean
+	2. loop():although the name shows the functions will be looped, but it doesn't have much meaning
+
+4. Do the functions used in the code do one thing? Give some examples of functions that
+only do one thing. Give some examples of functions that do more than one thing.
+Answer:
+	Some functions do one thing. Here are some examples:
+	In game.py:
+	random(self): returns a random number
+	write_message(self,n): writes a message
+	
+	Other functions do more than one things. Here are some examples:
+	In play.py:
+	resume(savefile, quiet=False): define global variable, import Game, import install_words, assign resume saved, call install_words function, check quiet =false, then print. 
+	other more complicated functions include do_motion(self, word), t_drop(self,verb,obj) and t_unlock(self, verb,obj)
+
+5. Do any of the functions cause side effects? If so, which ones?
+Answer:
+	Yes, play(seed=None) and resume(savefile,quiet=False) modified the global variable _game as a result of playing and resuming the game.
+
+6. Can you find any repeated code that could be made into a function?
+Answer:
+	Yes. One example I found is that for line 1623-1627 of game.py and the 1628 to 1631 of the same code. Here they are:
+	    for obj in (self.bottle, self.plant, self.oyster, self.lamp,
+                    self.rod, self.dwarf):
+            obj.prop = -2 if obj is self.bottle else -1
+            obj.drop(ne)
+	and 
+	    for obj in (self.grate, self.snake, self.bird, self.cage,
+                    self.rod2, self.pillow):
+            obj.prop = -2 if (obj is self.bird or obj is self.snake) else -1
+            obj.drop(sw)	
+	They could be right to some function like objloop() taking the 6 parameters of loaction and surranding items. 	 
+
+7. Does the program use exception handling? Can you find any input that causes the
+program to terminate abnormally? Hint: run the program from the terminal prompt. Thel
+invalid input may not be normal text.
+Answer:
+	Yes, there is. Ctrl+C cause the program to terminate.
+	if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so,
+which ones?
+Answer:
+	Game Class has more than one piece of functionality. It does functionalities including starting the game, moving, describing location, dying, and defining the surrounding, inventory and so on. 
+9. Are all the classes cohesive? List any that aren’t .
+Answer:
+	Game class is not that cohesive as it does a lot of functionalities, many of them are not related.
+10. Describe the author’s approach to commenting the code. Provide examples of good and
+bad comments that have been used in the code.
+Answer:
+	Author uses some good and some bad comments. Most of the comments are trying to explain the variable, function and class. An example of good comments is the description for the play function. It describes the function.
+	Some bad examples include using position marker(like #2 in line with move_to function), noisy comments (#cancel move and put him back underground in the move_to function) and using comments to describe the functionality (like "want instruction? under the start function) of game.py.
+	
+11. Provide an example of where vertical formatting has been used to make the code clearer.
+Answer:
+	An example of vertical formatting is functions start(self) and start2(self,yes) are organized together in the game.py. They are to sart the game with or without the instruction depending on the user input. 
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests
+meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria.
+Answer:
+It satisfies the F.I.R.S.T. criteria. It runs fast, the tests are independent as I can run them separately. The tests are repeatable and the outcome is always ok. The sef-valuation, the test will show results of pass or fail. The test is timely, although it is written in python 2, but it still can run in the python 3 environment. 
+
+Here is the result from the test:
+Jy@PowerPC MINGW64 /e/ds1007/gitfolder/assignment5/assignment5/adventure (master)
+$ python -m unittest discover
+............E:\anaconda2\lib\genericpath.py:30: DeprecationWarning: The Windows bytes API has been deprecated, use Unicode filenames instead
+  st = os.stat(path)
+..
+----------------------------------------------------------------------
+Ran 14 tests in 6.086s
+
+OK
+
+
