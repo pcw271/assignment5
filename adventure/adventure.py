@@ -34,7 +34,7 @@ def loop():
         baudout('GAME RESTORED\n')
 
     while not game.is_finished:
-        line = input('> ')
+        line = raw_input('> ')
         words = re.findall(r'\w+', line)
         if words:
             baudout(game.do_command(words))

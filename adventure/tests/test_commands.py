@@ -1,7 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.insert(0, '/Users/sunevan/Dropbox/Fall 2016/Programming for Data Science/Homework/assignment5/adventure')
-
 from play import load_advent_dat
 from game import Game
 
