@@ -1,0 +1,155 @@
+1,
+I changed the "raw_input" to "input" in line 37, adventure.py file
+
+2,
+The author used class, module and functions as three techiques to structure the program.
+
+3,
+Good examples:
+In Game.py, line 21 to 37 are examples of good variables names.
+Treasure_not_found:Unseen treasure.
+Deaths: How many death have occured.
+max_deaths:how many lifes a player have
+
+Bad examples:
+In adventure.py line, line 14 & line 15, we are unsure of what are c&s.
+In data.py,line 9, w is like word, but we might not get any information from only w.
+
+4,
+Function with one use:
+data.py
+line 183: def section10(data, score, line, *etc), it only append score and line
+
+Function with more than one use:
+game.py 
+line 153: def move_to(self, newloc=None): it return values for self.loc, self.clock2, 
+self.pnaic and etc.
+line 191 move_dwarves(self): it did multiple tasks at the same time.
+
+5,
+Side effect:
+For example in data.py, in line 41 to line 44
+return dictionary[n]
+which changes the dictionary
+Also on line 127, which change data.vocabulary
+
+6,
+In game.py
+def t_drop(self, verb, obj):  #9020
+        if obj is self.rod and not self.rod.is_toting and self.rod2.is_toting:
+            obj = self.rod2
+
+        if not obj.is_toting:
+            self.write(verb.default_message)
+            self.finish_turn()
+            return
+
+        bird, snake, dragon, bear, troll = self.bird, self.snake, self.dragon, \
+            self.bear, self.troll
+
+        if obj is bird and self.is_here(snake):
+            self.write_message(30)
+            if self.is_closed:
+                self.wake_repository_dwarves()
+                return
+            snake.prop = 1
+            snake.destroy()
+
+        elif obj is self.coins and self.is_here(self.machine):
+            obj.destroy()
+            self.batteries.drop(self.loc)
+            self.write(self.batteries.messages[0])
+            self.finish_turn()
+            return
+
+        elif obj is bird and self.is_here(dragon) and dragon.prop == 0:
+            self.write_message(154)
+            bird.destroy()
+            bird.prop = 0
+            if snake.rooms:
+                self.impossible_treasures += 1
+            self.finish_turn()
+            return
+
+        elif obj is bear and self.is_here(troll):
+            self.write_message(163)
+            troll.destroy()
+            self.troll2.rooms = list(self.troll.starting_rooms)
+            troll.prop = 2
+
+        elif obj is self.vase and self.loc is not self.rooms[96]:
+            if self.pillow.is_at(self.loc):
+                self.vase.prop = 0
+            else:
+                self.vase.prop = 2
+                self.vase.is_fixed = True
+            self.write(self.vase.messages[self.vase.prop + 1])
+
+        else:
+            self.write_message(54)
+There are so many elif in this function which I think could be made into a function.
+Also, we could find many other repeated code that could rewritten into functions.
+
+7,
+Definetly, the program has used exception handling. In adventure.py, we could find
+that from line43 to line 47, there is a try except. When we use strange symbols such as"#$#$"
+it would return sentence such as "I don't understand ..."
+
+8,"
+In game.py, we could obeseve class Game(Data) has more than one piece of functionalities.
+It defines a lot of attributes.It could be broken into more pieces of functionalities.
+
+9,
+There are some classes are not cohesive. Class Game in game.py as writen in 8 is definitely 
+an example of uncohesive class.
+
+10£¬
+Good comments:
+As shown in data.py, in line 6 and 7,
+
+# The Adventure data file knows only the first five characters of each
+# word in the game, so we have to know the full verion of each word.
+It gives the purpose and brief ideas of what does this part of coding do.
+Bad comments:
+In data.py, line102
+# skip bad "109"
+In game.py, line20-37
+#DKILL
+# KNFLOC
+and later #2, #74 and etc.
+Those comments are really unclear.
+
+11,
+Vertical formatting has been used a lot.
+Game.py is really a good example of vertical formatting.
+Instance variables are put together at very beginning of the code file.
+Related functions are put together. Even though in this class it has more than one
+piece of functionalities. The related functions are put together, such as 
+def start(self) & def start2(self,yes)
+def do_command(self, words):& def _do_command(self, words):
+def die_here(self): & def die(self):
+We could also observe depedent functions are put together as well.
+So vertical formatting is used.
+
+12,
+songs@DESKTOP-Q4TLQT9 MINGW64 ~/ds1007/hw5/assignment5/adventure (master)
+$ python -m unittest
+............C:\Anaconda3\lib\genericpath.py:30: DeprecationWarning: The Windows bytes API has been deprecated, use Unicode filenames instead
+  st = os.stat(path)
+................
+----------------------------------------------------------------------
+Ran 28 tests in 8.763s
+
+OK
+The test result was shown above, and it passed.
+It almost met the F.I.R.S.T. criteria
+Fast: The test was run in 8.763 seconds, and thus it was quick
+Independent: It does not depend on each other.
+Repeatable:It could be run after developement, thus it is repeatable.
+Self-Validating: It is ,as it passes.
+Timely: We are not sure whether it is done during the test or after the test. 
+So this is the only criteria we are not sure whether it has been satisfied or not.
+
+
+
+
