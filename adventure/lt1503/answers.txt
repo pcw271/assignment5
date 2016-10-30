@@ -1,0 +1,71 @@
+Programming for Data science
+HW 5 Answers.txt
+netid: lt1503
+N10886221
+
+1- The only change I made to this program to get it to run in python3 is changing raw_input() to input() in adventure.py line37.
+
+2-The author used the following coding techniques:
+2.1- The author used object classes to represent moves and games.
+2.2- The author used Python decorators to enhance many functions using the @property decorator.
+2.3- The author used variable parameter handling to retreive a variable number of words from the user and pass those words around using *args.
+
+3- The author used meaningful names such as game representing the game object the user is playing, and move representing the user's current action.
+The author used less meaningful names with variables like "words" which means "words parsed from the users current input", and function "t_suspend" to mean save game to file.
+
+4- Some functions do only one thing. For instance, the command do_command(self, words) just calls self._do_command(words), and returns the output. However, this is a case of the author sneaking in changes, because _do_command(words) is storing the output string of the command to self.output internally rather than returning the value of the string.
+
+Some commands do many things. For instance, _do_command(self, words), handles the response to yes/no questions, handles checking and acting based on the user being dead, and handles many specific game-state related functions such as managing the lamp treasure and cave door.
+
+5- The function _do_command(self, words) causes an important side effect. It stores the output string of the command into self.output, rather than returning the value of the string.
+
+6- There are many instances of repeated code. For instance, the following elif chain in game.py line 749-761
+        if 29 <= n <= 30 or 43 <= n <= 50:
+            self.write_message(9)
+        elif n in (7, 36, 37):
+            self.write_message(10)
+        elif n in (11, 19):
+            self.write_message(11)
+        elif n in (62, 65):
+            self.write_message(42)
+        elif n == 17:
+            self.write_message(80)
+        else:
+            self.write_message(12)
+This could be functionized and rewritten as:
+message_index = self.choose_message(n)
+self.write_message(message_index)
+
+7- yes. The program uses exception handling when saving the current state to file.
+
+8- The game class manages many separate pieces of functionality that should be broken down into separate classes within the game, so it has responsibility for more than one piece of functionality. It manages all the dwarves, the knife, the treasures, the lamp, and the users location and status.
+
+9- Not all the classes are cohesive. The game class is not cohesive. It included very different topics like writing messages, evaluating the light or dark of the user space, setting low level (the lowest level) variables such as accessing random numbers, and movement within the game. 
+The move class is also not cohesive. It talks about movements for drawves and humans and is therefore unnecessarily large and complex. This could be made simpler by having separate classes for user movements vs dwarf movements.
+
+The Room class is very cohesive. It contains all the information about a specific location in the game, and nothing else.
+
+
+10- The author uses comments sporatically. At the top of the files, he has a single comment to describe what the file handles. This is a good comment.
+In the files, he arbitrarily decides to comment or not comment variables, and sometimes these variables are not helpful, such as dwarves_killed = 0  # DKILL
+knife_location = None  # KNFLOC
+He also uses comments to specify the FORTRAN line number associated with the current state. This may be helpful if the user follows his description of how to use them, but there are more readable ways to encode this information.
+
+11- Most of the time the author uses vertical formatting to make the code clearer. An example is in the short file adventure.py, the author puts a space before if args.savefile is None: to separate out the input parsing from file saving, and then another space before while not game.is_finished to separate out the saving section from the prompting the user section.
+
+12-The tests all work without any changes except for Walkthrough1, which was commented out. In a sense all tests pass, except game.resume should have been changed to play.resume for the writer to be able to uncomment the walkthrough1 test. But as written that was not a unit test, just a commented artifact.
+
+The tests follow all of the FIRST criteria except for Timely:
+Fast: The tests run fast enough to run a comprehensive suite every change.
+
+Independent: The tests attempt to be independent. The walkthrough tests are not independent, but if those can be seen as system level tests instead of unit tests, then the rest of the tests are independent unit tests.
+
+Repeatable: The tests are repeatable. Except for a bug in a commented out line, everything written works on my machine so I believe they were written in a repeatable way.
+
+Self-validating: The tests are self-validating. The tests use assert*() statements rather than printing any values and expecting the user to evaluate.
+
+Timely: 
+I do not believe that this code was written in a timely manner during development because the tests cover very little of the low level functional processes. Most of the code is only tested at a system level.
+
+
+
