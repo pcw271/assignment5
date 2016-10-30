@@ -1,0 +1,80 @@
+1. 
+change raw_input() to input() (Other problems exit, but they are not caused by version of python)
+
+2. 
+(1) module; In order to separate concerns, for example, adventure module enable us to interact with the program. Also, it imports load_advent_dat from play.py module and Game from game.py, making the program easier to understand.
+
+(2) Classes; In different modules, it breaks up the structures into classesFor instance, in prompt.py, it defines various functions and attributes to exhibit different behaviors.
+
+(3) One class only has one responsibility. As we can see, it uses related function in each class.
+
+3.
+Yes for most cases. 
+For example, in play.py, the author uses names such as 
+(a) load_advent_dat which obviously means that the function is going to load data for the adventure.py.
+(b) In model.py, is_dark, is_forced, etc. such functions¡¯ names are very easy to be understood. 
+
+For the meaningless names, the author defines start2() and start() which are meaningless since we cannot tell the differences between them before we actually look  into the contents of the functions.
+
+4. 
+Some of the codes only do one thing:
+(1)In game.py line 109, the author defines a function called is_finished(self), if this function returns true, the game will end.
+(2) In model.py line 173, the start_at function only deals with the initial dwarf¡¯s position.
+
+Example that do more than one thing:
+In game.py line 130, the function start2() do more than one thing: it calls function write_message, set values for hints , lamp_turns, oldloc2, etc.
+
+5.
+In game.py line 1567, in the resume(self, obj) function, the game.random_generator was called after savefile.close(), it may cause some side effects.
+
+6. 
+In game.py from line 464 to line 497, it can be simplifier by define a new function that takes the lamp_turns parameters and returns a value to the do_command
+
+7. 
+Yes. 
+(1) In adventure.py line 42, if the exception EOFError is raised, the loop() will be passed. All invalid inputs will be handled by printing ¡°I DON'T KNOW THAT WORD¡± or ¡°I DON'T UNDERSTAND THAT!¡±
+(2) Some inputs such as ¡®!¡¯,¡¯@¡¯,etc. have no outputs
+
+
+8. 
+Yes, the most obvious mass class is the class Game(Data) in game.py line19, it serves multi-functionalities and should be broken into smaller pieces.
+
+9. 
+No, for example, the class Game(Data) too large to be cohesive since there are more than 15 attributes.
+
+10. 
+The author usually put the comments to explain the use of each module but some variables are difficult to understand.
+
+   Good Comments:
+   In model.py
+   class Hint(object):
+    """A hint offered if the player loiters in one area too long."""
+
+   Bad Comments:
+(1)In game.py line 25,26
+   dwarves_killed = 0  # DKILL
+   knife_location = None  # KNFLOC
+   
+(2)line 1605 
+   def start_closing_cave(self):  #10000
+ 
+11. 
+In model.py, in the class Object(object)
+
+the author first put a group of initiating variables together, and then put a blank line to separate the following functions. Moreover, different functions are separated by blank lines.
+
+12. 
+All 28 tests passed when I ran them. 
+Ran 28 tests in 10.814s
+OK
+However, when we ran two more tests, which are walkthrough1.txt and walkthrough2.txt, both failed. After I changed module adventure to play, all 30 tests passed. 
+Ran 30 tests in 10.926s
+
+OK
+
+For the F.I.R.S.T criteria: 
+(1) Fast: The tests are fast, since they take only about 11.314 seconds to do the job.
+(2) Independent: They are also independent to each other since they all can be ran isolated. 
+(3) Repeatable: They are repeatable since they can be ran repeatedly. 
+(4) self-validating: they are self-validated since we can tell whether the test is passed or failed from the terminal. 
+(5) Timely: However, they don¡¯t meet timely criteria since we can see the date of ¡°100% test coverage¡± is 02/15/2011 late than the ¡°first public release¡± which is on 31/01/2011. This means the author very likely writes the tests after the program is completed.
