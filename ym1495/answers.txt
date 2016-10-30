@@ -1,0 +1,80 @@
+1. When I tried to run adventure.py, it returned an error on raw_input. Thus 
+in adventure.py, line 37, I changed raw_input() into input(). And then game began.
+
+2. three main techniques:
+a)modular programming: ‘adventure’ adapts multiple modules from model, play and game, etc.
+b)classes: each module breaks down into multiple classes.
+c)tests: it also adds unit test modules to help test the codes.
+
+3.meaningful names 
+a) meaningful names: for example in play.py, defination of play it has _game, load_advent_dat, install_words, etc.
+b) not so meaningful names: in game.py there are obj.prop, self.objects_here, clock1 and clock2 not so meaning ful
+
+4.
+a) functions that do one thing:
+   in model.py in class Message, there’s __str__ does only one thing.
+b) functions that do more than one thing:
+   in game.py there is “move_dwarves” that count dwarves and move dwarves, and also move_to detects whether there’s dwarf blocking the way and moves yourself.
+
+5. Side effects?
+Yes. in game.py, there is write(self) that could change the global variable. I found it through example in question 7.
+
+6. Repeated code?
+Yes, in game.py, there are start and start2. They actually have similar functions.
+
+
+7. Yes, I have met abnormal termination.
+I was in the maze, after going randomly around and met two dwarves, the program suddenly broke down and reported: Traceback (most recent call last):
+
+  File "adventure.py", line 44, in <module>
+
+    loop()
+
+  File "adventure.py", line 40, in loop
+
+    baudout(game.do_command(words))
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 430, in do_command
+
+    self._do_command(words)
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 499, in _do_command
+
+    self.dispatch_command(words)
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 546, in dispatch_command
+
+    return self.do_motion(word1)
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 694, in do_motion
+
+    self.move_to(move.action)
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 186, in move_to
+
+    self.describe_location()
+
+  File "/Users/muriel820/Documents/data science hw/1007/assignment5/adventure/game.py", line 372, in describe_location
+
+    self.write(obj.messages[prop])
+
+KeyError: 0
+
+8. Classes with responsibility over multiple functionality?
+Yes, there are some in model.py, for example class Word has multiple functionalities, including detecting itself, find synonyms and etc.
+
+9. Cohesive?
+Not all of them are cohesive. “The more variables a method manipulates, the more cohesive it is to the class.” Thus for a class that is not cohesive, it is supposed to contain only a few variables that are less related to other functions within the modules. For example, in model.py, class Hint and class Message are not so cohesive.
+
+10. good/bad comments:
+a)good comments: model.py ln153, comment on hint: “A hint offered if the player loiters in one area too long”
+b)bad comments: data.py ln93 #special computed goto  
+			ln102 #skip bad “109”
+  these two can’t explain the situation to the readers clear enough.
+
+11. vertical formatting:
+game.py have some good examples in lines 809-920, that declare instance variables together
+
+12.Test:
+When I first ran the test, both failed with repeatedly “you have gotten yourself killed” and undefined adenture._game.clock1.
+No, I don’t think it meets FIRST criteria. Because they are not timely and fast enough. Both walkthrough txt files have input too long and apply almost all modules, which shouldn’t be this case. The programmer should have written partial test for each modules independently. So that it can test each module separately, without the environmental effects from other modules.
