@@ -1,0 +1,37 @@
+
+1. Describe the changes you made to make the game work with Python 3
+I changed raw_input() at line 37 in adventure.py to input().
+2. Describe three main techniques that the author used to structure the program.
+Module which contains everything necessary to execute only one aspect of the desired functionality: time, play, game
+Class which providing initial values for state and implementations of behavior: class Data(object), class Game(Data)
+Functions which accomplish a specific task: baudout(s), loop()
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+Example of meaningful names: the load_advent_date() at line 3 in play.py can be regarded as a meaningful name, which can be easily understood as loading adventure date from game. And the names in Class Game(data) at line 19 in game.py, like full_description_period, treasures_not_found, impossible_treasures, are all well-defined.
+Example of unmeaningful names: a series of variables section1(line 59), section2(line 64), section3(line 67) … in data.py can be regraded as a series of unmeaningful names, it is hard to tell what these functions are used for.
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+Not all the functions used in the code do one thing.
+Examples of functions that only do one thing: baudout(s) function at line 13 in adventure.py is an function that only do one thing, caculating the baud our rate; accumulate_message(dictionary, n, line) function at line 54 in data.py is another example of functions that only do one thing, which is recording accumulative messages.
+Examples of functions that do more than one thing: the loop() function at line 19 in adventure.py is an function that do more than one thing; move_to(self, newloc=None) function at line 153 in game.py is another example.
+5. Do any of the functions cause side effects? If so, which ones?
+There are some functions cause side effects. For example, the section 4 (data, n, text, *etc) function at line 107 in data.py is causing side effect. This function modified one of the inputs - text first, and then execute other statements. 
+6. Can you find any repeated code that could be made into a function?
+I can’t find any repeated code that could be made into a function.
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+In adventure.py file, if the user input some unvalid commands, the program will use exveption handling to output some prompts. However, I can’t find any input that causes the program to terminate abnormally.
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+Class Game at line 19 in game.py has more than one piece of functionality. It defines room situation, dwarf stage, treasures discovery, and even player death.
+9. Are all the classes cohesive? List any that aren’t.
+Class Game at line 19 in game.py is not cohesive, because it defines too many things which are uncorelated.
+10.Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+Example of good comments:
+The comment “The Adventure data file knows only the first five characters of each word in the game, so we have to know the full version of each word” at line 6-7 in data.py, and the comment “Append the Unicode representation of `s` to our output” at line 64 in game.py, “Ask a question and prepare to receive a yes-or-no answer” at line 73 in game.py are all good comments which well explained intentions.
+Example of bad comments:
+The author commented “# Knowledge of what each section contains.” at line 57 in data.py, however, this comment only explained that we need extra knowledge to know what the meaning of following section1, section2..functions, but it didn’t explain what exactly the meaning is.
+In Class game(Data) at line 19 in game.py, the author commented every name, however, all the variables are well-named and it is easily to understand what this variable for, so, there is no need to add these redundant comments.
+11. Provide an example of where vertical formatting has been used to make the code clearer. 
+In play.py, the play(seed=None) function at line 11 calls another function named load_advent_dat() at line 24, the dependent function play(seed = None) has been put right below the function load_advent_dat() at line 3 which it calls.
+And in all these three functions in play.py file, the arguments of import modules are put together, and other assignment commands are put together below them, there is a blank line between importing arguments and assignment commands, which identifies that these two parts are different.
+ 12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+All the tests passed. And I believe the tests meet the F.I.R.S.T criteria to some extent.
+All the tests run fast, they are repeatable and self-validating. But they are not independent because you have to run test_commands.py first and then you can sucessfully using walkthrough1.txt and walkthrough2.txt in test_walks.py, which means they can’t run in any order. Besides, it is unsure whether the tests are been written during code development. 
+
