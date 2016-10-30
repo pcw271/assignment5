@@ -1,4 +1,5 @@
 import doctest
+
 import os
 
 def load_tests(loader, tests, pattern):
