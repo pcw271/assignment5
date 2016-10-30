@@ -1,0 +1,69 @@
+1. Describe the changes you made to make the game work with Python 3.
+
+The changes that I made to make it compatible with Python 3 is that in “adventure.py” line 37, I changed “raw_input” to “input” since Python 3 is no longer supporting “raw_input” function.
+
+The following change that I made to improve the game:
+In “play.py” line 3, changed input argument from “data” to “gameData,” and in line 9, changed “data” to “gameData.” The reason for the change is that the function calls a module “parse” from the program “data” whereas using the same name for both argument and program name is just confusing.
+
+
+2. Describe three main techniques that the author used to structure the program.
+The three main techniques that the author used to structure the program are using modules, classes and inheritance. There are multiple modules in the program, such as “adventure” “data” and “play.” Within each module, there are many classes. For example, in “model” module, there are “move” “room” “word” and many other classes. Inheritance is also used between the modules “data” and “game”. “Game” is child class of “data”, thus “game” module has all the attributes of “data” module.
+
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names.
+
+The author has given meaningful names in most cases. For example, when structuring the program, “adventure.py” is the main program of the game, “model.py” means the model of the building, and “game.py” saves the design of the game itself. Additionally, such as in “model.py” there are two classes “Move” and “Room” where “Move” includes the action of moves from one place to another and “Room” denotes the location of the game. 
+
+Some names are unclear and could potentially cause confusion. For example, in “adventure.py” line 19, the function is defined as “loop()”. This is a very general name for functions and is unclear about what the function is actually doing.
+
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.Example of program doing one thing:
+In “game.py” line 57, the “random” function only does one thing is to get a random number.
+
+Example of program doing more than one thing:
+In “play.py” line 29 the “resume function”, it does three things, first resume the game, second install_words, and third check if is quite. 
+
+
+5. Do any of the functions cause side effects? If so, which ones?
+
+The functions “play” and “resume” in “play” module have side effects. The “global” commands (line 18 and 30) in the functions changes “_game” variable both in and outside of the function.
+
+
+6. Can you find any repeated code that could be made into a function?
+
+In “test_commands” module under the “tests” directory, some commands are repeated multiple time in the three methods. Such as “game = Game()” (line 8, 15 and 23) and “load_advent_dat(game)” (line 9, 16 and 24). The three functions can be aggregated into one.
+
+Additionally, in “play.py” line 20 and line 32, the module “Game” has been imported twice in two different functions “play” and “resume”. The habit of writing python programs is that to import all the packages and modules at the beginning of the program. These two imports should be merged into one and written at the beginning of the program.
+
+
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? H​ int: run the program from the terminal prompt. The invalid input may not be normal text.
+
+The program used exception handling in “adventure.py” line 42 - 47.
+“Control + c” will terminate the game unexpectedly.
+
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+In the “model” module, the class “Object” (line 103), besides the attributes, the class has functionality of carry, drop, hide and destroy methods. These are the actions that the player uses to control the game.
+
+
+9. Are all the classes cohesive? List any that a​ren’t​. 
+
+In the “game” module, class “Game” (line 19) many attributes, and each method controls only a few of them. 
+
+
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+In general, the comments that the author made were pretty clear. However, there are some comments which I think are unnecessary, for example, in “game.py” line 25-26, the variable names are already very straightforward, but the comments could cause unnecessary confusion. In the same module, line 47-51, these are all questions, however, the comments made it very unclear what “False” really means under these cases. For example, in line 47, self.is_closing = False, it is not clear if “False” means closing or not closing, and the comment should have elaborated on this.
+
+
+11. Provide an example of where vertical formatting has been used to make the code clearer.
+
+In “data.py” file line 74-75, variables m and n are defined. After one empty line, the author set the conditions for m (line 77-88). After another empty line, the author set the conditions for n (line 90-95).
+
+
+12. The unit tests provided with the program runs fine, but there were two issues with the walkthroughs. I have made the following change to make the walkthroughs work:
+a. In “test_walks.py” I uncommented line 9 and 10 to run a unit test on the two walkthroughs.
+b. In “walkthrough1.txt” line 863, I changed “adventure” to “play” as the “resume” function was in “play.py”.
+c. In “walkthrough2.txt” line 1172, I changed “adventure” to “play” as the “_game” function was in “play.py” not in “adventure.py”
+d. This was not exactly a change, the “save game” instruct was unclear in the “README.txt” file. The correct command to save the file is “save advent” instead of doing “save advent.save”.
