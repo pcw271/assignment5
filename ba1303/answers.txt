@@ -1,0 +1,134 @@
+1. Describe the changes you made to make the game work with Python 3.
+
+
+In the file "adventure.py", I edited line 37 in the following manner: 
+
+line = raw_input('> ') =============> line = input('> ')
+
+Because "raw_input()" does not exist in Python 3, "raw_input()" needed to be edited to "input()". If the code had remained "raw_input()", the user would not have been able to input any directions or commands.
+
+----------------------------------------------------------
+
+2. Describe three main techniques that the author used to structure the program.
+
+
+The three main techniques the author used to structure the program are: 1) modules; 2) classes; and 3) functions. 
+
+In Python, a module is a file containing Python definitions and statements. The modules in this program include data.py, game.py, model.py, play.py, and so on.    
+
+Some modules include classes. Classes generally contain a set of attributes and functions (or "methods"). Classes can be thought of as a "template" to create objects. Looking at the module Model.py, we see that the file is sub-divided into the classes "Move", "Room", "Word", "Object", "Message", "Hint", "Dwarf", and "Pirate."
+
+Lastly, modules and classes can be broken up into functions. The class "Dwarf" in Model.py, for example, includes the functions "__init__", "start_at", and "can_move".
+
+---------------------------------------------------------
+
+3. Has the author used meaningful names? Give some examples of meaningful and non-meaningful names.   
+
+
+The author did a so-so job of using meaningful names. 
+
+Examples of meaningful names include "compute_score" on LINE 1649 of game.py and "resume" on LINE 29 of play.py. 
+
+The names of functions should 1) be active verbs and 2) clearly define the function's purpose. The "compute_score" function does exactly what the name implies: it computes the player's score from a particular game. "Compute_score" is also an active verb phrase. Similarly, the "resume" function clearly defines the function's purpose - to enable a user to resume a saved game. "Resume" is also an active verb.
+
+Examples of non-meaningful names include "start2" on LINE 130 of game.py, the class "Data" on LINE 24 of data.py, and the functions "section1" (LINE 59), "section2" (LINE 64), "section3" (LINE 67) of data.py.  
+
+"start2" is a poor name choice because it provides no indication of what the function actually does. The function "start2" actually displays instructions if the user wants them. "Start2" should be renamed "Display_Instructions", or something similar. The class "Data" could have a more specific name; "Data" is such a vague term. Finally, the functions "section1", "section2", etc. are poorly-named. The names of functions should be verbs, not nouns. 
+
+--------------------------------------------------------------
+
+4. Do the functions used in the code do one thing? 
+
+
+Examples of functions that do one thing include "random()" (LINE 57 in game.py), "choice()" (LINE 60 in game.py), and "write_message()" (LINE 69 in game.py). Examples of functions that do more than one thing include "move_to()" (LINE 153 in game.py), "move_dwarves()" (LINE 188 in game.py), and "_do_command()" (LINE 433 in game.py).
+
+---------------------------------------------------------------
+
+5. Do any of the functions cause side effects? If so, which ones? 
+
+The function "start2" on LINE 130 of game.py may have a side effect. The comment for "start2" suggests that the function "displays instructions if the user wants them." The first few lines ("if yes: self.write_message(1)", LINES 132-133) appear to accomplish this function. The last line ("self.describe_location()", LINE 146) is also useful because it describes the user's location. 
+
+However, I'm a bit confused as to what LINES 141-144 are achieving. These lines, which focus exclusively on "treasures", don't really appear to be essential to the function "start2". To confirm my suspicions, I temporarily removed these lines before playing the game, and asked for instructions. Even after I removed LINES 141-144, there appeared to be no difference in the instructions provided at the start of the game. 
+
+As such, LINES 141-144 in the function "start2" seem to represent a "side effect."
+
+-----------------------------------------------------------------
+
+6. Can you find any repeated code that could be made into a function?
+
+
+In play.py, the functions "play" (LINE 11) and "resume" (LINE 29) contain redundant code. In particular, both functions begin with the following three lines: "global _game --> "from game import Game --> from prompt import install_words". 
+
+At a minimum, these three lines could be condensed into a separate function. 
+
+-----------------------------------------------------------------
+
+7. Does the program use exception handling? 
+
+Yes, the program uses exception handling. In the module adventure.py, LINE 45 provides an exception if the function "loop()" (LINE 19 of adventure.py) does not run properly, and hits an end-of-file (EOF) condition. If this happens, the "pass" statement is used; "pass" is a null operation so nothing happens.
+
+For most cases, when you input invalid text, the program responds with the following message: "I don't know that word."
+
+However, if you input certain non-alpha-numeric characters (such as :,;,?,/), the program does not respond with a text answer. The program simply directs the user to enter input on a blank new line.   
+
+-----------------------------------------------------------------
+
+8. Do any of the classes have responsibility over more than one piece of functionality? 
+
+Yes, many of the classes in the program have responsibility over more than one piece of functionality. The class "Game" in game.py (LINE 19) has responsibility over a ton of functions, including __init__(), yesno(), start(), start2(), and so on. In general, the class "Game" contains far too many functions. 
+
+In model.py, the class "Room" (LINE 38) has responsibility over many functions, as do the classes "Word" (LINE 82), "Object" (LINE 103), and "Dwarf" (LINE 165).      
+
+In data.py, the class "Data" (LINE 24) has responsibility over two pieces of functionality. In prompt.py, the class "ReprTriggeredPhrase" (LINE 5) has responsibility over four pieces of functionality. 
+
+-----------------------------------------------------------------
+
+9. Are all the classes cohesive? List any that aren't.
+
+Not all of the classes are cohesive. 
+
+For example, in model.py, the class "Room" (LINE 38) is not cohesive. In particular, the class "Room" has 13 instance variables and 7 methods. However, it does not seem like ANY of the 7 methods manipulates any of the 13 instance variables. In a cohesive class, each method should manipulate at least one of the attributes. 
+
+Another example of a class in model.py that isn't cohesive is "Hint" (LINE 152). The class "Hint" has six attributes and one method. This method, however, does not appear to manipulate any of the instance variables. 
+
+-----------------------------------------------------------------
+
+10. Describe the author's approach to commenting the code. Provide examples of good and bad comments. 
+
+The author seems to include a comment at the top of each file to explain the module's purpose. In addition, the author often includes a comment at the start of each class, providing a quick description of that class. However, the author is not as consistent in terms of providing a comment at the start of each function. Some functions have an explanatory comment, while other functions do not. The author is also inconsistent in terms of including comments to describe the variables of classes. However, within certain functions, the author will occasionally include comments to clarify what's going on.        
+
+One example of a "good comment" appears at the very beginning (LINES 6-7) of data.py. The comment reads: "The Adventure data file knows only the first five characters of each word in the game, so we have to know the full verion [sic] of each word." Regardless of spelling errors, I thought the comment provided a good explanation for why the programmer wanted to create a dictionary of "long words" and their five-letter truncated forms. Without the comment, which explains that the data file only reads the first five characters, I would have been confused by the subsequent code. 
+
+Examples of "bad comments" appear in LINES 25-26 of game.py. The class "Game" includes 17 instance variables. Most of these attributes have comments explaining their purpose. Some of these comments are useful -- for example, I found the comment for "max deaths" (LINE 36) to be helpful. However, the abbreviated comments for "dwarves_killed" (LINE 25) and "knife_location" (LINE 26) are utterly worthless, and only serve to clutter the layout.    
+
+Another example of a "bad comment" is LINE 218 in data.py. This line contains "commented-out code". It's tough for the reader to know whether this comment should be deleted. 
+
+-------------------------------------------------------------------
+
+11. Provide an example where vertical formatting has been used to make the code clearer.
+
+In data.py, the author smartly grouped the functions "section1", "section2", "section3",...,"section 12" (LINES 59-193) close to one another. Based on my reading, each function gathers data from its section (so the function section1() gets data from section 1). These functions are very similar to each other, and so it was good to group them together. Placing the "parse()" function (LINE 198) after the section1(), section2(),... commands was also a smart decision from the author. At a minimum, judging by the comments (see LINES 214-215), the parse function seems to refer to elements in the functions section3() and section5(). 
+
+As such, it makes sense for the parse() function to come after the functions section1(), section2(), section3(),...
+
+--------------------------------------------------------------------
+
+12. Run the tests provided with the program. Do they pass or fail? Do the tests meet the F.I.R.S.T. criteria? 
+
+
+I ran the tests by typing the following command into Terminal: $ python -m unittest discover
+The tests passed. Now, were the tests fast, independent, repeatable, self-validating, and timely? 
+
+FAST: I was able to run 14 tests in 3.999 seconds. This seems like a pretty quick rate, so the tests satisfy the "Fast" condition. 
+
+INDEPENDENT: The tests are independent; none of the unit-tests in test_data.py appears to depend on the outcomes of any of the other unit-tests. The tests seem to satisfy the "Indepedent" condition.    
+
+REPEATABLE: I ran the command "$ python -m unittest discover" multiple times, and the test never failed. The tests seem to satisfy the "Repeatable" condition. 
+
+SELF-VALIDATING: Tests should either pass or fail; there should be no room for subjectivity. In the test code (test_data.py), many of the testing functions include the command "self.assertEqual()", which implies that the only outcomes are pass or fail. As such, the tests seem to satisfy the "Self-Validating" condition.  
+
+TIMELY: I have no idea if the tests were written during or after the program was written. Ideally, the author should have written the tests as he wrote the production code. 
+
+
+
+
