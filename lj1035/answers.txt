@@ -1,0 +1,99 @@
+1. Describe the changes you made to make the game work with Python 3
+
+file name: adventure.py 
+line number: 37
+-  line = raw_input('> ')
++  line = input('> ')
+2. Describe three main techniques that the author used to structure the program.
+
+First, the author used modules to separate the whole program into smaller pieces. For example, adventure game includes modules such as game.py and play.py. 
+Second, the author used classes to contain a set of functions which describe behaviors. 
+Third, the author used function to describe specific behavior. 
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+
+Used meaningful names:
+1) file name: play.py
+   line number: 29
+   - The name ‘resume’ means returning to a previously saved game. 
+2) file name: game.py
+   line number: 109
+   - The name ‘is_finished’ means finishing a game. 
+
+Not used meaningful names:
+file name:data.py 
+The function names ‘section1’, ‘section2’,…, ’section12’ are somewhat not clear. We can’t get a clear idea of what these functions mean to do just by looking at their names. 
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+
+Functions that only do one thing:
+1) file name: prompt.py
+   line number: 12
+   The function ‘__repr__’ returns a message represents in a specified way.
+2) file name: game.py
+   line number: 57
+   The function ‘random’ generates a random number between 0 and 1. 
+
+Functions that do more that one thing: 
+file name: game.py
+line number: 81 - 85
+The function ‘is_dark’ does more than one thing, including checking whether there is lamp here and checking whether the location is dark. 
+5. Do any of the functions cause side effects? If so, which ones?
+
+Yes. For example, in the file ‘data.py’, the function ’section12’ reads the Adventure data file and makes changes to the ‘Data’ object. 
+6. Can you find any repeated code that could be made into a function?
+
+I think it is hard to find repeated codes in this program. However, some codes seem to be repeated and can be rewritten in a simpler way. For example, in the file game.py, from line number 822 - 832, the codes are as follows: 
+
+def write_default_message(self, verb, *args):
+    self.write(verb.default_message)
+    self.finish_turn()
+
+t_nothing = say_okay_and_finish
+t_calm = write_default_message
+t_quit = write_default_message
+t_score = write_default_message
+t_fee = write_default_message
+t_brief = write_default_message
+t_hours = write_default_message
+
+The author can create a new list and make ’t_calm’, ’t_quit’,…, ’t_hours’ as elements of the list. Then, the author can define a function to pass the whole list as an argument of the function and use the ‘for’ loop to handle this function. 
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+
+Yes, the program uses exception handling. For example, in the file adventure.py, the author used try-except statements to handle EORE error. 
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+Yes. For example, in the file game.py, the Game class has responsibility over several pieces of functionality. Such pieces of functionality include resuming a game, computing the score of a game, and keeping track of the motion of a player, etc. 
+9. Are all the classes cohesive? List any that aren’t.
+
+No. For example, in the file game.py, the Game class is not cohesive. It includes various kinds of functions such as tracking motion of a player and writing messages, which can be put into separate classes to make each class more cohesive.
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+Good comments:
+file name: play.py
+line number: 12 - 17
+"""Turn the Python prompt into an Adventure game.
+
+With optional the `seed` argument the caller can supply an integer
+to start the Python random number generator at a known state.
+
+"""
+This is a good comment because it clearly describes the purpose of the ‘play’ function and what the parameter of this function means. 
+
+Bad comments: 
+file name: prompt.py
+line number: 29
+# stack()[0] is this; stack()[1] is adventure.play(); so, stack()[2]
+This is a bad comment because it just seems to be meaningless. I can’t understand what the author want to comment about. 
+11. Provide an example of where vertical formatting has been used to make the code clearer. 
+
+file name: prompt.py
+line number: 5 - 25
+The ReprTriggeredPhrase class contains four different functions. In this class, the author always used a blank line before defining a new function to make his codes clearer. 
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+
+Yes, all the tests pass. 
+As for the F.I.R.S.T. criteria,
+1) Fast: The tests run pretty fast. 
+2) Independent: The tests are not independent because they cannot be run in any order. We need to ensure that the file test_comments.py can be executed before we move on to ‘walkthrough1.txt’ and ‘walkthrough2.txt’
+3) Repeatable: The tests are repeatable. 
+4) Self-validation: If we run the command ‘python -m unittest discover’ in the terminal, we can see that all tests pass. 
+5) Timely: Because the tests are written in python 3 while the program is written using python 2, it seems that the test are not written during code development. 
