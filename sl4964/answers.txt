@@ -1,0 +1,31 @@
+1. I changed raw_input in adventure.py line 37 into input. The function name cha
+nged from python 2 to 3. 
+I also added the adventure directory to the path, in the test_commands.py file.
+This ensures the successful import of modules play and game.
+
+2. 1) modular programming. Different modules, such as game.py, model.py and data.py, handle different concerns.
+2) using classes. For example, in model.py, separate classes model separate aspects, such as hints, objects, and moves.
+3) using functions/methods. functions and methods partition the whole functionality of the game into simpler single tasks.
+
+3. In some cases yes, others no. In model.py, class Room is used to indicate a location in the game, which makes semantic sense. In contrast, the loop function in adventure.py does not give any information about what it does, which is to decide whether to load the game from the beginning or from a saved file, and prompt input. It should be separted into two functions, one called prompt, which deals with player input; and the other called load, which loads the game. 
+
+4. An example of function that does two things is shown in answer 3. The function baudout, also in adventure.py, does exactly one thing: make sure the output is typed at 1200 baud.
+
+5. The describe_location function in game.py has a side effect: apart from outputting your location, which is is supposed to do, it also kills you if you fall. 
+
+6. Yes. In game.py, t_throw and t_drop have two if statements in the beginning that are the same, and can be made into a function to make the code easier to update, if needed.
+
+7. Yes. The last lines of adventure.py raise an exception for EOFError. Command + C will terminate the program.
+
+8. The worst one is game.py: everything is thrown into the same class called game, which defeats the purpose of creating classes. 
+
+9. Class game is again obviously the most incohesive one. 17 attributes were declared for the class, but many methods in the class only deal with a couple of attributes. The class should most definitely be broken into several smaller classes.
+
+10. The author comments the functionality of modules at the beginning of each file, and sometimes comments the functionality of methods or meaning of variables. 
+A good comment is concise and conveys explanatory information to the code. For example, the comment for class Hint in model.py: """A hint offered if the player loiters in one area too long.""" does exactly that. 
+A bad example is the first comment for play.py: """The Adventure game.""" This conveys no information whatsoever about the functionality of the module. 
+
+11. In play.py, the author used empty lines to separate the three different functions, as well as distinct parts within each function, such as importing and starting the game.
+
+12. Because the tests are put in subfolder, I had to edit the path for test_commands.py. Apart from that, all tests are passed. They meet the FIRST criteria for as much as I can tell: they are fast, independent from each other, repeatable in different environments, and self-validating: either you see an error, which means the tests didn’t pass; or they run smoothly without an error, which means they pass. The only thing is, we don’t really know if the tests were written at the same time as the code.
+
