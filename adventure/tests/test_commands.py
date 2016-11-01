@@ -1,5 +1,3 @@
-import sys,os
-sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.pardir)))
 from unittest import TestCase
 from play import load_advent_dat
 from game import Game
