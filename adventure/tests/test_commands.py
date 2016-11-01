@@ -9,7 +9,7 @@ from play import load_advent_dat
 from game import Game
 
 class CommandTest(TestCase):
-
+    
     def setUp(self):
         game = Game()
         load_advent_dat(game)
@@ -32,3 +32,4 @@ class CommandTest(TestCase):
             game.do_command(['yes'])  # WOULD YOU LIKE INSTRUCTIONS?
             game.do_command(['enter'])  # so we are next to lamp
             game.do_command([word, 'lamp'])
+            
