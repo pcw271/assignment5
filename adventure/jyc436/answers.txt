@@ -1,0 +1,25 @@
+1. In line 37 of adventure.py, the function raw_input() was converted to input(). 
+
+2. Firstly, the author structured the program via modular programming in order to divide it out into logically discrete concerns. A second technique the author used to structure the program is organizing the structural and behavioral components into classes. Thirdly, the author has used comments to address what each section contains.
+
+3. The author sometimes uses meaningful names. For example, in model.py, the names carry() (line 130), drop() (line 134), hide() (line 138) and destroy() (line 142) are meaningful in the sense that they represent what action the player is making in the game.  
+Other times, the author fails to use meaningful names. For example, start2() on line 130 of game.py is a function that displays the instructions to the user, but the name start2() does not indicate anything about instructions. Similarly, in file data.py, the sequence of names section1() (line 59), section2() (line 64), section3() (line 67) etc. are not meaningful. 
+
+4.The functions __init__ (lines 89-90) and __repr__ (lines 92-93) in model.py both only do one thing, whereas functions such as loop() (lines 19-40) and baudout() (lines 13-17) in adventure.py do more than one thing.    
+
+5. There is a side effect in the function score_and_exit() (lines 1698-1713) in game.py because on top of computing the player’s score, the program also displays customized messages to the player regarding the outcome of the game. 
+
+6. I cannot find any repeatable code that could be more easily formatted as a single function. 
+
+7. Yes, the program uses exception handling once, in adventure.py (lines 42-46). As far as I have tried, I have not found any input that causes the program to terminate abnormally. 
+
+8. Yes, there are classes that have responsibility over more than one piece of functionality. For example, ReprTriggeredPhrase (lines 5-25) in prompt.py not only protects against the player changing lists but also retrieves and prints stored information.
+
+9. The least cohesive class is Room, from model.py (lines 38-80).
+
+10. The author’s approach to commenting the code is quite inconsistent. While line 131 of game.py (“Display instructions if the user wants them.”) is helpful because it establishes intent clearly, this comment would not have been necessary if the author had appropriately named this function (which was mysteriously named “start2”). There are good examples of comments, such as for line 241 in game.py (“A dwarf cannot walk and attack at the same time”), which clarifies any non-obvious reasoning behind the code.
+
+11. The author uses vertical formatting for start2(), between lines 130-146 in game.py in order to differentiate between separate concepts using white space.
+
+12. The tests provided by the program pass. They do meet the F.I.R.S.T. criteria, because 1) the tests run fast, 2) tests can be run in any order, 3) tests are repeatable in any environment, 4) there is a binary outcome of either pass or fail, with no grey zone in between, and 5) timely, as far as I can tell. 
+

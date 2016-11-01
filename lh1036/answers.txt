@@ -1,0 +1,144 @@
+Programming for Data Science Assignment 5
+Answers
+Leslie Huang (lh1036)
+
+1.	Describe the changes you made to make the game work with Python 3
+
+adventure.py, line 37: changed raw_input() to input() to resolve NameError. This was a new change in Python 3 from Python 2.
+
+2.	Describe three main techniques that the author used to structure the program.
+
+- Modular programming: creating separate programs for different concerns
+- Using classes to encapsulate state information and behavior (although in some cases the classes have more than one responsibility, e.g. game.py, "Game" class)
+- Limiting functions to one "thing"/level of abstraction (although the author does not always accomplish this)
+
+3.	Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+
+In some cases, the author has used names that are concise, descriptive, describe the purpose, and make lengthy comments unnecessary. In other cases, the author has used imprecise names for variables, or misleading names that do not describe everything that a method/function actually does.
+
+- Ex. meaningful names:
+game.py, line 25: "dwarves_killed" is an integer representing the number of dwarves the player has killed in the game
+game.py, line 36: "max_deaths" is the maximum integer value of player deaths before the game will be over. The author's comment is unnecessary because the name is meaningful.
+
+- Ex. meaningless names: 
+adventure.py, line 19: "loop" function
+data.py, line 24: "Data" class 
+data.py, line 59: "section1" through "section12" 
+game.py, lines 45-46: instead of including explanatory comments with the vague names for self.clock1 and self.clock2, these could be named self.TimeSinceLastTreasure and self.TimeUntilCaveCloses and the comments wouldn’t be needed
+game.py, line 27: "foobar" variable
+model.py, line 103: class named "Object"!!!
+
+4.	Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+
+- Functions that do only one thing:
+game.py, line 88: "inventory" 
+play.py, line 3: "load_advent_dat"
+
+- Functions that do more than one thing: 
+adventure.py, line 19: "loop" 
+game.py, line 153: "move_to" 
+game.py, line 188: "move_dwarves"
+game.py, line 323: "describe_location"
+
+5.	Do any of the functions cause side effects? If so, which ones?
+
+YES. In many cases, the methods cause side effects such as (a) doing something other than what its name says it does, (b) changing variables or stores values, (c) calling additional functions only if certain conditions are met
+
+adventure.py, loop() function: side effects include game.start() and reading input, printing output
+
+game.py, line 72: "yesno" stores values for future use, modifying the effect of future input
+game.py, line 114: "start" stores values for future use. "start2" starting on line 130 also stores values for future use and calls describe_location()
+game.py, line 153: "move_to" stores many values for future use
+game.py, line 188: "move_dwarves" stores many values for future use
+game.py, line 323: "describe_location" stores values for future use
+game.py, line 384: "finish_turn" advances the random number generator
+game.py, line 433: "_do_command" stores values for future use
+game.py, line 501: "dispatch_command" stores values for future use
+game.py, line 612: "dont_understand" stores values for future use
+game.py, line 623: "i_see_no" stores values for future use
+game.py, line 729: "do_motion" stores values for future use
+game.py, line 767: "die_here" stores values for future use
+game.py, line 772: "die" stores values for future use
+game.py, line 805: "ask_verb_what" stores values for future use
+game.py, line 834: "i_carry" calls additional functions depending on condition
+game.py, line 842: "t_carry" calls additional functions depending on condition
+game.py, line 896: "t_drop" calls additional functions depending on condition
+game.py, line 962: "t_say" calls a function that has side effects
+game.py, line 982: "t_unlock" calls additional functions depending on condition
+game.py, line 1053: "t_light" stores values for future use
+game.py, line 1067: "t_extinguish" stores values for future use
+game.py, line 1094: "i_attack" calls additional functions depending on condition and stores values for future use
+game.py, line 1115: "t_attack" calls additional functions depending on condition
+game.py, line 1169: "t_pour" calls different functions depending on condition, besides pouring
+game.py, line 1202: "t_eat" calls different functions depending on condition, besides eating
+game.py, line 1220: "t_drink" sometimes destroys your water
+game.py, line 1239, "t_throw" does a variety of different actions depending on condition
+game.py, line 1303, "i_quit" sometimes exits the game
+game.py, line 1310, "t_find" writes different messages depending on state
+game.py, line 1325: "i_inventory" writes different messages depending on state
+game.py, line 1339: "t_feed" writes different messages depending on state, sometimes destroys bird or food
+game.py, line 1381: "i_fill" either fills your bottle or asks you something if "if" condition not met
+game.py, line 1386: "t_fill" sometimes exits the game, sometimes does not
+game.py, line 1417: "t_blast" sometimes exits the game, sometimes does not
+game.py, line 1433: "i_score" sometimes exits the game, sometimes does not
+game.py, line 1433: "i_fee" calls different functions and stores values for future use, depending on condition
+game.py, line 1514: "t_break" calls different functions depending on condition
+game.py, line 1620: "close_cave" does many additional actions besides closing the cave and stores values for future use
+
+
+6.	Can you find any repeated code that could be made into a function?
+data.py, line 59: the functions "section1" through "section12" contain bits of repeated code.
+
+7.	Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+
+There is exception handling. Example: 
+adventure.py, line 43: try-except blocks routines.
+
+The program does not continue or throw an error if the user keyboard input is an emoji or punctuation. It does not terminate, but you have to either type "quit" or hit a letter to continue.
+
+8.	Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+Yes.
+
+game.py, line 19: "Game"
+model.py, line 3: "Move"
+model.py, line 38: "Room"
+model.py, line 82: "Word"
+model.py, line 103: "Object"
+model.py, line 165: "Dwarf"
+
+9.	Are all the classes cohesive? List any that aren’t.
+
+There are non cohesive classes. In some of these classes, methods use only one or a small subset of the many attributes defined for the class. In other classes, the methods do not use any of the instance variables for the class (or the class has no methods defined).
+
+Non cohesive classes:
+game.py, line 19: "Game" class
+model.py: line 38, "Room" class
+model.py, line 103: "Object" class
+model.py, line 152: "Hint" class (methods do not manipulate class attributes)
+model.py, line 165: "Dwarf" class (methods do not manipulate class attributes)
+model.py, line 185: "Pirate" class (has no methods)
+
+10.	Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+The author’s approach is a bit uneven. In some places, there is overcommenting where clarification is not needed (see examples below). In other cases, comments are used to explain code that cannot explain itself.
+
+Good comments:
+adventure.py, line 15: comment explains formula for calculating baud
+prompt.py, line 10: comment explains choice of data type (tuple instead of list)
+
+Bad comments:
+game.py, line 30, 34, 36: Comments that are unnecessary: comment and name of variable are repetitive
+game.py, line 25, 26: Comments that are useless: the comments are abbreviations of the variable name, which were self explanatory. (For that matter, nearly all of the instance variables in the Game class have unnecessary comments explaining their names.)
+Commented out code that the author forgot to take out: test_walks.py, lines 9-10
+
+11.	Provide an example of where vertical formatting has been used to make the code clearer. 
+
+game.py, "Game" class: blank line spaces between each of the many methods to visually separate each chunk of code.
+
+12.	Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+
+The provided tests all pass. 
+
+However, I would argue that the tests do not meet the F.I.R.S.T. criteria. In particular, they do not meet the Independent criteria because tests should have only one reason to fail but some of the tests can fail for multiple reasons. For example, a test with multiple Assert statements can fail for multiple reasons. 
+Examples: test_data.py, line 30: "test_hint", line 54, "test_move_repr_look_good"

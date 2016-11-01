@@ -1,0 +1,39 @@
+1.I changed raw_input() to input().
+
+2.	a.Organize the components into classes, like Data, Move and Room.
+	b.Single Responsibility, like Move, it only has one function.
+	c.Cohesion, like Data, only has data related operations.
+
+3.Yes the author uses meaningful names.
+	meaningful: game.py line 21: look_complaints
+	not meaningful: data.py line 75: mh and mm
+
+4.Some of them do one thing, some of them do not.
+	Do one thing: game.py line 63 write() just writes something.
+	Do more than ont thing: game.py line 188 function move_dwarves() seems to do a lot of things because it is really long.
+
+5.Yes.
+	Like game.py line 57 random(), it uses line 53's random.Random(), it depends on the random number generater by Python.
+
+6.I did not find repeated code.
+
+7.Yes.
+	Like adventure.py line 43, it uses try and except.
+
+8.Class Game takes responsibility to all the operations.
+
+9.Data and Game
+
+10.In data.py line 38 and 57, there are comments for some functions. It seems that the author just comments on the very high level functionalities.
+In data.py line 70, the author comments on that line of code. It seems that the author comments on some situations that is not easy to understand from code.
+
+	Good comments: data.py line 198 has the API description.
+	Bad comments: data.py line 218 has commented code.
+
+11.In data.py line 68 and 74, the last_travel and n,m,mh,mm are all declared just before they are used.
+12.It passes all the test cases.
+Fast: It is really fast.
+Independent: It is independent because it starts from the beginning.
+Repeatable: It starts from the beginning of the game, so it is repeatable.
+Self-validating: It uses asserts to validate the results.
+Timely: I don't know whether the author wrote the test cases during developing.

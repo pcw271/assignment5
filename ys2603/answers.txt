@@ -1,0 +1,101 @@
+1. In line 37 of adventure.py, raw_input('>') was changed into input('>'). 
+After the change the game could be run normally.
+
+2. Three main stuctural techniques used:
+a. Modules: in the adventure.py, the author imported play.py to increased the 
+readability of the program. Also, the author added unittest modules to increase
+the testability, both of which are very important aspects of a clean code.
+
+b. Classes: in model.py, the author used classes to organize the code, which
+again make the code easier to understand. In the same time, the classes Move,
+Room, word, etc. represent major game components.
+
+c.Combination of both. My saved game 'adve' can be resumed as a result of author
+'s class/modular programing techniques. The game state is separated and the 
+game can be revisited anytime.
+
+3. 
+In data.py and model.py, many variables and class names are meaningful. For
+example, in game.py variables names such as treasures_not_found, dwarves_killed,
+and in model.py, classes names such as Dwarf, Message and Hint are very
+meaningful: the classes are just nouns and the variables are descriptive.
+ There are some meaningless names, for example, in data.py, make_object
+(dictionary, klass, n), the n can be anything, and def section1(data, n, *etc),
+section 1 is also meaningless.
+
+4. 
+Do one thing functions: in play.py, def resume(savefile, quiet=False) restarts
+the game; in model.py, def is_aboveground(self) returns a different score to
+test if player above the ground.
+
+Do more than one thing functions: def move_to(self, newloc=None), and def
+section3(data, x, y, *verbs).
+
+5.
+In game.py, def move_to(self, newloc=None) has side effects. The function not
+only describes location of the player, but also moves the player to a new location.
+
+6.
+In game.py, from 'self.turns += 1' to 'self.dispatch_command(words)' is a repeated
+code(lines 453-499). This code can be written using a function.
+
+7.
+Yes, there is 'try/except' handling. In adventure.py: 
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+adventure Yang$ python adventure.py ad
+Traceback (most recent call last):
+  File "adventure.py", line 44, in <module>
+    loop()
+  File "adventure.py", line 33, in loop
+    game = Game.resume(args.savefile)
+  File "/Users/Yang/Desktop/assignment5/adventure/game.py", line 1570, in resume
+    savefile = open(obj, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: 'ad'
+
+This is an abnormal error message I got after I tried to restart my saved game
+'adve'
+
+8.
+Yes. In game.py, the class 'Game'covers the majority part of the functions of
+the game, such as scoring, status of the player etc,. It is clearly more than one
+functionalities.
+
+9.
+Class Room(object) is the most not cohesive one. 13 attributes are created, but
+.is_light is used.
+
+Class Object(object) is not cohesive neither. 10 attributes are created, but only
+self.names, self.rooms, self.toting are used.
+
+10.
+In game.py, class Game(Data) has many unnesseary comments. For example, look_complaints = 3
+how many times to "SORRY, BUT I AM NOT ALLOWED..."
+full_description_period = 5  # how often we use a room's full description
+There are also useful comments at the beginning of game.py. For example,
+'# Numeric comments scattered through this file refer to FORTRAN line
+# numbers, for those comparing this file and `advent.for`; so "#2012"\
+# refers to FORTRAN line number 2012\'94. For a reader who has no idea of FORTRAN, she 
+can look it up using various resources.
+
+11.
+In play.py, the three functions are well defined in vertical formatting, very readable
+and understandable, with some triple quote comments added. 
+
+12.
+Ran 15 tests in 4.658s
+
+FAILED (failures=1)
+Above is the result of running the test if uncommenting some test code in test_walk.py.
+Fast is met for a relatively quick run of 4.658 seconds;
+Independent is not met because the test_walk.py failed due to running
+tests.addTests(doctest.DocFileSuite('walkthrough1.txt')) and/or
+tests.addTests(doctest.DocFileSuite('walkthrough2.txt')), but secceeded if not
+uncommenting;
+Repeatable is met because all tests can be run repeatedly;
+Timely is not met because the test was run after public release of the program.
+

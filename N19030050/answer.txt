@@ -1,0 +1,75 @@
+1. I change the raw_input() to input();
+
+2.  (1)modules: such as import os - top level
+    (2)class: such as class game in game.py  - mid level
+    (3)function - lower level 
+
+3. names in class Game are good meaningful names with comments.
+
+
+   bad function names are as following:
+
+    def __repr__(self):
+      
+
+    def __call__(self, arg=None):
+     
+
+    def __getattr__(self, name):
+       
+4.  def make_object(dictionary, klass, n):
+    if n not in dictionary:
+        dictionary[n] = obj = klass()
+        obj.n = n
+    return dictionary[n]
+
+    do the one thing;
+
+    def section series do multiple things
+
+5. score_and_exit
+
+
+6. Not found
+
+7.  In function loop(), try and catch EOFException
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+
+8. Class Data
+
+9. Yes
+
+10. def __repr__(self):
+        """Run this command and return the message that results."""
+        output = self.game.do_command(self.words)
+        return output.rstrip('\n') + '\n'
+
+    def __call__(self, arg=None):
+        """Return a compound command of several words, like `get(keys)`."""
+        if arg is None:
+            return self
+        words = arg.words if isinstance(arg, ReprTriggeredPhrase) else (arg,)
+        return ReprTriggeredPhrase(self.game, self.words + words)
+
+
+     here the author could use meaningful names instead of comments
+
+11.class Hint(object):
+    """A hint offered if the player loiters in one area too long."""
+
+    turns_needed = 0
+    turn_counter = 0
+    penalty = 0
+    question = None
+    message = None
+    used = False
+
+    def __init__(self):
+        self.rooms = []
+
+12. yes
+	meet the 5 standards

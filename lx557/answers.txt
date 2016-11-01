@@ -1,0 +1,79 @@
+1.  
+To make it work with python 3, I changed 'raw_input' (a python 2 built-in function) into 'input' function which is for python 3 with same content.
+
+
+
+2. 
+(1) module:  A module is a file containing Python definitions and statements and it ends with '.py'. In this case, files such as adventure.py and play.py are all modules. They contain related statements and are written seperately. When combined together, they perform the function of the whole program.
+
+(2)class£ºit provides a way of organization. Take model.py as an example, there are different classes inside and many takes a single responsibility of defining an object.
+
+(3)function: In each module, there are different functions to define the behavior of whole program. For example, in 'play' module, there is a function 'resume' used for users to continue previously saved game.
+
+
+
+3.Yes, the user has used lots of meaningful names. 
+
+For example, in 'model.py'> function 'Room'> variable 'is_light' which is quite clearly about status of light or dark. Also, those class names in model.py tell about what exactly those classes are trying to define. Another example is that in 'game.py'> class 'Game', there are a few variables clearly defined in the beginning such as max_death is about how many times the player can die.
+
+However, there are also some situations where names are not perfect. For example, in 'model.py'> class 'Dwarf'> function 'start_at', attribute prefixes are used such as 'self.room =room'. Another example would be that in 'game.py' > class 'Game'(line 45-46), author can make 'clock1' and 'clock2' more descriptive like 'clock_FindLastTreasure' rather than just 1 and 2, which could be confusing later. 
+
+
+
+4. Some functions do while others are not.
+
+Do one thing: in 'model.py' > class 'room' > function 'is_after_hall_of_mists', it only checks if it is after hall of mist. Another example: in 'game.py'> class 'Game'> function 'objects_here'(line 96), it only returns the location of the object.
+
+Do more than one thing:  in 'adventure.py'> function loop() does a bunch of things, such as checking if the game is finished and adding descriptions. Another example: in 'game.py'> class 'Game'> function 'is_dark'(line 81), it assigns value first, then check condition and finally return the dark status.
+
+
+
+5. Yes, there is. 
+
+For example, in 'game.py'> function 'write'(line 63), the function changes the global variable 'output'
+
+
+
+6.For example, in 'play.py', function 'play' is trying to start a new game while function 'resume' is trying to resume a game. They share several lines common codes so it would be better to define a function which deals with import process.
+
+
+
+7.Yes; Yes.
+
+In 'adventure.py', in the end of the file, exception handelling is applied. 
+When you hit Ctrl+C, the program will end abnormally.
+
+
+
+8.
+In 'data.py', the class 'Data' has two functions, one is for initializing variables and the other one is used for assign other values. Or considering class 'Game', it actually is the main body of the game which has lots of functionalities.
+
+
+
+9. Not really.
+
+For class 'Game', it carrys many different responsbility such as define properties and control movement of objects.
+
+
+
+10.
+good: In the beginning of the file, the author will commend a few lines about what this file is for. For each classes in 'model.py', the focus of this class is described.
+
+bad: some comments seems redundant. For example, in 'game.py', there are comments for well-named variables like 'max_deaths' and 'is_dead'.
+
+
+
+11.
+In 'game.py'(line 809-832), instead of declaring those variable in the very beginning, the author define them here and put them together, which meets the criteria of 'variables should be declared close to their usage as possible' and 'instances variables should be declared together'
+
+
+
+12.
+Testing walkthrough files failed since adventure is not defined when running (after remove # in 'test_walk.py'). After change into 'play.resume' in walkthrough1.txt and 'play._game' in walkthrough2.txt, it worked.
+
+It doesn't meet F.I.R.S.T critirea. 
+For example, game use part of play function. Therefore, it is not independent.
+For F, I think it is pretty fast which only takes 4.77 s to run 16 tests. But I actually don't know if it should be regarded as fast or not since there is no threshold. 
+For T, the game was written in python 2 at first but tests are actully given in python 3.
+For I, the tests files such as 'walkthrough1' and 'walkthrough2' are independent. But they are not independent from modules. 
+Other criteria are met.

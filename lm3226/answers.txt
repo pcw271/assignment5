@@ -1,0 +1,52 @@
+1. Change adventure.py line 37 raw_input('> ') to input('> ')
+2. Inheritance, Single responsibility principle, Cohesion
+3. Bade name: in adventure.py line 19, the function "loop()" is a bad name since it doesn't tell us what kind of loop it is and what it does. 
+In data.py, functions that are named from section1 to section12 are not meaningful names. It is hard to tell what they do out of context.
+Good name: in game.py line 822, "write_default_message" is a descriptive name.
+4. In adventure.py line 19, the function "loop()" doesn't just do one thing. In data.py line 54, the function accumulate_message(dictionary) only does one thing. In data.py line 34, “referent(self, word)” only check if word.kind == 'noun’.
+5. In data.py line 107, the function "section4(data, n, text, *ect)" changes the argument
+"text" to lower case, and it modifies the original argument by changing into lower case and long_words.
+In game.py line 772, the function die(self) modifies the instance variables "deaths" and "is_dead".
+In model.py, line 130 functions "carry(self)", line 134 "drop(self)", and line 138 "hide(self)" all have side effects.
+6. In game.py, the function  t_throw and t_drop both have the following duplicated code:
+if not obj.is_toting:
+    self.write(verb.default_message)
+    self.finish_turn()
+    return
+This could be easily made into its own function. For instance:
+def write_verb_message_and_end_turn_if_object_not_toting(self, obj, verb)
+  if not obj.is_toting:
+      self.write(verb.default_message)
+      self.finish_turn()
+      return
+7. Yes. In adventure.py, we have exception in the loop function:
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+When you enter control+c, it gives you exception.
+8. In game.py, the class Game(object) has more than one functionality. It handles
+movement logic, game starting and ending, logic for objects interaction and more.
+9. Not all classes are not cohesive. For example, in game.py, Game(Data) has too
+many attributes and functions inside Game(Data) often manipulates more than one of
+the attributes.
+10. The author comments on particular lines that they think might be confusing
+to explain what they are doing. They also give classificatory comments for some
+functions.
+Good example: adventure.py line 13 to 17
+def baudout(s):
+    for c in s:
+        sleep(9. / BAUD)  # 8 bits + 1 stop bit @ the given baud rate
+        stdout.write(c)
+        stdout.flush()
+Bad example:
+game.py line 1303  def i_quit(self, verb):  #8180
+game.py line 1310  def t_find(self, verb, obj):  #9190
+All the numerical comments are unclear and they do not explain what the function does.
+There are more comments in game.py that are just numbers, which do not offer any
+explanation for the code.
+11. In adventure.py, line 19 the function "loop()" has nice vertical formatting. It leaves
+a line between each segment of code.
+12. Yes, the test passes after making change in adventure.py line 37 raw_input('> ') to input('> ‘). The test doesn’t meet the F.I.R.S.T criteria. The test is not independent. In test_commands.py, line 13 and line 21 depend on line 7.
+

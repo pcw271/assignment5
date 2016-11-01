@@ -1,0 +1,71 @@
+1.
+I change the raw_input ,which in line 37, in adventure.py to input so that it could work with python 3.
+
+2.
+Functions: a type of procedure or routine. They are logically seprated.
+Modules: each module contains code necessary to execute only one aspect of the desired functionality.
+Classes: combine both structural and behavioral components and comtain a set of functions that define behavior.
+
+3.
+Names like resume, should_offer_hint, close_cave are meaningful. Resume means reload the game. Should_offer_hint
+means the different situations that the game should give hints to players.close_cave means when cave room is
+closed and players have to leave cave. Names like start2, section1, section2, section3..., I think, is meaningless.
+ 
+4.
+Not really
+Some function do only one thing: For instance, random(self) is used to call self.random_generator.random() and return
+                                 the output.
+                                 write_message(self, n) just calls self.write(self.messages[n]) and return the output.
+And some do more than one thing: For instance, is_dark(self) first calls self.object['lamp'], then checks whether
+                                 players can use lamp, and also return self.loc.is_dark.
+
+5.
+Yes. For example, in _do_command(self, words), it changes the value of clock1 and store the new value in the self.clock1,
+which means this function modify a global variable. Besides, the value of clock1 has the side effect of assigning value
+to other varaibles, such as clock2. This presents a potential hangup for programmers.
+
+6.
+For example, in line 18-21 and 30-33 in play.py is repeated which can be made to a function or import on the top of the file. 
+    global _game
+    from game import Game
+    from prompt import install_words
+
+7.
+Yes. The game uses exception handling in loop() in adventure.py when saving game file.
+
+When inputing CTRL+C, it throws an expection 'KeyboardInterrupt' and terminates abnormally.
+When inputing CTRL+Z, it also stops, but I think it is due to CTRL+Z is designed to stop program in command line. 
+
+8.
+Yes.For instance, the class game obviouly has more than one piece of of functionalite which should be divided into 
+different classes. It includes move, location, status, start, command, look, die and other responsibilities.
+
+9.
+Not all the classes are cohesive. The game class is not cohesive as I mention in 8. And class Dwarf is not very cohesive
+either, since it also includes some functions of pirate instead of merely dwarf.
+But classes, such as Object, Hint, are cohesive.
+ 
+ 
+10.
+The author uses some comment to summerize certain functionality in one block or variables like line 104, 116 in model.py.
+He also uses comments on the top of each class and file to explain the responsibilities of the file or class. 
+He also add many FORTRAN lines as comment such as line 380-383 in game.py.
+
+11. 
+In the do_motion in game.py, author uses blank line to identify separate concepts so that it is clear different inputed
+words will lead to different motion status. 
+
+12. 
+It will fail on walkthrough1.txt and walkthrough2.txt because they try to use adventure object without importing adventure module.
+After changing name adventure to play, the game can pass all the test.
+
+Fast
+    The test is pretty fast which ran 16 tests in 5.232s on my laptop.
+Independent
+    The walkthrouth tests are not independent.
+Repeatable
+    It seems that the tests are repeatable on my laptop.
+Self-validating
+    The test is self-validating, since unittest module gives result 'pass' or 'fail' which is objective.
+Timely
+    I do not think the test is timely, since first it is developed in python 2 but the test pass in the python 3.

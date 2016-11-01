@@ -1,0 +1,31 @@
+1. Change raw_input() into input() in adventure.py line 37. 
+
+2. The author uses modular programming as there are many separation of concerns. The author follows the single responsibility principle, and the program is cohesion.
+
+
+3. The author used some meaningful names. For example in game.py, dwarves_killed (line 25) means the number of dwarves killed by the player and deaths (line 35) means how many times the player has died. 
+But the author also use names not meaningful names. In adventure.py, we hard to know what function baudout (line 13) is used for by its name.
+
+4. Do one thing: random() in game.py line 57 generates random numbers.
+Do more than one thing: start() in game.py line 114 turns long words into five-letter words, set things going, and check whether the player want instructions or not.
+
+5. Some functions cause side effects. 
+
+6.          self.write_message( )
+            self.axe.drop(self.loc)
+            self.do_motion(self.vocabulary['null'])
+This code have been repeated many times (game.py, line 1276, 1282, 1288) in game.py that could be made into a function.
+
+7. The program use exception handling in adventure.py line 43. 
+
+8. In game.py class Game have responsibility lots of functionalities. It can start the game, kill dwarf, move, etc.
+
+9. In game.py class Game are not very cohesive, because it contains large number of attributes.
+
+10. Good comment: Comment on yesno (game.py line 73) explain what the function used for. 
+Bad comment: Comments on dwarves_killed(game.py line 25) and is_dead(game.py line 34), their names are too clear to use comments.
+
+11. In game.py line 56, 59, 62, etc.the author uses blank lines to separate concepts.
+
+12. It passes all the tests. The tests are fast. It is independent for we can run them in any order. The tests is repeatable in any environment, and either pass or fail which means it is self-validation. I cannot find evidence to prove the tests were write after the program is completed so I guess it is timely. Therefore it meets FIRST criteria. 
+ 

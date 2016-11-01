@@ -1,0 +1,36 @@
+1. To make the game work, I changed the command “raw_input” in line 37 into “input”.
+
+2. First, the author made use of classes to represent different game components. Second, modules were used to separate different concerns such as “model”, “play”, making the code more structured and reusable. Third, the author wrote tests to help the debugging process.
+
+3. The author has used many meaningful names including:
+ “write_default_message”, which is the creation of default messages.
+“i_walk”, “i_drop”, etc. denoting the user’s actions
+Some not meaningful names:
+section1(), section2()… which don’t have clear purposes of what they do
+
+4. Functions that only do one thing:
+“is_aboveground(self)”: determine whether the player is aboveground
+“is_finished(self)”: determine whether the player is done with the game
+Functions that do more than one thing:
+“__init__(self)”: declare multiple initial conditions of the objects in the game
+“move_dwarves(self)”: determine the movements of dwarf by assigning multiple attributes of the dwarf
+
+5. The function "make_object" has side effects. It is returning an input variable "dictionary".
+
+6. In "play.py", the functions "play" and "resume" have some repeated parts which can be shared by the same function.
+
+7. Yes. While running the main loop, it passes the EOFError, which is when one of the built-in functions hits an end-of-file condition without reading any data. The input "Ctrl+C" has caused the program to terminate abnormally.
+
+8. Class "Game" has more than one piece of functionality, including initializing the game, setting up multiple variables, and keeping track of properties of game objects, and so on.
+
+9. Not all the classes are cohesive. For example, Class "Game" has a lot of variables that are not directly related to each other.
+
+10. The author kept comments to the minimum unless necessary. Overall, the comments are concise and clear.
+Examples of good comments are: Line 4, 39, 83 from "model.py", which explains the function of certain classes.
+Some bad comments: I think the numeric comments scattered through the file "game.py" are not really good comments for those who are not familiar with FORTRAN line numbers.
+
+11. The author did a great job regarding vertical density. A good example would be line 826-832 in "game.py". Variables that are related to each other are closer together, while other functions are further away.
+
+12. The tests passed. 14 tests were ran in 5.410s. As for the F.I.R.S.T criteria, the tests satisfy the first four. They are fast enough to be ran frequently. They are independent and can be ran in any order. They are also repeatable and self-validating. However, I do not think that they are timely since they were ran after the program was completed. 
+
+

@@ -1,0 +1,74 @@
+﻿Questions
+Note: Use the filename and line number when referring to locations in the code.
+   
+   1. Describe the changes you made to make the game work with Python 3
+   
+   raw_input() doesn’t work for Python 3, so change it to input() and the game works. 
+
+   2. Describe three main techniques that the author used to structure the program.
+   
+   		1. The author defined multiple functions. 
+   		2. The author also had several classes such as Game() and Data() and so on. 
+   		3. The author used comprehensive names for different variables. 
+   
+   3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+   
+   Yes and no. I would say that some of the names are meaningful and some of them ain't. 
+   Meaningful names: data.py, line 40, make_object(). data.py, line 54, accumulate_message. 
+   Not used meaningful names: In adventure.py, line 13, function baudout(). data.py,line 24, function data().data.py,line 59, section1() to section4.
+   
+   
+   4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+   
+   The functions that only do one thing: data.py, line 46, expand_tabs(). data.py, line 193, section12.
+   
+   The functions that do more than one thing:data.py, line 198, function parse(). data.py,line 24, function data().data.py,line 59, section1() to section4.
+   
+   5. Do any of the functions cause side effects? If so, which ones?
+   
+   Yes. The functions that cause side effects are: data.py, line 107, section4. 
+   
+   6. Can you find any repeated code that could be made into a function?
+   
+   Yes. In data.py, line 168, to see the value of bit from 0 to 3, it repeated 4 times and could be made into a function. 
+   
+   7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+   
+   No. I've been playing the game for a while and I cannor find input that causes program to terminate abnormally.
+   
+   8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+   
+   Yes, the class Game() in game.py and data() in data.py.
+   
+   9. Are all the classes cohesive? List any that aren’t.
+   
+   Cohesive means that a class does a common job. Not all the classes are cohesive. 
+   Game() in game.py does a lot of jobs that are not having common purpose. 
+   
+   
+   10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+   
+   Sometimes the author's comments are readable and make the code easy to understand. However, most of time there are very few comments. 
+   
+   Good comments: model.py, line104, under class object: set a example for object. game.py, line218-222, comments on room chosen. 
+   
+   Bad comments: model.py, line145, under class message: a message for printing? what do you want to print? game.py very few comments. 
+   
+   11. Provide an example of where vertical formatting has been used to make the code clearer. 
+   
+   Vertical formatting means that each blank line suggests a new and separate concept
+   prompt.py line 5-25. Vertical formatting makes functions more readable and easy to understand. 
+   
+   12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria.
+   
+   Test_commands.py only works when you get all files in the foler.  while test_data.py and test_walks.py worked. 
+   They are fast, since their runtime is short. 
+   They are independent since they can be run at any order. 
+   They are repeatable, since they can be run in any environment
+   They are self-validating since they either pass or fail. 
+   They are not timely since we run it after all the program. 
+   
+   
+   
+   
+   

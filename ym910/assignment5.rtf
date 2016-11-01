@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 1. When I run adventure.py it gives the following error message: \
+    
+\f1\fs22 \CocoaLigature0 NameError: name 'raw_input' is not defined\
+  
+\f0\fs24 \CocoaLigature1 changes I made:\
+    change raw_input() to input(). \
+    reference: https://docs.python.org/3/whatsnew/3.0.html\
+\
+2. The author used Modules, Classes and Functions to structure the code of the game. Modules separates concerns for this game, the Classes are used for store game elements such as moves, room, word, message, and characters. For example, the game.py module is a Class that takes data collected, defines common game actions use functions and tracks all possible user\'92s actions, locations, belongings, etc.; and the play.py starts, saves and ends a game. The author also creates several modules to test and debug the game. \
+\
+3. Meaningful names: (model.py, Line 145, 152, 165) Message, Hint, Dwarf;\
+    Not quite clear: (data.py, Line 74-87) the names m,n, mh,mm are confusing, even if they are just used in the middle of the function and are used as temporary variables; or (game.py, line 130) start2 might refers to a second chance to start from where last time ends but it confuses me with questions like if this means restart then I could have multiple chances to restart the game with my history? The name does not speak much for itself in this sense. \
+\
+4. Functions only do one thing: (game.py, line 88-105): inventory(self), treasure(self), objects_here(self).\
+    Functions that are multifunctioned: (data.py) section3() modifies multiple variables (depending on the arguments it takes) and updates the travel history. \
+\
+5.  #reference: https://books.google.com/books?id=iNlOCwAAQBAJ&pg=PA201&dq=side+effect+learning+python&hl=en&sa=X&ved=0ahUKEwjQpbPTxvzPAhWEOz4KHV52CQYQ6AEIOTAD#v=onepage&q=side%20effect%20learning%20python&f=false\
+the book define side effect as any function that changes value that does not depend on the function's input. So here (game.py, line 188)\
+The function move_dwarves(self) make changes to variables other than self (and its related).\
+\
+6.  When the author defines actions and elements at property, (games.py), the code may be organized into one function instead of repeatedly call and define. \
+\
+7. Yes. The author uses exception handling when dealing with saving the game and loop error (adventure.py, line 42-46).\
+\
+8. The Class Game has responsibility over more than one piece of functionality. It tracks locations of users, manage elements like dwarves and items in properties, defines movements, etc.\
+\
+9. Classes that are not cohesive: Class Game, Class Room, Class Move, etc. \
+\
+10. The comments serves well for the author himself, but may lack clarity for readers. His comments at the beginning of each module is instructional, and his comments on variables are mostly well used: (game.py, line 21-37)\
+    look_complaints = 3  # how many times to "SORRY, BUT I AM NOT ALLOWED..."\
+    full_description_period = 5  # how often we use a room's full description\
+    full_wests = 0  # how many times they have typed "west" instead of "w"\
+but sometimes his comments does not make sense:\
+    dwarves_killed = 0  # DKILL\
+    knife_location = None  # KNFLOC\
+\
+11. The author utilizes vertical formatting in his game. A good example is the code in the game module, the __init__() function and several functions followed. (game.py, line 39-66). Each blank lines is a visual cue that identifies a new concept, instant variables are declared together; and related functions (random(), choice(), wirte()) are put closely. \
+\
+12. The tests pass. It meets most of the F.I.R.S.T criteria. The test runs fast enough that I can run them several times in a short period; the walkthrough1 and walkthrough2 are not independent but the rest are not ordered and can run independently; the tests are also repeatable and self-validating; whether the tests are written during the code development or not is unclear, but some tests require the game to be highly competed to work. \
+\
+   \
+}

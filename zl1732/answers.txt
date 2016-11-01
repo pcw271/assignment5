@@ -1,0 +1,133 @@
+1, In adventure.py, line37: line = raw_input('> ') should be modified to line = input('> '). Since raw_input() is no longer exist in python 3, use input() instead. This is the only error need to be fixed.
+
+2, The program mainly used the following structure techniques.
+i> Modular Programming: Small modules are written separately and reused in other programs. For example, In adventure.py, it import functions from "play" and "game".
+ii> Class: Combining both structural and behavioral components, which made the program more clear on the structure. For example, in model.py, the author created a series of class like Room, Message and Hint.
+iii> Module: The author also import some modules to his program, for example, from sys import executable, stdout
+
+3, The author used lots of meaningful names, but there's also several meaningless names in the program. For example, in game.py, "describe_location(self)" is a meaningful name, it describe the location. however, in data.py, "section1(data, n, *etc)" and section2,3,4... they are meaningless names.
+
+4, The functions that only do one thing:
+data.py: accumulate_message(dictionary, n, line), only accumulate message.
+	 section10(data, score, line, *etc), only append score and line to class_messages.
+game.py: inventory(self), only return the current inventory.
+
+The functions that do more than one things:
+game.py: start(self), take the user's input and also assign value to  self.chest_room and ask for instructions.
+	 move_dwarves(self), does many things, very long code. It also deal with pirate.
+
+5, One of the function that have side effect is section5(data, n, *etc) in data.py. when n is between 1 and 99, _object in data object is changed.
+def section5(data, n, *etc):
+    if 1 <= n <= 99:
+        data._object = make_object(data.objects, Object, n)
+        data._object.inventory_message = expand_tabs(etc)
+the other one is parse(data, datafile), it delete _last_travel and _object in data object and finally return the modified data object.
+def parse(data, datafile):
+    """Read the Adventure data file and return a ``Data`` object."""
+    data._last_travel = [0, [0]]  # x and verbs used by section 3
+
+    while True:
+        section_number = int(datafile.readline())
+        if not section_number:  # no further sections
+            break
+        store = globals().get('section%d' % section_number)
+        while True:
+            fields = [ (int(field) if field.lstrip('-').isdigit() else field)
+                       for field in datafile.readline().strip().split('\t') ]
+            if fields[0] == -1:  # end-of-section marker
+                break
+            store(data, *fields)
+
+    del data._last_travel  # state used by section 3
+    del data._object       # state used by section 5
+
+    data.object_list = sorted(set(data.objects.values()), key=attrgetter('n'))
+    #data.room_list = sorted(set(data.rooms.values()), key=attrgetter('n'))
+    for obj in data.object_list:
+        name = obj.names[0]
+        if hasattr(data, name):
+            name = name + '2'  # create identifiers like ROD2, PLANT2
+        setattr(data, name, obj)
+    return data
+
+6, In game.py, def dispatch_command(self, words), there is some repeated code
+elif obj is self.bottle.contents and self.is_here(self.bottle):
+                    obj_here = True
+                elif obj is self.loc.liquid:
+                    obj_here = True
+in either case, assign True to obj_here, but I think the code is more readable in this way, so it doesn't need to be combined.
+
+7, Yes, there is exception handling. In adventure.py
+if __name__ == "__main__":
+    try:
+        loop()
+    except EOFError:
+        pass
+when I enter something like `,@,],/,|, the program do the pass and does not response.
+
+8, Game class have responsibility over more than one piece of functionality, it's huge and have tens of functions. for example, it have initialize function like random(self), choice(self, seq), it also have 
+dispatch_command(self, words), which manage the game, and t_eat(self, verb, obj), which deal with the detailed movement in the game.
+
+9, Game class is probably not cohesive, first, it have too many attributes and too many functions. More importantly, some instant variables, like full_wests,  is not used in any of the functions in game class.
+
+10, The author overall have good comment in his code, he uses meaningful name for both variables and functions, which makes the code clear and readable. for example
+    while not game.is_finished:
+        line = input('> ')
+        words = re.findall(r'\w+', line)
+        if words:
+            baudout(game.do_command(words))
+
+while some of the comments are not good enough, which appears when the names of the variables or functions are not clear enough. for example,
+	self.clock1 = 30                # counts down from finding last treasure
+        self.clock2 = 50                # counts down until cave closes
+this could be improved by changing the variables name. Moreover, some of the comments seems redundent. For example,
+ 	dwarves_killed = 0  # DKILL
+    	knife_location = None  # KNFLOC
+the comments is not even clearer than the variable names
+
+11, The author applied vertical formatting many places.
+i> all instance variables are declared together.
+class Game(Data):
+    look_complaints = 3  # how many times to "SORRY, BUT I AM NOT ALLOWED..."
+    full_description_period = 5  # how often we use a room's full description
+    full_wests = 0  # how many times they have typed "west" instead of "w"
+    dwarf_stage = 0  # DFLAG how active the dwarves are
+    dwarves_killed = 0  # DKILL
+    knife_location = None  # KNFLOC
+    foobar = -1  # FOOBAR turn number of most recent still-valid "fee"
+    gave_up = False
+    treasures_not_found = 0  # TALLY how many treasures have not yet been seen
+    impossible_treasures = 0  # TALLY2 how many treasures can never be retrieved
+    lamp_turns = 330
+    warned_about_dim_lamp = False
+    bonus = 0  # how they exited the final bonus round
+    is_dead = False  # whether we are currently dead
+    deaths = 0  # how many times the player has died
+    max_deaths = 3  # how many times the player can die
+    turns = 0
+
+ii> related functions are keeped close, for example, i_eat, t_eat, i_drink, t_drink
+
+iii> dependent functions below functions that call them, for example, i_eat, t_eat, i_drink, t_drink
+
+iv> Vertical openness between concepts, for example, the blank line between each function.
+
+12, Run the tests and all 16 tests passed in 5.402s
+noted that I uncomment the test for two walkthrough in test_walks.py, besides, there are two errors in walkthrough1&2
+		adventure._game.clock1
+		NameError: name 'adventure' is not defined
+just change adventure to play. the other one have the same issue, but is about resume().
+Fast: yes, 16 tests in 5.4s, fast enough.
+Independent: yes, tests does not depend on each other.
+Repeatable: yes, repeatable.
+self-validating: yes, the tests either pass or fail.
+Timely: I don't know if these test case are developed during code development.
+
+In conlusion, it satisfy four of the five, good enough but not perfect.
+
+
+
+
+
+
+

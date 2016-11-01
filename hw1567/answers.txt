@@ -1,0 +1,23 @@
+1. I changed the function name from "raw_input" to "input" in the file adventure.py line 37.
+
+2. The author uses the Classes to organize commonly used game actions, such as, moves, hints. Besides that, the author uses modules to put related code togetherand to separate of concerns, such as: saving/loding state. Finally, the author uses unitest modules to test the program.
+
+3. The author uses some meaningful names. For instance: from game.py, function name "describe_location" describes players current location, and function name "say_okay_and_finish" just print "ok" and finishes the game. However, some names are not meaningful. For example: function name "do_command", "_do_command" in game.py, and function name "section1", ..., "section12" in data.py.
+
+4.Functions "random()", "choice()", "write_message()" in the game.py just do one thing, which returns a random number. However, functions "start()", "move_to" do more than one thing. For example, function "start()" first print the instructions if the user want them, then it print other information, such as location, etc.
+
+5. Functions "section1()", ..., "section12()" in data.py has side effects because it changes the global object "data".
+
+6. It is hard to find some reapeated code in this project. Although I didn't find any repeated code that could make into a function, I think some functions could break into smaller functions, such as function "loop" in the 'adventure.py'.
+
+7. The program has error handling in adventure.py from lines 42 to lines 46. If we type "python adventure.py <filename>" in the command line, but the "filename"doesn't match any file name in the directory, then the error will not be caught,and the program will end abnormally.
+
+8. The class Game in the game.py has many functionalities. For example, parsing the command, starting the game, scoring, describing the location, finishing the game. 
+
+9. The class Game in the game.py is incohesive because it is a super large classthat contains many unrelated things. It might be better to divide this large class to some smaller classes. Some attributs such as "is_done" that are only used in some methods, which means we can break this class into smaller classes.
+
+10. The author gives a lot of comments like Fortran code comments and explanations of some variables and functions. Some comments are good, such as: comments for methods "move_to()" and "start()" in game.py, which is real TODO comments. On the contrary, comments for variables in the game.py such as "look_complaints", ... , "max_deaths", "turns" are bad because we can repharse the variable name without the comment.  
+
+11. In the method "decribe_location" in game.py, the author uses vertical formaating since each different case (if statement) is separated by a blank line.
+
+12. The code passes all the 14 default enabled tests. For the F.I.R.S.T. criteria, I think this test follows criterias: Fast, Repeatable, Self-Validating. But the tests are not Independent because 'walkthrough1.txt' and 'walkthrough2.txt' depend on 'test_commands.py'. Besides that, these tests are more likely not Timely because the code is written in python 2 at first but these tests are given in python3.   

@@ -1,0 +1,136 @@
+1. Changes I have made in order to get the game work:
+
+	1) Line 37 of file ‘adventure.py’ was changed to “line = input('> ‘)” from “line = raw_input('> ‘)”, to make it compatible with python3.
+
+	2) At the top of file ‘test_commands.py’, I added: 
+“import os, sys; parent_path = os.path.abspath(os.path.join(os.getcwd(), “..”)); sys.path.append(parent_path)”,
+ (as mentioned in Q.12), so that the module “play” can be imported into the test file from its parent path.
+
+	3) Adjusted the comment format of the file ‘data.py’ (as mentioned in Q.10) making it more formal and tidy. This change is not necessary, though.
+
+
+2. The three main techniques the author used to structure the game are: 
+
+	1) Building modules: The author wrote specific modules, such as play, game and model, for separate concerns, to construct clear logics and functioning purposes, to allow reusing the code in other programs and to combine them with other modules to complete the whole game, so that the project can be more straightforward to read and understand.
+
+	2) Building classes with methods: The author used classes with different sets of functions to define and organize behaviors, structures and attributes. For example, class Move, Room, Word, Hint, Dwarf, etc. in the file ‘model.py’.
+
+	3) Building functions: Other than the methods within the classes, the author also built functions, some are global functions, to realize various actions involved in the game. For example, “play()” (line 11 of ‘play.py’).
+
+
+3. Meaningful names are descriptive, pronounceable and searchable. Below are some examples: 
+
+“describe_location” (line 323 of ‘game.py’) means to show the description of the chosen object;
+“say_okay_and_finish” (line 376 of ‘game.py’) means to write message “Okay” and then finish turn;
+“score_and_exit” (line 1698 of ‘game.py’) means to show the score of the player and quit.
+
+
+Here are some not so meaningful names:
+
+“do_command” (line 427 of ‘game.py’). This is not specific, because in general, the purpose of any functions is to do command;
+“section1” (line 60 of ‘data.py’), “section2” (line 65 of ‘data.py’), to “section12” (line 194 of ‘data.py’). These are not descriptive enough if not presented with comments, which can be hard for readers to understand.
+
+
+4. Some of the small size functions in the code only do one thing. Examples:
+
+1) Line 127 of ‘model.py’: 
+def is_at(self, room):
+        return room in self.rooms
+
+2) Line 142 of ‘model.py’: 
+def destroy(self):
+        self.hide()
+
+3) Line 60 of ‘game.py’: 
+def choice(self, seq):
+        return self.random_generator.choice(seq)
+
+Some of the complicated and large size functions in the code do more than one things:
+
+1) Line 17 of ‘prompt.py’
+
+def __call__(self, arg=None):
+        if arg is None:
+            return self
+        words = arg.words if isinstance(arg, ReprTriggeredPhrase) else (arg,)
+        return ReprTriggeredPhrase(self.game, self.words + words)
+
+This function multi-tasks checking whether the argument exists, responding to the check, giving value to “words” object, and returning value to the function. 
+
+2) Function “move_to()” in ‘game.py’ line 153:
+
+This function checks if there is a move, if the move is allowed, if the move is blocked on the way and so forth, and also gives the value to the new location of the object.
+
+
+5. There are some side effects caused by the code. One of the examples is in line 199 of ‘data.py’, where the global variable “data” in function parse(data, datafile) is modified inside of the function. That is to say, the return value of “data” is changed, hence is not the same as its input value, which causes side effects.
+
+
+6. The code “self.write(verb.default_message)” has repeated 21 times in ‘game.py’, in line 823, 844, 901, 1048, 1055 and so forth. This piece of code could have been made into a function called wr_default_msg() to avoid the multiple repetitions.
+
+
+7. The program does use exception handling, for example, force quitting command (cmd+q), force saving (cmd+s) and quit game from terminal (ctrl+c).
+
+
+8. The Game class (line 19 of ‘game.py’) has responsibility over multiple pieces of functionality, such as the starting of the game, the instructions, the player’s locations and movements, dwarves’ movements, and other settings such as lamp, cave, door and knife.
+
+
+9. Not all the classes are cohesive and here are some examples:
+
+	1) The “Game” class (in ‘game.py’). A class with good cohesion should handle small number of instance variables, and each method should manipulate at least one of them. However, the Game class handles too many numbers of features, and it should have been separated into different smaller classes according to different specific concerns. 
+
+	2) The “Dwarf” class (in ‘model.py’). This class is also not cohesive enough, much more cohesive than Game class, though.
+
+
+10. The author comments on each of his module with a description (using “””) on the beginning of the coding, giving a good explanation to the readers about its general function, sometimes followed with more detailed explanations. Here is a good example:
+
+	1) ”””How we keep track of the state of the game.""" (line 1 of ‘game.py’).
+
+The author also comments on the functions when their names are not straightforwardly descriptive enough; he also comments at the ends of some lines with hashtags, for a good example, 
+
+	2) “look_complaints = 3  # how many times to "SORRY, BUT I AM NOT ALLOWED..." (line 21 of ‘game.py’), 
+making the variable easy to understand.
+
+Another good example is:
+	3) # Properties of the cave. (line 78 of ‘game.py’)
+This is a good example, since it describes the specific uses of the following defined functions are related to cave.
+
+But the author doesn’t obey strict rules of commenting, and he only comments on some of the functions in detail while other with simple or sometimes meaningless descriptions. For bad examples of the author’s comments:
+
+	1) Line 175 and line 177 of ‘data.py’, the author comments with hashtag but does not leave a white space after #, nor two white space before “# oil” or “# water”. I have corrected both of them. 
+
+	2) “knife_location = None  # KNFLOC” (line 26 of ‘game.py’). This comment is not readable or searchable, and it is even more vague than the name of the variable itself.
+
+
+11. An example of vertical formatting by the author is the module ‘adventure.py’. The author applies blank lines as vertical openness between concepts, cleanly separating the module importing section, variable valuing section, function defining section and exception defining section. Between different functions, white lines are applied. Inside of function adventure.loop(), white lines are applied between the variable valuing part, “if” condition part, and while loop part, so that related codes are presented close. Variables (line 11 and line 25) are declared as close to their usage as well.
+
+
+12. The tests of data and walks both pass without changing anything, while test_commands does not pass. After adding “import os, sys; parent_path = os.path.abspath(os.path.join(os.getcwd(), “..”)); sys.path.append(parent_path)” at the top of file ‘test_commands.py’, I made the import of the ‘play’ module working, and the program passes the test.
+
+For the F.I.R.S.T criteria:
+
+1) Fast: The tests are all fast enough to present the result.
+
+2) Independent: ‘test_commands.py’, ‘test_data.py’ and ‘test_walks.py’ are not dependent on each other and they can be run in by any order. However, the the two walkthrough txt files are not independent since they are pre-set by the author with seed, hence does not look independent.
+
+3) Repeatable: All the tests are repeatable.
+
+4) Self-validating: All the tests can validate by themselves objectively.
+
+5) Timely: I think the tests were written after the program was completed instead of during the code development, that is somehow, not meeting the TIMELY criteria in this case.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

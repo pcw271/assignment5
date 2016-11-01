@@ -1,0 +1,156 @@
+1) Changes made to run in python 3:
+-> In adventure.py(line no. 37) - change raw_input()  to input()
+
+2) The three main things the author has focussed on to structure the program are:
+*Readability – good documentation, formatting and commenting to enable the reader to understand the code with minimal difficulty
+
+*Correctness – to check the correctness of the code by making use of good number of unit tests that covers all the possible errors or mistakes in the code structure
+
+*Maintainability – Excellent design patterns and code structure to retain the functionality without much refactoring of the code
+
+3) There are few good meaningful names(because the name appropriately describes what the method does), while there more non-meaningful names. Some of the meaningful names are:
+
+play.py:
+line no. 3: load_advent_dat(data)  <--- (it loads all the data when the game is initiated), 
+line no. 11: play(seed=None)  <--- (starts the game), 
+line no. 29: resume(savefile, quiet=False) <--- (resumes the previously saved game) 
+game.py: 
+line no. 323: describe_location(self) <--- (describe the current location), 
+line no. 376: say_okay_and_finish(self, *ignored) <--- (while quitting the game), 
+line no. 384: finish_turn(self, obj=None) <---(finishes the current turn),
+
+
+Some of the non-meaningful names are:
+data.py:
+line no. 59: section1(data, n, *etc),
+line no. 64: section2(data, n, line)
+.
+.
+.
+line no. 193: section12(data, n, line)
+game.py:
+line no. 57: random(self),
+line no. 60: choice(self, seq)
+model.py:
+line no. 38: Room(object),
+line no. 82: word(object),
+line no. 165 Dwarf(object)
+
+The above mentioned methods are very short and un-descriptive of the method does and hence qualify as non meaningful names.
+
+4) Functions that do one thing:
+data.py:
+line no. 183: section10(data, score, line, *etc),
+line no. 193: section12(data, n, line)
+model.py:
+line no. 59: __rep__(self),
+line no. 121: __hash__(self),
+line no. 124: __eq__(self, other),
+line no. 127: is_at(self, room),
+game.py:
+line no. 57: random(self),
+line no. 60: choice(self, seq),
+line no. 69: write_message(self, n),
+line no. 96 objects_here(self)
+
+These above funtions are doing just one thing - returning a value or performing one task.
+
+Functions that do more than one thing:
+These functions do more than one operation or tasks.
+data.py:
+line no. 40: make_object(dictionary, klass, n),
+line no. 46: expand_tabs(segments),
+line no. 59: section1(data, n, *etc), etc
+game.py:	
+line no. 72: yesno(self, s, yesno_callback, casual=False),
+line no. 81: is_dark(self),
+line no. 114: start(self), etc
+model.py:
+line no. 11: def __repr__(self), etc
+
+5) Some examples of side effects are:
+def move_dwarves(self) :
+This function is in game.py module at line no. 188. According to the name, the method should only be responsible to move the dwarves. But apart from this, it does various other activities like, calculating if dwarf.has_seen_adventurer, and also calculating other feaatures of self like self.message, self.write_message, etc.
+def describe_location(self):
+This function is also in game.py module at line no. 323. According to the name, this function should only describe the current location. But in the last line we could see that the function also calls the finish_turn method, hence performing an extraneous task and giving rise to side effects.
+
+6)  There is no such repeated code that can be made into a function.
+
+7) Yes. The program does uses exception handling. For example: def loop() in adventure.py uses exception handling. Even some of the test modules contain exception. Example: def test_move_repr_works_on_all_moves(self) in test_data.py contains exceptions. Also, there is no such input that causes the program to terminate abnormally. The game is programmed in a wonderful way such that for all the inputs which are not used in the game, the program shows this output - "I DONT KNOW THAT WORD" 
+
+8) One piece of functionality means that the class or module does only one particular task (which should be indicative through its name). There are many classes that have more than one functionality. Some of the classes are:
+data.py:
+class Data(object)  <--- (it initializes the self data and also does another task 'referent' - checks for the noun)
+game.py:
+class Game(Data)  <--- (it has the responsibility of doing various tasks like describing location, movement, track turns, etc)
+model.py:
+class Room(object) <--- (it also has various responsibilities like to check it is before or after the hall of mist, it is dark or not, etc)
+
+9) Not all the classes are cohesive. Some of the classes which aren't cohesive are:
+model.py:
+class Room(object)
+class Hint(object)
+class Pirate(Dwarf)
+
+I have chosen these classes because, in all these classes, there are many instance varibales which haven't been used by any of the methods in the class. Infact, class pirate(Dwarf) has two instance variables, but not even one method to manipulate or use those variables.
+
+10) Author's approach of commenting is really good. But there are some bad comments too. Some if the good comments are: 
+(data.py, line no. 6)
+# The Adventure data file knows only the first five characters of each
+# word in the game, so we have to know the full verion of each word.
+
+This comment is present in the data.py module. It appears in the starting part of the module, right before the author makes a list of long words. So it is quite useful for the reader to understand the purpose of creating the list. Some other examples like this are:
+(line no. 38 in data.py)
+# Helper functions. <--- (to indicate that methods under this comment are helper functions)
+(line no. 199 in data.py)
+"""Read the Adventure data file and return a ``Data`` object."""  <--- (to indicate what the method does)
+(line no. 389 in game.py)
+# Check whether we should offer a hint.  <--- (It checks whether or not to offer a hint to the user)
+(line no. 1640 in game.py)
+# TODO: 12000   <--- (helps the reader to understand what the next step should be)
+
+Some of the bad comments are:
+(line no. 218 in data.py)
+#data.room_list = sorted(set(data.rooms.values()), key=attrgetter('n'))   <--- (obselete comment)
+(line no. 1649 in game.py)
+#6024   <--- (not much help from seeing this comment)
+(line no. 1653 in game.py)
+# if ptext(0) is zero?  <--- (this occurs inside def compute_score(self, for_score_command=False) in game.py module. But it is not in accord with what actually the method does. Hence it is a bad comment)
+
+11) One good example for vertical formatting that the author has used is - def section3(data, x, y, *verbs). Here the author has used vertical formatting multiple number of times to convey clearly what the code does. A part of this method is 
+def section3(data, x, y, *verbs):
+	last_travel = data._last_travel
+    if last_travel[0] == x and last_travel[1][0] == verbs[0]:
+        verbs = last_travel[1]  # same first verb implies use whole list
+    else:
+        data._last_travel = [x, verbs]
+
+    m, n = divmod(y, 1000)
+    mh, mm = divmod(m, 100)
+
+    if m == 0:
+        condition = (None,)
+    elif 0 < m < 100:
+        condition = ('%', m)
+    elif m == 100:
+        condition = ('not_dwarf',)
+    elif 100 < m <= 200:
+        condition = ('carrying', mm)
+    elif 200 < m <= 300:
+        condition = ('carrying_or_in_room_with', mm)
+    elif 300 < m:
+        condition = ('prop!=', mm, mh - 3)
+
+We can see that after the if-else statement, author has used Vertical formatting to distinguish properly the new instance variables that will be used in the next section of this method. Also variables with same initial values are intialized together. Example: m, n = divmod(y, 1000). 
+After this initialization, author has used vertical formatting again to convey another if-else statement that is used in the function.
+Other examples of good vertical formatting are :
+def move_to(self, newloc=None) inside game.py module,
+def finish_turn(self, obj=None) inside game.py module, etc
+
+12) All the 14 tests were running successfully. The command I used to run is - [python -m unittest discover]
+Conditions of F.I.R.S.T criteria are: Fast, Independent, Repeatable, Self-validating, Timely. So the performance of unittest of this adventure game on each condition is:
+Fast: I won't say the tests were that fast enough, but they had an good average speed (it took around 8 seconds for me to run all the tests).
+Independent: All the tests are independent, because there doesn't exist any test that calls another test method or depends on another test's output.
+Repeatable: All the tests are repeatable in any kind of environment because the tests are only doing assert_equal tests on the dataset predefined in various modules - long_description, short_descripton, hints, etc. Also, there are no special conditions required to run to tests on different environments. Hence they are repeatable.
+Self_validating: The tests are self validating, because it says "Pass", when all the tests are run successfuly, and for instance, if there are some errors,  it says "Ran 5 successfully (7.989 s). ONE error". 
+Timely: This completely depends on when the author had written these tests.i.e, whether he wrote the tests while writting the program or after the completion of the program. Hence, I can't comment on this.

@@ -1,0 +1,81 @@
+
+Note: Use the file name and line number when referring to locations in the code.
+1. Describe the changes you made to make the game work with Python 3.
+
+I only changed raw_input() to input() and it could be run in python 3.
+
+2. Describe three main techniques that the author used to structure the program.
+ 
+a) The author has used the modular structure to write this game. In the game's directory, there are multiple python files, each of which contains funtions. There is also a additional __init__.py file, which shows that this directory is a package and not just a bunch of python scripts.
+
+b) Defines and uses Classes, so that each class is responsible for a kind of functionality. 
+
+c) The classes are somewhat cohesive (except class game), in that each method is responsible for manipulating a number of attributes
+
+
+3. Has the author used meaningful names? Give some examples of meaningful names used and what you think they mean. Give some examples of where the author has not used meaningful names. 
+
+Examples of meaningful name: 
+play.py, line 7, datapath: the directory where the data is saved
+data.py, line 54, accumulate_message: makes up the message the user will see
+game.py, line 34, is_dead:  a boolean to show whether the palyer is currently dead
+
+	
+Examples of not meaningful names: 
+adventure.py, line 20: parser
+adventure.py, line 22: prog
+data.py, line 59,section1 (and all the other sections)
+data.py, line 156, room2
+
+4. Do the functions used in the code do one thing? Give some examples of functions that only do one thing. Give some examples of functions that do more than one thing.
+
+Functions that only do one thing:
+adventure.py, line 13, baudout: It makes the massage to be printed out in a gradual manner. data.py, line 54, accumulate_message: Almost one! This function gets something from dictionary and concatinates it with line
+data.py, line 183, section10: It seems that this function only does an append action 
+data.py, line 193, section12: Only uses other function, accumulate_message
+game.py, line 92, treasures: resurns an object from a list
+
+Functions that do more than one thing:
+adventure.py, line 19, loop: It sounds that this function does more than one thing. There are some variable defining at the beginning. Then an if statement which does multiple actions under different conditions. And also a while statement that does other actions.
+prompt.py, line 28 install_words: this function defines a list and builds it. It also has a if statement that does some actions and checks a status in the if statement. 
+
+5. Do any of the functions cause side effects? If so, which ones?
+Yes! in adventure line 19, the loop function takes the action of starting the game in line 30. However this is not implied in the function's name. loop does multiple things and one of them is the start.
+
+
+6. Can you find any repeated code that could be made into a function?
+
+There are repeated code in play.py under play and resume functions. To avoid this repeatition, we could have a conditional to first declare the status of start or resume. 
+
+7. Does the program use exception handling? Can you find any input that causes the program to terminate abnormally? Hint: run the program from the terminal prompt. The invalid input may not be normal text.
+
+Error handling case: adventure.py, line 42-46
+
+When I enter charactors such as !,@,#,$,',* the program does not respond. It does not terminate, but it is a kind of error, because it leaves the user wondering what might be the next step. 
+
+
+8. Do any of the classes have responsibility over more than one piece of functionality. If so, which ones?
+
+The class game in game.py is a very large class with many functions. Some of these functions handle messages, saves data for some variables, etc. 
+
+9. Are all the classes cohesive? List any that aren’t.
+
+The game class in game.py contains many menthods and is responsible for many functionalities. As a result, many of the menthods in this class manipulate only a subset of attributes in this class. This results in low cohesion for these methods. 
+
+
+10. Describe the author’s approach to commenting the code. Provide examples of good and bad comments that have been used in the code.
+
+The a	author provided minimal comments and tried to make the code clear using meaningful names. Examples of good comments: for many of the functions, he provides a comment right below def to make the functionality clear. For example, in game.py, line 73 under yesno function a comment says """Ask a question and prepare to receive a yes-or-no answer.""" or in model.py line 153 the comment """A hint offered if the player loiters in one area too long.""" makes the class Hint clear. On the other hand, there are some examples of bad comments too. For example, in game.py, line 130, under start2 function, a comment says """Display instructions if the user wants them.""" which is not necessarily understood by the name of the function. So rather than this comment we could have a more descriptive name. Also, another bad comment is in data.py line 57: # Knowledge of what each section contains. Rather than this comment, we could have more descriptive names for all the section functions.
+
+11. Provide an example of where vertical formatting has been used to make the code clearer.
+
+In the game class in game.py, the instant variables are declared together at the begininig of the code. Different functions are nicely seperated by a blank line. Even inside a function, blank lines has been used to seperate different sections of conditionals and etc.
+
+12. Run the tests provided with the program. Do they pass or fail? Do you consider the tests meet the F.I.R.S.T. criteria? Provide details of why they do or do not meet the criteria. 
+
+All tests pass. It meets the F.I.R.S.T criteria in general. 
+The test runs fast. 
+All the test run independently; (except for the walkthroughs) 
+The tests are also repeatable and self-validating; 
+I can't tell if they were witten during the original code developement or not 
+

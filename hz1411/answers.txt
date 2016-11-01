@@ -1,0 +1,49 @@
+1. 
+line37 in adventure.py: raw_input() —> input()
+
+2.
+2.1 Modules: Several modules are used by the author, including game.py, play.py and data.py. They are written separately and combined together later making the program more readable.
+2.2 Classes: Many classes are defined to combine sets of functions and describe certain behavior. For example, in line19 of game.py, class Game is used to record basic game rules.
+2.3 Functions: Blocks of code that do mostly one thing. For example, in line13 of adventure.py, function baudout() is to defined how fast each character of game descriptions appears on screen.
+
+3. Yes,mostly.
+Meaningful names: 
+Line88,line92 in game.py: inventory and treasures shows that the corresponding function returns the inventory/treasures the player has.
+Line165 in model.py: class name dwarf shows that the class is to define the behavior of dwarf.
+
+Not Meaningful names:
+line219-220 in data.py: variable name ‘name’ and ‘obj’ are too short and hard to search.
+line24 in data.py: class name “data” is an abstraction, and it’s better to use more descriptive nouns.
+
+4. 
+Some functions only do one thing. For example, function baudout(s) only controls how sentences are displayed on screen.
+Some functions do more than one thing. For example, starting from line 153 in game.py, functions move_to(), move_dwarves() both do many things.
+
+5.Yes.
+Line 29 in play.py, function resume() changes the global variable _game.
+
+6.Yes
+From line130-line143 in model.py, there is lots of repetition between functions carry(), drop(), hide(),destroy(). Similar things happens from line67-line76, where functions is_aboveground(),is_before_hall_of_mists(),is_after_hall_of_mists() are alike.
+
+7.Yes. 
+In line43-46 of adventure.py, there is exception handling. If you type in ctrl+c, the program will terminate abnormally.
+
+8.Yes. 
+Examples include class Game() in game.py. It is a huge class that controls almost everything in the game.
+
+9. Not all classes are cohesive. Still, class Game() in game.py is not cohesive as it has more than one functionality. Class move() in model.py is also not cohesive as it controls not just the player’s move but also the dwarf, and the conditions are very complex.
+
+10. The author use comments frequently to explain what a block of codes do or what a variable represents. 
+Good comments: 
+line39 in model.py “A location in the game.” briefly explain what class Room() is. 
+line12-17 in play.py, the comment “Turn the Python prompt into an Adventure game.
+With optional the `seed` argument the caller can supply an integer to start the Python random number generator at a known state." explains what function play() does as it not so obvious just by the function name.
+
+Bad comments:
+line25-26 in game.py. The comment ‘# DKILL’ and ‘# KNFLOC’ is unnecessary as the name is of the variable is already very descriptive, while the comments are hard to understand.
+
+11.
+In adventure.py, the author puts spaces between every important, and somewhat independent parts, making the code clearer.
+
+12.The tests(test_commands.py, test_data.py, test_walks.py)all pass. They generally meet the F.I.R.S.T. criteria. 
+They’re fast and can be run frequently. They’re independent and can be run in any order. The tests are repeatable and self-validating. However, I do not know if these tests are timely or not, because it’s uncertain when the author wrote the tests.

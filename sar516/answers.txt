@@ -1,0 +1,31 @@
+1. The only change I had to make to make the game work with Python 3 was that I change "raw_input" to "input" on line 37 of adventure.py
+2. The author setups the program to run through the module adventure.py which calls on other modules which thmeselves call on other modules and so on. The author also gives each  
+   of the modules a specific purpose. For example the play.py module from what I can understand contains functions that deal with loading particular save files for the game while
+   the model.py contains classes that define compotents of the games such as the rooms and enemies. The author then makes sure that each module calls on the necessary functions 
+   and classes to fufill its purpose. For example the game.py module which keeps track of the state of game call on the Data class from the module data.py to help define the 
+   current state of the game.
+3. Yes the author does us meaningful names. Under classes Dwarf (line 165) and Pirate (line 185) in the module model.py there are two variables called is_dwarf and is_pirate which
+   I believe determine whether an object is a dwarf or a pirate. One example of the author not using meaningful names is in the module data.py some of the function are defined as 
+   section (e.g. section8 line 160) and it is not immediatelly clear from the name wha it is doing.
+4. Examples of functions in the code that do one thing are random (line 57), choice (line 60), and write_message (line 69) in the module game.py
+   Examples of functions in the code doing more than one thing are move_dwarves (line 188) and describe_location (323) in the module game.py
+5. The closest thing I could find to a function causing side effects is in the module play.py where the variable _game is globalized with keyword global and refered to by two 
+   functions play (line 11) and resume (line 29).             
+6. In the module game.py  there are two block of repeating code, lines 809-820 and lines 826-832, which each could be turned into a function.
+7. Yes the program does use exception handling, which hapenns at line 45 of adventure.py. I can't think of an input that could terminate the program abnormally.
+8. None of classes in the program appear to handle more than one piece of functionlity. The only two classes that I might consider to be responsible for more that one piece of
+   functionality is Game (line 19) of game.py and Data (line 24) in the module data.py but Game is responsible for keeping track of the state of the game and Data stores the data
+   associated with that game state.  
+9. The following classes are not cohesive: Room(line 38), Hint(line 152), Dwarf(line 165), and Pirate(line 185) in module model.py; Data(line 24) in module data.py. I think these 
+   classes are not cohesive because none of them have methods that modify or manipulate any of their instantce variables.
+10. The author mainly put comments in the modules game.py and data.py where most of the code is which seems sensible. One example of a good comment are lines 218-222 in module
+    game.py where the author explains why they need to stabilize the order with a sort so the game could be tested. Some examples of bad comments are lines 21-36 in module data.py
+    where the author puts in unnecessary comments to describe variables.
+11. One example of verical formatting make the code easier to read are lines 39-55 in module game.py where the instance variables of class Game being declared togetheer but the
+    variables that dealt with the input of user were seperated from the variables that dealt with components of the game such as the cave and treasure and then these game
+    component variables were seperated from the random seed variable. These seperations made it clear that these variables dealt with different concepts of program.
+12. When I first ran the test one of them, test_commands.py, couldn't find a few modules so I had to copy them into the test directory for it to work. But after doing so all
+    the tests passed. The tests do seem to be fast, when test_commands.py failed it did not take long for me to find out. THe test also appear to be independent because they
+    don't call on each other. I was able repeat the test multiple times to the same results. Tests also do seem to either fail or pass and do not return any other values. I 
+    can't however speak to their timelyness since I do not whether or not these test were developed during code development.
+
