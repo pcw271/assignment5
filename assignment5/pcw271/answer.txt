@@ -1,0 +1,106 @@
+Q1.
+file:adventure.py line37
+raw_input() -> input()
+
+Q2.
+modules
+package
+classes
+cohesion
+
+Q3.
+Mostly not.
+In file adventure.py line 20-
+parser = argparse.ArgumentParser(
+
+the user will confuse about what this parser is going to do . No info at all.
+
+The meaningful name should be let user know why, what, how is it do.
+Fro example:
+parser can change to adventure_start_parser
+
+Q4.
+Some of them yes, some of them not.
+For yes:
+file:game.py line57
+def random(self):
+        return self.random_generator.random()
+only return value in this function.
+
+For not:
+file:adventure.py line 19
+
+def loop():
+    parser = argparse.ArgumentParser(
+        description='Adventure into the Colossal Caves.',
+        prog='{} -m adventure'.format(os.path.basename(executable)))
+    parser.add_argument(
+        'savefile', nargs='?', help='The filename of game you have saved.')
+    args = parser.parse_args()
+
+    if args.savefile is None:
+        game = Game()
+        load_advent_dat(game)
+        game.start()
+        baudout(game.output)
+    else:.....
+    
+the loop will 1. start the setting for the game
+			  2. check the if condition-the file is saved or not;
+			  3. if yes, execute the game function, if not, ....
+
+Q5.
+I can not find any side effect.
+
+Q6.
+I use pylint to detect the duplication code for all files, no duplication found.
+
+Q7.
+Yes
+in adventure.py line 45, it used exception to deal with EOFErr issue.
+if I enter symbol(ex:!@#$%) instead of alphabats, it will not appear the next command or call any function. 
+
+Q8.
+in class CommandTest(TestCase), it test for test_intransitive_commands_should_not_throw_exceptions(self) and test_transitive_commands_should_not_throw_exceptions(self).
+it may be better to split to two classes.
+
+Q9.
+file: game.py function def compute_score at line 1469
+the scoring function group can set to another part of class from game.py to be more cohesive to those game progressing funcitons.
+
+Q10.
+to explain the code that did not explain itself well.
+good command:
+in game.py line 21: look_complaints = 3  # how many times to "SORRY, BUT I AM NOT ALLOWED..." which clearly state what this attribute means and represent in the function.
+bad command:
+in game.py line 241:  # A dwarf cannot walk and attack at the same time.
+I have no clue for this command.
+
+Q11.
+in game.py line 81:
+def is_dark(self):
+        lamp = self.objects['lamp']
+        if self.is_here(lamp) and lamp.prop:
+            return False
+        return self.loc.is_dark
+the variable lamp is declared and used very close to each other to the instance variable.
+
+Q12.
+for test_command.py, Ran 2 tests in 4.024s
+
+OK
+
+for test_walks.py, Ran 2 tests in 1.562s
+
+OK
+
+for test_data.py, Ran 10 tests in 0.142s
+
+OK
+
+All pass.
+Yes, they all correspond to the F.I.R.S.T. principles.
+Those test are fast, completed in a few seconds, and work independently, repeatable for every environment, and respond only pass or fail-self-validating. 
+
+
+
